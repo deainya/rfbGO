@@ -9,7 +9,10 @@ App is built using MEAN stack
 
 ## To Do & Done
 * Client side
- - [ ] Empty
+ - [x] Index
+ - [x] Simple style
+ - [ ] Angular?
+ - [ ] Bundle?
 * Server side
  - [ ] Authorization
  - [x] Basic routing
@@ -17,4 +20,6 @@ App is built using MEAN stack
 
 ## Developing
 * `npm install` to resolve dependencies
+* `npm install gulp` to install Gulp
+* `npm run watch` to start transpile watch
 * `node server/app.js` to run app on server side

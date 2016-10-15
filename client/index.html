@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="rfbgo">
+  <head>
+    <meta charset="utf-8">
+    <title>RFB-GO prototype</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+
+    <link rel="icon" href="images/rfb.png" sizes="32x32" />
+    <link rel="icon" href="images/rfb.png" sizes="192x192" />
+    <link rel="apple-touch-icon-precomposed" href="images/rfb.png" />
+    <meta name="msapplication-TileImage" content="images/rfb.png" />
+
+    <style>
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important; }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <div class="cell">
+        <table><tr valign="center"><td width="38"><a ui-sref="home"><img src="images/logo.png"/></a></td><td><h1 class="logo"> RFB-GO</h1></td></tr></table>
+      </div>
+    </div>
+
+    <div class="cell" ui-view></div>
+
+  </body>
+
+  <script src="bundle.js"></script>
+</html>
