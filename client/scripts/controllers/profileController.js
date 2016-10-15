@@ -6,6 +6,7 @@
 // controllers/profileController.js
 
 module.exports = function ($scope, Entity, Gravatar) {
-  $scope.user = Entity.setEntityWeb('/partners');
+  Entity.setEntityWeb('/partners');
+  $scope.user = Entity.Entity;
   $scope.gravatarUrl = Gravatar.generate($scope.user.email);
 };
