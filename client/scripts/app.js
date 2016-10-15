@@ -8,12 +8,14 @@ angular.module('rfbgo', ["ui.router"])
   $stateProvider
   .state('consultant', {
     url: '/consultants',
-    templateUrl: 'templates/profile.html'
+    templateUrl: 'templates/profile.html',
+    controller: 'profileCtrl'
   })
 
   .state('partner', {
     url: '/partners',
-    templateUrl: 'templates/profile.html'
+    templateUrl: 'templates/profile.html',
+    controller: 'profileCtrl'
   })
 
 })
