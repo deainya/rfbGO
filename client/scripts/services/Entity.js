@@ -18,8 +18,7 @@
 
 // services/Entity.js
 
-module.exports = function ($http) {
-  var User = {};
+module.exports = function ($scope, $http) {
   return {
     setEntity: function(entity){
       console.log("set: " + entity);
@@ -27,10 +26,9 @@ module.exports = function ($http) {
     },
     setEntityWeb: function(route){
       $http.get(route).then(function(res){
-        console.log("setWeb: " + res.data);
-        User = res.data;
+        console.log(res.data);
+        $scope.data = res.data;
       });
-      return User;
     },
     getEntity: function(){
       console.log("get: " + this.Entity);
