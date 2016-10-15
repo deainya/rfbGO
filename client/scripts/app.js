@@ -1,9 +1,10 @@
 import angular from 'angular'
 import 'angular-ui-router'
 
-var EntityFactory = require('./services/Entity');
-var GravatarFactory = require('./services/Gravatar');
-var profileController = require('./controllers/profileController');
+//var EntityFactory = require('./services/Entity');
+//var GravatarFactory = require('./services/Gravatar');
+var profileResource = require('./services/profileResource');
+var profileCtrl = require('./controllers/profileController');
 
 angular.module('rfbgo', ["ui.router"])
 
@@ -11,22 +12,33 @@ angular.module('rfbgo', ["ui.router"])
   $urlRouterProvider.otherwise('/')
 
   $stateProvider
-  .state('consultant', {
+  /*.state('consultant', {
     url: '/consultants',
     templateUrl: 'templates/profile.html',
     controller: 'profileController'
-  })
+  })*/
 
   .state('partner', {
     url: '/partners',
     templateUrl: 'templates/profile.html',
-    controller: 'profileController'
-  })
+    resolve: {
+        // A string value resolves to a service
+        profileResource: 'profileResource',
+
+        // A function value resolves to the return
+        // value of the function
+        profile: function(profileResource){
+          return profileResource.query().$promise;;
+      }
+    },
+    controller: 'profileCtrl'
+})
 
 })
 
-.factory('Entity', ['$http', EntityFactory])
+//.factory('Entity', ['$http', EntityFactory])
+//.factory('Gravatar', GravatarFactory)
+//.controller('profileController', ['$scope', '$http', 'Entity', 'Gravatar', profileController])
 
-.factory('Gravatar', GravatarFactory)
-
-.controller('profileController', ['$scope', '$http', 'Entity', 'Gravatar', profileController])
+.factory('profileResource', ['$resource', profileResource])
+.controller('profileCtrl', ['$scope', profileCtrl])

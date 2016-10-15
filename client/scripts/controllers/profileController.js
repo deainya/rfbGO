@@ -5,9 +5,17 @@
 
 // controllers/profileController.js
 
-module.exports = function ($scope, $http, Entity, Gravatar) {
+/*module.exports = function ($scope, $http, Entity, Gravatar) {
   Entity.setEntityWeb('/partners');
   $scope.user = $http.get('/partners');
   console.log($scope.user);
   $scope.gravatarUrl = Gravatar.generate($scope.user.email);
+};*/
+
+module.exports = function ($scope, profile) {
+  // Log customers when controller executes
+  console.log(profile);
+
+  // Assign customers to scope
+  $scope.profile = profile;
 };
