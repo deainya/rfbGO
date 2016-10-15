@@ -23,8 +23,8 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
     url: '/partners',
     templateUrl: 'templates/profile.html',
     resolve: {
-        Profile: 'Profile', // A string value resolves to a service
-        profile: function(Profile){ return Profile.get().$promise; } // A function value resolves to the return value of the function
+      Profile: 'Profile', // A string value resolves to a service
+      profile: function(Profile){ return Profile.get(url).$promise; } // A function value resolves to the return value of the function
     },
     controller: 'profileCtrl'
   })
@@ -33,5 +33,6 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
 
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
-.factory('Profile', ['$resource', ProfileFactory])
+//.factory('Profile', ['$resource', ProfileFactory])
+.factory('Profile', ['$http', ProfileFactory])
 .controller('profileCtrl', ['$scope', 'profile', 'Entity', 'Gravatar', profileCtrl])
