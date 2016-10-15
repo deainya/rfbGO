@@ -29,6 +29,8 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
         // A function value resolves to the return
         // value of the function
         profile: function(profileResource){
+          console.log(profileResource.get());
+          console.log(profileResource.get().$promise);
           return profileResource.get().$promise;
       }
     },
