@@ -18,20 +18,21 @@
 
 // services/Entity.js
 
-module.exports = function ($http) {
+module.exports = function ($scope, $http) {
   return {
     setEntity: function(entity){
       console.log("set: " + entity);
-      this.Entity = entity;
+      $scope.Entity = entity;
     },
     setEntityWeb: function(route){
       $http.get(route).then(function(res){
-        this.setEntity(res.data);
+        $scope.Entity = res.data;
+        console.log("setWeb: " + $scope.Entity);
       });
     },
     getEntity: function(){
-      console.log("get: " + this.Entity);
-      return this.Entity;
+      console.log("get: " + $scope.Entity);
+      return $scope.Entity;
     }
   }
 };
