@@ -7,8 +7,7 @@ angular.module('rfbgo', ["ui.router"])
 
   .state('partners', {
     url: '/partners',
-    templateUrl: 'templates/partner.html',
-    controller: 'profileCtrl'
+    templateUrl: 'templates/partner.html'
   })
 
 })
