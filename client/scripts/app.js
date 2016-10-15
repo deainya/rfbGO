@@ -13,11 +13,15 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
   $urlRouterProvider.otherwise('/')
 
   $stateProvider
-  /*.state('consultant', {
+  .state('consultant', {
     url: '/consultants',
     templateUrl: 'templates/profile.html',
-    controller: 'profileController'
-  })*/
+    resolve: {
+      Profile: 'Profile', // A string value resolves to a service
+      profile: function(Profile){ return Profile.get('/consultants')/*.$promise*/; } // A function value resolves to the return value of the function
+    },
+    controller: 'profileCtrl'
+  })
 
   .state('profile', {
     url: '/partners',
