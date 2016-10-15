@@ -29,7 +29,7 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
         // A function value resolves to the return
         // value of the function
         profile: function(profileResource){
-          return profileResource.query().$promise;;
+          return profileResource.get().$promise;;
       }
     },
     controller: 'profileCtrl'
