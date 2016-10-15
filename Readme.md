@@ -1,12 +1,11 @@
-# rfbGO app
+# RFB-GO app
 
 ## General info
-App is built using MEAN stack:
+App is built using MEAN stack
 * MongoDB
 * Express
 * Angular
 * Node
-App will run on AWS EC2 environment.
 
 ## To Do & Done
 * Client side
