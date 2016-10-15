@@ -18,22 +18,14 @@
 
 // services/Entity.js
 
-module.exports = function ($http) {
+module.exports = function () {
   return {
     setEntity: function(entity){
-      console.log("set: " + entity);
+      console.log("set: " + JSON.stringify(entity));
       this.Entity = entity;
     },
-    setEntityWeb: function(route){
-      this.$http.get(route).then(function(res){
-        console.log(res.data);
-        this.eee = res.data;
-        console.log(this.eee);
-      });
-      console.log(this.eee);
-    },
     getEntity: function(){
-      console.log("get: " + this.Entity);
+      console.log("get: " + JSON.stringify(this.Entity));
       return this.Entity;
     }
   }
