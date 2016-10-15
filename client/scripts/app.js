@@ -6,7 +6,7 @@ angular.module('rfbgo', ["ui.router"])
   $urlRouterProvider.otherwise('/')
 
   $stateProvider
-  .state('partners', {
+  .state('partner', {
     url: '/partners',
     templateUrl: 'templates/partner.html'
   })

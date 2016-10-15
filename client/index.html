@@ -24,25 +24,22 @@
     </div>
 
     <div class="cell">
-      <ul class="grid list list--unstyled mbl" ng-cloak>
-        <li><div class="card">
-          <a class="card-link" ui-sref="orders">Вызовы консультанта</a>
-        </div></li>
-        <li><div class="card">
-          <a class="card-link" ui-sref="orders-new">Новый вызов</a>
-        </div></li>
-      </ul>
+      <div class="sports-list">
+        <ul class="grid list list--unstyled mbl" ng-cloak>
+          <li><div class="card">
+            <a class="card-link" ui-sref="orders">Вызовы консультанта</a>
+          </div></li>
+          <li><div class="card">
+            <a class="card-link" ui-sref="orders-new">Новый вызов</a>
+          </div></li>
+        </ul>
+      </div>
     </div>
 
     <div class="cell" ui-view></div>
 
-    <div class="card">
-      <a class="card-link" ui-sref="partner">Партнёр</a>
-    </div>
-
-    <div class="card">
-      <a class="card-link" ui-sref="consultant">Консультант</a>
-    </div>
+    <p> <a class="card-link" ui-sref="partner">Партнёр</a> </p>
+    <p> <a class="card-link" ui-sref="consultant">Консультант</a> </p>
 
   </body>
 
