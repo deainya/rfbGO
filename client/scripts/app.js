@@ -1,12 +1,13 @@
 import angular from 'angular'
 import 'angular-ui-router'
+import 'angular-resource'
 
 //var EntityFactory = require('./services/Entity');
 //var GravatarFactory = require('./services/Gravatar');
 var profileResource = require('./services/profileResource');
 var profileCtrl = require('./controllers/profileController');
 
-angular.module('rfbgo', ["ui.router"])
+angular.module('rfbgo', ["ui.router", "ngResource"])
 
 .config(($stateProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise('/')
