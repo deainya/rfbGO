@@ -9,10 +9,11 @@ App is built using MEAN stack
 
 ## To Do & Done
 * Client side
- - [x] Index
- - [x] Simple style
- - [ ] Angular?
- - [ ] Bundle?
+ - [x] Angular module
+ - [x] bundle.js
+ - [x] index.html file
+ - [ ] Routing
+ - [x] Simple styling
 * Server side
  - [ ] Authorization
  - [x] Basic routing
@@ -23,3 +24,9 @@ App is built using MEAN stack
 * `npm install gulp` to install Gulp
 * `npm run watch` to start transpile watch
 * `node server/app.js` to run app on server side
+
+## Seeding MongoDB
+* `mongoimport -u user -p pass --db rfbgo-dev --collection consultants --type json --file server/seeds/c-seed.json --jsonArray --drop`
+* `mongoimport -u user -p pass --db rfbgo-dev --collection orders --type json --file server/seeds/o-seed.json --jsonArray --drop`
+* `mongoimport -u user -p pass --db rfbgo-dev --collection partners --type json --file server/seeds/p-seed.json --jsonArray --drop`
+* `mongoimport -u user -p pass --db rfbgo-dev --collection tradepoints --type json --file server/seeds/t-seed.json --jsonArray --drop`
