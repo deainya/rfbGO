@@ -25,8 +25,8 @@ angular.module('rfbgo', ["ui.router"])
 
 })
 
-.factory('Entity', ['$scope', '$http', EntityFactory])
+.factory('Entity', ['$http', EntityFactory])
 
 .factory('Gravatar', GravatarFactory)
 
-.controller('profileController', ['$scope', 'Entity', 'Gravatar', profileController])
+.controller('profileController', ['$scope', '$http', 'Entity', 'Gravatar', profileController])
