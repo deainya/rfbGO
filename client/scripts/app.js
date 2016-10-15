@@ -5,7 +5,7 @@ import 'angular-resource'
 var EntityFactory = require('./services/Entity');
 var GravatarFactory = require('./services/Gravatar');
 var ProfileFactory = require('./services/Profile');
-var profileCtrl = require('./controllers/profileCtrl');
+var profileCtrl = require('./controllers/Profile');
 
 angular.module('rfbgo', ["ui.router", "ngResource"])
 
@@ -13,6 +13,10 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
   $urlRouterProvider.otherwise('/')
 
   $stateProvider
+  .state('home', {
+    url: '/'
+  })
+
   .state('consultant', {
     url: '/consultants',
     templateUrl: 'templates/profile.html',
@@ -37,6 +41,5 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
 
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
-//.factory('Profile', ['$resource', ProfileFactory])
-.factory('Profile', ['$http', ProfileFactory])
+.factory('Profile', ['$http', ProfileFactory])//.factory('Profile', ['$resource', ProfileFactory])
 .controller('profileCtrl', ['$scope', 'profile', 'Entity', 'Gravatar', profileCtrl])
