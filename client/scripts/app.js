@@ -4,7 +4,7 @@ import 'angular-resource'
 
 var EntityFactory = require('./services/Entity');
 var GravatarFactory = require('./services/Gravatar');
-var Profile = require('./services/Profile');
+var ProfileFactory = require('./services/Profile');
 var profileCtrl = require('./controllers/profileCtrl');
 
 angular.module('rfbgo', ["ui.router", "ngResource"])
@@ -23,21 +23,15 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
     url: '/partners',
     templateUrl: 'templates/profile.html',
     resolve: {
-        // A string value resolves to a service
-        Profile: 'Profile',
-        // A function value resolves to the return value of the function
-        profile: function(Profile){
-          return Profile.get().$promise;
-      }
+        Profile: 'Profile', // A string value resolves to a service
+        profile: function(Profile){ return Profile.get().$promise; } // A function value resolves to the return value of the function
     },
     controller: 'profileCtrl'
-})
+  })
 
 })
 
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
-//.controller('profileController', ['$scope', '$http', 'Entity', 'Gravatar', profileController])
-
-.factory('Profile', ['$resource', Profile])
+.factory('Profile', ['$resource', ProfileFactory])
 .controller('profileCtrl', ['$scope', 'profile', 'Entity', 'Gravatar', profileCtrl])

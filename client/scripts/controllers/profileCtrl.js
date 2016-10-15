@@ -14,7 +14,7 @@
 
 module.exports = function ($scope, profile, Entity, Gravatar) {
   // Log customers when controller executes
-  console.log(profile);
+  //console.log(profile);
   // Assign customers to scope
   $scope.profile = profile;
   $scope.gravatarUrl = Gravatar.generate(profile.email, 80);
