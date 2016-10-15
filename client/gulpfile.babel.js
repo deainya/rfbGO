@@ -13,7 +13,7 @@ gulp.task("transpile", () => {
       console.error( "\nError: ", error.message, "\n");
       this.emit("end");
     })
-    .pipe(source("bundle.js"));
+    .pipe(source("bundle.js"))
     .pipe(gulp.dest(""));
 
 });
