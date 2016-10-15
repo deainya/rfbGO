@@ -25,9 +25,10 @@ module.exports = function ($http) {
       this.Entity = entity;
     },
     setEntityWeb: function(route){
-      $http.get(route).then(function(res){
+      this.$http.get(route).then(function(res){
         console.log(res.data);
         this.eee = res.data;
+        console.log(this.eee);
       });
       console.log(this.eee);
     },
