@@ -18,7 +18,7 @@
 
 // services/Entity.js
 
-module.exports = function($http) {
+module.exports = function ($http) {
   return {
     setEntity: function(entity){
       console.log("set: " + entity);
