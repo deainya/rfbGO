@@ -2,8 +2,6 @@ import angular from 'angular'
 import 'angular-ui-router'
 import 'angular-resource'
 
-require('./sources/MD5');
-
 var EntityFactory = require('./services/Entity');
 var GravatarFactory = require('./services/Gravatar');
 var Profile = require('./services/Profile');
