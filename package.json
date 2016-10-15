@@ -1,6 +1,6 @@
 {
   "name": "rfbGO",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "rfbGO app powered by MEAN stack",
   "main": "server/app.js",
   "scripts": {
