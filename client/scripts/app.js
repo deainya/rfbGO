@@ -1,5 +1,9 @@
 import angular from 'angular'
 import 'angular-ui-router'
+
+var Entity = require('./services/Entity');
+var profileController = require('./controllers/profileController');
+
 angular.module('rfbgo', ["ui.router"])
 
 .config(($stateProvider, $urlRouterProvider) => {
@@ -9,13 +13,13 @@ angular.module('rfbgo', ["ui.router"])
   .state('consultant', {
     url: '/consultants',
     templateUrl: 'templates/profile.html',
-    controller: 'profileCtrl'
+    controller: 'profileController'
   })
 
   .state('partner', {
     url: '/partners',
     templateUrl: 'templates/profile.html',
-    controller: 'profileCtrl'
+    controller: 'profileController'
   })
 
 })
