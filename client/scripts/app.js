@@ -1,7 +1,8 @@
 import angular from 'angular'
 import 'angular-ui-router'
 
-var Entity = require('./services/Entity');
+var EntityFactory = require('./services/Entity');
+var GravatarFactory = require('./services/Gravatar');
 var profileController = require('./controllers/profileController');
 
 angular.module('rfbgo', ["ui.router"])
@@ -23,3 +24,9 @@ angular.module('rfbgo', ["ui.router"])
   })
 
 })
+
+.factory('Entity', ['$http', EntityFactory]);
+
+.factory('Gravatar', GravatarFactory);
+
+.controller('profileController', ['$scope', 'Entity', 'Gravatar', profileController]);
