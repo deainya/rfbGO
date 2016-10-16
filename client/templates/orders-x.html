@@ -1,0 +1,43 @@
+<h2>Список вызовов консультанта</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Клиент</th>
+      <th>Телефон</th>
+      <!--th>E-mail</th-->
+      <th>Партнёр</th>
+      <th>Торговая точка</th>
+      <!--th>Адрес</th-->
+      <th>Статус</th>
+      <th>Действие</th>
+    </tr>
+  </thead>
+  <tbody>
+    <div class="cell" ng-repeat="order in orders">
+      <tr>
+        <td>{{ order.client }}</td>
+        <td>{{ order.contact.phone }}</td>
+        <!--td>{{ order.contact.email }}</td-->
+        <td>{{ order.partner.name }}</td>
+        <td>{{ order.partner.tradepoint }}</td>
+        <!--td>{{ order.partner.address }}</td-->
+        <td>{{ order.status }}</td>
+        <td>
+          <form ng-show="isCancel(order.status)&&role==1" ng-submit="changeStatus('Отменить',order._id)"/>
+            <input class="btnx" type="submit" value="Отменить" />
+          </form>
+          <form ng-show="isAccept(order.status)&&role==0" ng-submit="changeStatus('Принять',order._id)"/>
+            <input class="btnx" type="submit" value="Принять" />
+          </form>
+          <form ng-show="isResolve(order.status)&&role==1" ng-submit="changeStatus('Завершить',order._id)"/>
+            <input class="btnx" type="submit" value="Завершить" />
+          </form>
+        </td>
+      </tr>
+      <tr>
+
+      </tr>
+    </div>
+  </tbody>
+</table>

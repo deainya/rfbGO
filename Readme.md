@@ -25,7 +25,7 @@ App is built using MEAN stack
  - [x] Angular module
  - [x] bundle.js
  - [x] index.html file
- - [ ] Routing
+ - [x] Routing
  - [x] Simple styling
 * Server side
  - [ ] Authorization

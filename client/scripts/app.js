@@ -40,7 +40,7 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
 
   .state('orders', {
     url: '/orders',
-    templateUrl: 'templates/orders.html',
+    templateUrl: 'templates/orders-x.html',
     resolve: {
       dataSource: 'dataSource',
       get: function(dataSource){ return dataSource.get('/orders'); }
