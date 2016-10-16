@@ -26,7 +26,7 @@ module.exports = {
   },
   tradepoints(){
     return _db.collection('tradepoints');
-  }
+  },
   users(){
     return _db.collection('users');
   }
