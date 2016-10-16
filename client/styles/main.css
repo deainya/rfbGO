@@ -150,16 +150,6 @@ table {
   transition: 0.2s ease-in-out;
 }
 
-.card-link--cycling::after {
-  background-image: url('../images/icon-cycling.svg');
-  width: 200px;
-}
-
-.card-link--weightlifting::after {
-  background-image: url('../images/icon-weightlifting.svg');
-  width: 200px;
-}
-
 .card-link:active,
 .card-link:focus,
 .card-link:hover {
@@ -179,6 +169,14 @@ table {
 .cell {
   margin: 0 auto;
   max-width: 900px;
+}
+
+/*-----------------------------------------------
+*   FormX
+-----------------------------------------------*/
+
+.fromx {
+  display: inline-block;
 }
 
 /*-----------------------------------------------
@@ -375,4 +373,8 @@ table {
 
 .mbl {
   margin-bottom: 40px;
+}
+
+.opt {
+  background-color: #f0f0f0;
 }
