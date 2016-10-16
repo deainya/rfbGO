@@ -7,7 +7,7 @@ module.exports = function ($scope, $state, get, dataSource) {
 
   $scope.Create = function(neworder){
     angular.extend(neworder, {partner:get}, {"status":"Новый"});
-    delete neworder.role;
+    delete neworder.partner.role;
     console.log(neworder);
     dataSource.set('/orders/create', neworder).then(function(){
       $state.go("orders");
