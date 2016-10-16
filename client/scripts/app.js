@@ -53,14 +53,14 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
     templateUrl: 'templates/orders-new.html',
     resolve: {
       Entity: 'Entity',
-      get: function(Entity){ return Entity.getEntity(); }
+      get: function(Entity){ return Entity.get(); }
     },
     controller: 'ordersCtrl'
   })
 
 })
 
-.factory('dataSource', ['$http', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
+.service('dataSource', ['$http', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
 .controller('profileCtrl', ['$scope', 'get', 'Entity', 'Gravatar', profileCtrl])

@@ -1,11 +1,11 @@
 // services/Entity.js
 module.exports = function () {
   return {
-    getEntity: function(){
+    get: function(){
       console.log("get: " + JSON.stringify(this.Entity));
       return this.Entity;
     },
-    setEntity: function(entity){
+    set: function(entity){
       console.log("set: " + JSON.stringify(entity));
       this.Entity = entity;
     }

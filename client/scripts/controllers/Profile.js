@@ -5,5 +5,5 @@ module.exports = function ($scope, get, Entity, Gravatar) {
   // Assign getObject to $scope
   $scope.profile = get.data;
   $scope.gravatarUrl = Gravatar.generate(get.data.email, 80);
-  Entity.setEntity(get.data);
+  Entity.set(get.data);
 };
