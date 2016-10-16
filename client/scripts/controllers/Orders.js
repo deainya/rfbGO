@@ -8,13 +8,13 @@ module.exports = function ($scope, $state, get, dataSource) {
   $scope.Create = function(neworder){
     angular.extend(neworder, {partner:get}, {"status":"Новый"});
     console.log(neworder);
-    Profile.set('/orders/create', neworder).then(function(){
+    dataSource.set('/orders/create', neworder).then(function(){
       $state.go("orders");
     });
   };
 
   $scope.Cancel = function(orderid){
-    Profile.set('/orders/cancel', orderid).then(function(){
+    dataSource.set('/orders/cancel', orderid).then(function(){
       console.log(orderid);
       $state.reload();
     });
