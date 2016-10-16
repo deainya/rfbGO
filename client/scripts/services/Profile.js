@@ -8,7 +8,7 @@ module.exports = function ($http) {
       return $http.get(url);
     },
     set: function(url, id){
-      return $http.post(url, data: {id});
+      return $http({method: 'POST', url: url, data: {id}});
     }
   }
 };
