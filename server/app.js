@@ -98,7 +98,7 @@ app.post("/orders/accept", jsonParser, (req, res) => {
 });
 
 app.post("/orders/resolve", jsonParser, (req, res) => {
-  let orderid = req.body.orderid || {};
+  let orderid = req.body.dataset || {};
   let orders = mongoUtil.orders();
 
   orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: {status: "Завершён"}}, function(err, result){
