@@ -83,7 +83,7 @@ table {
   color: white;
   display: inline-block;
   line-height: 2.5;
-  padding: 0 5px;
+  padding: 0 20px;
   transition: 0.2s ease-in-out;
 }
 
@@ -297,7 +297,7 @@ table {
   font-size: 14px;
   line-height: 1.5;
   padding: 10px 20px;
-  vertical-align: top;
+  vertical-align: center;
 }
 
 
