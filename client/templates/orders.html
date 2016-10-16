@@ -24,7 +24,7 @@
       <td>{{ order.status }}</td>
       <!--td></td-->
     </tr>
-    <tr class="add" ng-show="order._active==true">
+    <tr class="opt" ng-show="order._active==true">
       <td colspan="2">
         Действие:
         <form class="formx" ng-show="isAccept(order.status)&&role==0" ng-submit="changeStatus('Принять',order._id)"/>
