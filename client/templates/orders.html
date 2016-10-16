@@ -24,8 +24,8 @@
       <td>{{ order.status }}</td>
       <td>
         <form ng-submit="changeStatus(order.state, order._id)"/>
-          <input ng-hide="isCancelled(order.status)||role==0" class="btnx" type="submit" ng-model="order.state" value="Отменить" />
-          <input ng-hide="isAccepted(order.status)&&role==0" class="btnx" type="submit" ng-model="order.state" value="Принять" />
+          <input ng-show="isCancel(order.status)&&role==1" class="btnx" type="submit" ng-model="order.state" value="Отменить" />
+          <input ng-show="isAccept(order.status)&&role==0" class="btnx" type="submit" ng-model="order.state" value="Принять" />
         </form>
       </td>
     </tr>
