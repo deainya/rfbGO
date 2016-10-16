@@ -23,8 +23,8 @@
       <!--td>{{ order.partner.address }}</td-->
       <td>{{ order.status }}</td>
       <td>
-        <form ng-submit="Cancel(order._id)"/>
-          <input ng-hide="isCancel(order.status)" class="btnx" type="submit" value="Отменить" />
+        <form ng-hide="isCancelled(order.status)" ng-submit="Cancel(order._id)"/>
+          <input class="btnx" type="submit" value="Отменить" />
         </form>
       </td>
     </tr>

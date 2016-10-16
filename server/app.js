@@ -23,9 +23,9 @@ app.use( express.static(__dirname + "/../client") ); // default App route
 
 // Routing                    ==================================================
 app.get("/consultants", (req, res) => {
-  let consultants = mongoUtil.consultants();
+  let consultants = mongoUtil.users();//consultants();
 
-  consultants.find().limit(1).next((err,doc) => {
+  consultants.find({"role":"0"}).limit(1).next((err,doc) => { // query
     if (err) { res.sendStatus(400); }
     console.log( JSON.stringify(doc) );
     res.json( doc ); // 1st consultant from collection
@@ -33,9 +33,9 @@ app.get("/consultants", (req, res) => {
 });
 
 app.get("/partners", (req, res) => {
-  let partners = mongoUtil.partners();
+  let partners = mongoUtil.users();//partners();
 
-  partners.find({}, {"_id":false}).limit(1).next((err,doc) => {
+  partners.find({"role":"1"}, {"_id":false}).limit(1).next((err,doc) => { // query + projection
     if(err) { res.sendStatus(400); }
     console.log( JSON.stringify(doc) );
     res.json( doc ); // 1st partner from collection

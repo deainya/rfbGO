@@ -20,5 +20,10 @@ module.exports = function ($scope, $state, get, dataSource) {
     });
   };
 
-  $scope.isCancel = function(status){ return status === "Отменён"; };
+  $scope.isCancelled = function(status){ return status === "Отменён" || status === "Завершён" }; //hide
+
+  $scope.isAccepted = function(status){ return status === "Новый" }; //show
+
+  $scope.isResolved = function(status){ return status === "Принят" }; //show
+
 };
