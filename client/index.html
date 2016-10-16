@@ -38,9 +38,9 @@
 
     <div class="cell" ui-view></div>
 
-    <div class="cell">
-      <p> <a ng-show="!role" ui-sref="profile">Консультант</a> </p>
-      <p> <a ng-show="!hide" ui-sref="partner">Партнёр</a> </p>
+    <div ng-switch="role" class="cell">
+      <p> <a ui-sref="partner" ng-switch-when="1">Партнёр</a> </p>
+      <p> <a ui-sref="profile" ng-switch-default>Консультант</a> </p>
     </div>
 
   </body>
