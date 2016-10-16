@@ -15,6 +15,7 @@ module.exports = function ($scope, $state, get, dataSource) {
 
   $scope.changeStatus = function(state, orderid){
     var url ='';
+    console.log(state);
     switch(state){
       case "Отменить":
         url = '/orders/cancel';
@@ -22,10 +23,12 @@ module.exports = function ($scope, $state, get, dataSource) {
       case "Принять":
         url = '/orders/accept';
         break;
+      case "Завершить":
+        url = '/orders/resolve';
       default:
         console.log("ouch");
     }
-
+    console.log(url);
     if (!url) {
       dataSource.set(url, orderid).then(function(){
         console.log(orderid);
