@@ -24,7 +24,7 @@
       <td>{{ order.status }}</td>
       <td>
         <form ng-submit="Cancel(order._id)"/>
-          <input ng-show="isCancel(order.status)" class="btn" type="submit" value="Отменить" />
+          <input ng-hide="isCancel(order.status)" class="btn" type="submit" value="Отменить" />
         </form>
       </td>
     </tr>
