@@ -76,7 +76,7 @@ app.post("/orders/create", jsonParser, (req, res) => {
 });
 
 app.post("/orders/cancel", jsonParser, (req, res) => {
-  let orderid = req.body.orderid || {};
+  let orderid = req.body.id || {};
   let orders = mongoUtil.orders();
 
   orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: {status: "Отменён"}}, function(err, result){
