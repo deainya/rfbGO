@@ -109,6 +109,7 @@ table {
 .card:focus,
 .card:hover {
   border-color: #808080;
+  background-color: #ffe3dc;
 }
 
 /* ----- States ----- */
