@@ -1,0 +1,32 @@
+<h2>Вызовы консультанта</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Клиент</th>
+      <th>Телефон</th>
+      <!--th>E-mail</th-->
+      <th>Партнёр</th>
+      <th>Торговая точка</th>
+      <th>Адрес</th>
+      <th>Статус</th>
+      <th>Действие</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="order in orders">
+      <td>{{ order.client }}</td>
+      <td>{{ order.contact.phone }}</td>
+      <!--td>{{ order.contact.email }}</td-->
+      <td>{{ order.partner.name }}</td>
+      <td>{{ order.partner.tradepoint }}</td>
+      <td>{{ order.partner.address }}</td>
+      <td>{{ order.status }}</td>
+      <td>
+        <form ng-submit="Cancel(order._id)"/>
+          <input ng-show="isCancel(order.status)" class="btn" type="submit" value="Отменить" />
+        </form>
+      </td>
+    </tr>
+  </tbody>
+</table>
