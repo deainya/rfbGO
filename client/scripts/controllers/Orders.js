@@ -29,7 +29,7 @@ module.exports = function ($scope, $state, get, dataSource) {
         console.log("ouch");
     }
     console.log(url);
-    if (!url) {
+    if (length(url)>0) {
       dataSource.set(url, orderid).then(function(){
         console.log(orderid);
         $state.reload();

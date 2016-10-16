@@ -23,10 +23,10 @@
       <!--td>{{ order.partner.address }}</td-->
       <td>{{ order.status }}</td>
       <td>
-        <form ng-submit="changeStatus(order.state, order._id)"/>
-          <input ng-show="isCancel(order.status)&&role==1" class="btnx" type="submit" ng-model="order.state" value="Отменить" />
-          <input ng-show="isAccept(order.status)&&role==0" class="btnx" type="submit" ng-model="order.state" value="Принять" />
-          <input ng-show="isResolve(order.status)&&role==1" class="btnx" type="submit" ng-model="order.state" value="Завершить" />
+        <form ng-submit="changeStatus(state,order._id)"/>
+          <input ng-show="isCancel(order.status)&&role==1" class="btnx" type="submit" value="Отменить" ng-model="state" />
+          <input ng-show="isAccept(order.status)&&role==0" class="btnx" type="submit" value="Принять" ng-model="state" />
+          <input ng-show="isResolve(order.status)&&role==1" class="btnx" type="submit" value="Завершить" ng-model="state" />
         </form>
       </td>
     </tr>
