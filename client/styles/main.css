@@ -73,6 +73,27 @@ table {
 }
 
 /*-----------------------------------------------
+*   ButtonX
+-----------------------------------------------*/
+
+.btnx {
+  background-color: #ef8354;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  display: inline-block;
+  line-height: 2.5;
+  padding: 0 5px;
+  transition: 0.2s ease-in-out;
+}
+
+.btnx:active,
+.btnx:focus,
+.btnx:hover {
+  background-color: #d6774e;
+}
+
+/*-----------------------------------------------
 *   Card
 -----------------------------------------------*/
 
