@@ -1,4 +1,4 @@
-<h2>Вызовы консультанта</h2>
+<h2>Список вызовов консультанта</h2>
 
 <table class="table">
   <thead>
@@ -23,8 +23,9 @@
       <!--td>{{ order.partner.address }}</td-->
       <td>{{ order.status }}</td>
       <td>
-        <form ng-hide="isCancelled(order.status)" ng-submit="Cancel(order._id)"/>
-          <input class="btnx" type="submit" value="Отменить" />
+        <form ng-submit="changeStatus(order.state, order._id)"/>
+          <input ng-hide="isCancelled(order.status)||role==0" class="btnx" type="submit" ng-model="order.state" value="Отменить" />
+          <input ng-hide="isAccepted(order.status)&&role==0" class="btnx" type="submit" ng-model="order.state" value="Принять" />
         </form>
       </td>
     </tr>

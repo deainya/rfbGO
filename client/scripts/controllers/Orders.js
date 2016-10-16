@@ -13,11 +13,20 @@ module.exports = function ($scope, $state, get, dataSource) {
     });
   };
 
-  $scope.Cancel = function(orderid){
-    dataSource.set('/orders/cancel', orderid).then(function(){
-      console.log(orderid);
-      $state.reload();
-    });
+  $scope.changeStatus = function(state, orderid){
+    var url ='';
+    switch(state){
+      case "Отменить": url = '/orders/cancel' break;
+      case "Принять": url = '/orders/accept' break;
+      default: console.log("ouch");
+    }
+
+    if (!url) {
+      dataSource.set(url, orderid).then(function(){
+        console.log(orderid);
+        $state.reload();
+      });
+    }
   };
 
   $scope.isCancelled = function(status){ return status === "Отменён" || status === "Завершён" }; //hide
