@@ -1,6 +1,6 @@
 "use strict";
 
-// Dependencies and params
+// Dependencies and params    ==================================================
 let express = require( "express" );
 let app = express();
 // params
@@ -16,12 +16,12 @@ let ObjectID = require('mongodb').ObjectID;
 let bodyParser = require("body-parser");
 let jsonParser = bodyParser.json();
 
-// Initializing the App
+// Initializing the App       ==================================================
 mongoUtil.connect(url); // connecting to MongoDB
 app.use( express.static(__dirname + "/../client") ); // default App route
 //app.use(express.session({ secret: secretkey })); // session secret key
 
-// Routing
+// Routing                    ==================================================
 app.get("/consultants", (req, res) => {
   let consultants = mongoUtil.consultants();
 
@@ -53,7 +53,7 @@ app.get("/tradepoints", (req, res) => {
   });
 });
 
-// Orders routing
+// Orders routing             ==================================================
 app.get("/orders", (req, res) => {
   let orders = mongoUtil.orders();
 
@@ -65,18 +65,18 @@ app.get("/orders", (req, res) => {
 });
 
 app.post("/orders/create", jsonParser, (req, res) => {
-  let order = req.body.order || {};
+  let neworder = req.body.dataset || {};
   let orders = mongoUtil.orders();
 
-  orders.insert(order, function(err, result){
+  orders.insert(neworder, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( "Order added: " + JSON.stringify( order ) );
+    console.log( "Order created: " + JSON.stringify( neworder ) );
     res.sendStatus(201);
   });
 });
 
 app.post("/orders/cancel", jsonParser, (req, res) => {
-  let orderid = req.body.id || {};
+  let orderid = req.body.dataset || {};
   let orders = mongoUtil.orders();
 
   orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: {status: "Отменён"}}, function(err, result){
@@ -108,5 +108,5 @@ app.post("/orders/resolve", jsonParser, (req, res) => {
   });
 });
 
-// Starting the App
+// Starting the App           ==================================================
 app.listen(port, () => console.log( "App is listening on " + port ) );

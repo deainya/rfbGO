@@ -1,22 +1,9 @@
-/*angular.module('rfbgo').controller('profileCtrl', function($scope, Entity, Gravatar){
-  $scope.user = Entity.setEntityWeb('/partners');
-  $scope.gravatarUrl = Gravatar.generate($scope.user.email);
-})*/
-
-// controllers/profileController.js
-
-/*module.exports = function ($scope, $http, Entity, Gravatar) {
-  Entity.setEntityWeb('/partners');
-  $scope.user = $http.get('/partners');
-  console.log($scope.user);
-  $scope.gravatarUrl = Gravatar.generate($scope.user.email);
-};*/
-
-module.exports = function ($scope, profile, Entity, Gravatar) {
-  // Log customers when controller executes
-  //console.log(profile);
-  // Assign customers to scope
-  $scope.profile = profile.data;
-  $scope.gravatarUrl = Gravatar.generate(profile.data.email, 80);
-  Entity.setEntity(profile.data);
+// User profile controller
+module.exports = function ($scope, get, Entity, Gravatar) {
+  // Log getObject when controller executes
+  //console.log(get);
+  // Assign getObject to $scope
+  $scope.profile = get.data;
+  $scope.gravatarUrl = Gravatar.generate(get.data.email, 80);
+  Entity.setEntity(get.data);
 };

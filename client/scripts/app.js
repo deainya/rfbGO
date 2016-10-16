@@ -2,9 +2,9 @@ import angular from 'angular'
 import 'angular-ui-router'
 import 'angular-resource'
 
+var dataSourceService = require('./services/dataSource');
 var EntityFactory = require('./services/Entity');
 var GravatarFactory = require('./services/Gravatar');
-var ProfileFactory = require('./services/Profile');
 var profileCtrl = require('./controllers/Profile');
 var ordersCtrl = require('./controllers/Orders');
 
@@ -18,22 +18,22 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
     url: '/'
   })
 
-  .state('consultant', {
+  .state('profile', {
     url: '/consultants',
     templateUrl: 'templates/profile.html',
     resolve: {
-      Profile: 'Profile', // A string value resolves to a service
-      profile: function(Profile){ return Profile.get('/consultants')/*.$promise*/; } // A function value resolves to the return value of the function
+      dataSource: 'dataSource', // A string value resolves to a Service
+      get: function(dataSource){ return dataSource.get('/consultants')/*.$promise*/; } // A function value resolves to the return value of the function
     },
     controller: 'profileCtrl'
   })
 
-  .state('profile', {
+  .state('partner', {
     url: '/partners',
     templateUrl: 'templates/profile.html',
     resolve: {
-      Profile: 'Profile', // A string value resolves to a service
-      profile: function(Profile){ return Profile.get('/partners')/*.$promise*/; } // A function value resolves to the return value of the function
+      dataSource: 'dataSource',
+      get: function(dataSource){ return dataSource.get('/partners'); }
     },
     controller: 'profileCtrl'
   })
@@ -42,8 +42,8 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
     url: '/orders',
     templateUrl: 'templates/orders.html',
     resolve: {
-      Profile: 'Profile',
-      get: function(Profile){ return Profile.get('/orders'); }
+      dataSource: 'dataSource',
+      get: function(dataSource){ return dataSource.get('/orders'); }
     },
     controller: 'ordersCtrl'
   })
@@ -56,8 +56,8 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
 
 })
 
+.factory('dataSource', ['$http', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
-.factory('Profile', ['$http', ProfileFactory])//.factory('Profile', ['$resource', ProfileFactory])
-.controller('profileCtrl', ['$scope', 'profile', 'Entity', 'Gravatar', profileCtrl])
-.controller('ordersCtrl', ['$scope', '$state', 'get', 'Profile', ordersCtrl])
+.controller('profileCtrl', ['$scope', 'get', 'Entity', 'Gravatar', profileCtrl])
+.controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
