@@ -48,6 +48,11 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
     controller: 'ordersCtrl'
   })
 
+  .state('orders-new', {
+    url: '/orders/new',
+    templateUrl: 'templates/orders-new.html',
+    controller: 'ordersCtrl'
+  })
 
 })
 

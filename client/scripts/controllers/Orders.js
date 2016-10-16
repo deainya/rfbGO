@@ -21,12 +21,20 @@ module.exports = function ($scope, $state, get, Profile, Entity, Gravatar) {
   // Assign customers to scope
   $scope.orders = get.data;
 
+  $scope.Create = function(order){
+    angular.extend(order, {partner:Entity.Entity}, {"status":"Новый"});
+    console.log(order);
+    Profile.set('/orders/new', order).then(function(){
+      $state.go("orders");
+    });
+  };
+
   $scope.Cancel = function(orderid){
     Profile.set('/orders/cancel', orderid).then(function(){
       console.log(orderid);
       $state.reload();
     });
-  }
+  };
 
   $scope.isCancel = function(status){ return status === "Отменён"; };
 };
