@@ -51,6 +51,10 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
   .state('orders-new', {
     url: '/orders/new',
     templateUrl: 'templates/orders-new.html',
+    resolve: {
+      Entity: 'Entity',
+      get: function(Entity){ return Entity.getEntity; }
+    },
     controller: 'ordersCtrl'
   })
 
