@@ -17,7 +17,7 @@ module.exports = function ($scope, $state, get, dataSource) {
   $scope.Accept = function(setorder){
     var today = new Date();
     var date = today.getDate();
-    angular.extend(setorder, {consultant:get}, {"status":"Принят", "accepted":date}); //get for partner
+    angular.extend(setorder, {consultant:get}, {"status":"Принят", accepted:date}); //get for partner
     console.log(setorder);
     dataSource.set('/orders/accept', setorder).then(function(){
       $state.go("orders");
