@@ -6,7 +6,7 @@ module.exports = function ($scope, $state, get, dataSource) {
   $scope.orders = get.data;
 
   $scope.Create = function(neworder){
-    angular.extend(neworder, {partner:get}, {"status":"Новый"});
+    angular.extend(neworder, {partner:get}, {"status":"Новый"}); //get for partner
     delete neworder.partner.role;
     console.log(neworder);
     dataSource.set('/orders/create', neworder).then(function(){
@@ -14,13 +14,27 @@ module.exports = function ($scope, $state, get, dataSource) {
     });
   };
 
+  $scope.Accept = function(orderid){
+    //angular.extend(neworder, ); //get for partner
+    //delete neworder.partner.role;
+    //console.log(neworder);
+    var today = new Date();
+    dataSource.set('/orders/accept', {_id:orderid, {consultant:get}, "status":"Принят", accepted:today.getDate()}).then(function(){
+      $state.go("orders");
+    });
+  };
+  //get for consultant
+
   $scope.changeStatus = function(state, orderid){
     var url ='';
     switch(state){
       case "Отменить": url = '/orders/cancel'; break;
-      case "Принять": url = '/orders/accept'; break;
+      case "Принять":
+        url = '/orders/accept';
+        //???
+        break;
       case "Завершить": url = '/orders/resolve'; break;
-      default: console.log("ouch");
+      default: console.log("Ouch :)");
     }
     console.log(url);
     if (!!url) {

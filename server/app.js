@@ -87,12 +87,14 @@ app.post("/orders/cancel", jsonParser, (req, res) => {
 });
 
 app.post("/orders/accept", jsonParser, (req, res) => {
-  let orderid = req.body.dataset || {};
+  let setorder = req.body.dataset || {};
+  let orderid = setorder._id;
+  delete setorder._id;
   let orders = mongoUtil.orders();
 
-  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: {status: "Принят"}}, function(err, result){
+  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: {setorder}}, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( "Order accepted: " + JSON.stringify(orderid) );
+    console.log( "Order accepted: " + JSON.stringify(orderid) + JSON.stringify(setorder) );
     res.sendStatus(201);
   });
 });

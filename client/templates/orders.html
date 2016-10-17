@@ -27,7 +27,7 @@
     <tr class="opt" ng-show="order._active==true">
       <td colspan="2">
         Действие:
-        <form class="formx" ng-show="isAccept(order.status)&&role==0" ng-submit="changeStatus('Принять',order._id)"/>
+        <form class="formx" ng-show="isAccept(order.status)&&role==0" ng-submit="Accept(order._id)"/>
           <input class="btnx" type="submit" value="Принять" />
         </form>
         <form class="formx" ng-show="isResolve(order.status)&&role==1" ng-submit="changeStatus('Завершить',order._id)"/>

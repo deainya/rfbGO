@@ -37,7 +37,7 @@
 
     <div class="cell" ui-view></div>
 
-    <div ng-switch="role" class="cell">
+    <div class="cell" ng-switch="role">
       <p> <a ui-sref="profile" ng-switch-when="1">Войти как Консультант</a> </p>
       <p> <a ui-sref="partner" ng-switch-default>Войти как Партнёр</a> </p>
     </div>
