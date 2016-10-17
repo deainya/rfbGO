@@ -14,12 +14,12 @@ module.exports = function ($scope, $state, get, dataSource) {
     });
   };
 
-  $scope.Accept = function(orderid){
-    //angular.extend(neworder, ); //get for partner
-    //console.log(neworder);
+  $scope.Accept = function(setorder){
     var today = new Date();
     var date = today.getDate();
-    dataSource.set('/orders/accept', {_id:orderid, {consultant:get}, "status":"Принят", accepted:date}).then(function(){
+    angular.extend(setorder, {consultant:get}, {"status":"Принят", "accepted":date}); //get for partner
+    console.log(setorder);
+    dataSource.set('/orders/accept', setorder).then(function(){
       $state.go("orders");
     });
   };
