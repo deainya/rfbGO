@@ -16,10 +16,10 @@ module.exports = function ($scope, $state, get, dataSource) {
 
   $scope.Accept = function(orderid){
     //angular.extend(neworder, ); //get for partner
-    //delete neworder.partner.role;
     //console.log(neworder);
     var today = new Date();
-    dataSource.set('/orders/accept', {_id:orderid, {consultant:get}, "status":"Принят", accepted:today.getDate()}).then(function(){
+    var date = today.getDate();
+    dataSource.set('/orders/accept', {_id:orderid, {consultant:get}, "status":"Принят", accepted:date}).then(function(){
       $state.go("orders");
     });
   };
