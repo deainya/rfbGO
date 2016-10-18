@@ -16,11 +16,11 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   };
 
   $scope.Accept = function(orderid){
-    var entity = Entity.getEntity();
+    var entity = Entity.get();
     var today = new Date();
     var date = today.getDate();
     var setorder = {};
-    angular.extend(setorder, {_id:orderid, "status":"Принят", accepted:date}, {consultant:Entity.Entity}); //get for partner
+    angular.extend(setorder, {_id:orderid, "status":"Принят", accepted:date}, {consultant:entity}); //get for consultant
     console.log(setorder);
     dataSource.set('/orders/accept', setorder).then(function(){
       $state.go("orders");
