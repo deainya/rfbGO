@@ -6,7 +6,8 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   $scope.orders = get.data;
 
   $scope.Create = function(neworder){
-    angular.extend(neworder, {partner:Entity.Entity}, {"status":"Новый"}); //get for partner
+    var entity = Entity.getEntity();
+    angular.extend(neworder, {partner:entity}, {"status":"Новый"}); //get for partner
     delete neworder.partner.role;
     console.log(neworder);
     dataSource.set('/orders/create', neworder).then(function(){
@@ -15,6 +16,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   };
 
   $scope.Accept = function(orderid){
+    var entity = Entity.getEntity();
     var today = new Date();
     var date = today.getDate();
     var setorder = {};
