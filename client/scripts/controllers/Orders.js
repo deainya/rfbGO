@@ -6,7 +6,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   $scope.orders = get.data;
 
   $scope.Create = function(neworder){
-    var entity = Entity.getEntity();
+    var entity = Entity.get();
     angular.extend(neworder, {partner:entity}, {"status":"Новый"}); //get for partner
     delete neworder.partner.role;
     console.log(neworder);
