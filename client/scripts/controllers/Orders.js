@@ -1,5 +1,5 @@
 // Orders controller
-module.exports = function ($scope, $state, /*get, */dataSource, Entity) {
+module.exports = function ($scope, $state, get, dataSource, Entity) {
   // Log getObject when controller executes
   //console.log(get);
   // Assign getObject to $scope
