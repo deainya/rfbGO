@@ -51,10 +51,10 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
   .state('orders-new', {
     url: '/orders/new',
     templateUrl: 'templates/orders-new.html',
-    resolve: {
+    /*resolve: {
       Entity: 'Entity',
       get: function(Entity){ return Entity.get(); }
-    },
+    },*/
     controller: 'ordersCtrl'
   })
 
@@ -64,4 +64,4 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
 .controller('profileCtrl', ['$scope', '$rootScope', 'get', 'Entity', 'Gravatar', profileCtrl])
-.controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
+.controller('ordersCtrl', ['$scope', '$state', /*'get', */'dataSource', 'Entity', ordersCtrl])

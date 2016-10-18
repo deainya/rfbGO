@@ -1,12 +1,12 @@
 // Orders controller
-module.exports = function ($scope, $state, get, dataSource) {
+module.exports = function ($scope, $state, /*get, */dataSource, Entity) {
   // Log getObject when controller executes
   //console.log(get);
   // Assign getObject to $scope
   $scope.orders = get.data;
 
   $scope.Create = function(neworder){
-    angular.extend(neworder, {partner:get}, {"status":"Новый"}); //get for partner
+    angular.extend(neworder, {partner:Entity.Entity}, {"status":"Новый"}); //get for partner
     delete neworder.partner.role;
     console.log(neworder);
     dataSource.set('/orders/create', neworder).then(function(){
@@ -18,7 +18,7 @@ module.exports = function ($scope, $state, get, dataSource) {
     var today = new Date();
     var date = today.getDate();
     var setorder = {};
-    angular.extend(setorder, {_id:orderid, "status":"Принят", accepted:date}, {consultant:get}); //get for partner
+    angular.extend(setorder, {_id:orderid, "status":"Принят", accepted:date}, {consultant:Entity.Entity}); //get for partner
     console.log(setorder);
     dataSource.set('/orders/accept', setorder).then(function(){
       $state.go("orders");
