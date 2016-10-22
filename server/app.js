@@ -25,7 +25,7 @@ app.use( express.static(__dirname + "/../client") ); // default App route
 app.get("/consultants", (req, res) => {
   let consultants = mongoUtil.users();//consultants();
 
-  consultants.find({"role":"0"}).limit(1).next((err,doc) => { // query
+  consultants.find({"role":"0"}, {"_id":false}).limit(1).next((err,doc) => { // query
     if (err) { res.sendStatus(400); }
     console.log( JSON.stringify(doc) );
     res.json( doc ); // 1st consultant from collection
@@ -45,7 +45,7 @@ app.get("/partners", (req, res) => {
 app.get("/tradepoints", (req, res) => {
   let tradepoints = mongoUtil.tradepoints();
 
-  tradepoints.find({}, {"_id":false}).toArray((err,docs) => {
+  tradepoints.find().toArray((err,docs) => {
     if(err) { res.sendStatus(400); }
     console.log( JSON.stringify(docs) );
     //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
@@ -65,7 +65,7 @@ app.get("/orders", (req, res) => {
 });
 
 app.post("/orders/create", jsonParser, (req, res) => {
-  let neworder = req.body.dataset || {};
+  let neworder = req.body.dataset || {$currentDate: {"created": {$type: "date"}}};
   let orders = mongoUtil.orders();
 
   orders.insert(neworder, function(err, result){
@@ -92,7 +92,7 @@ app.post("/orders/accept", jsonParser, (req, res) => {
   delete setorder._id;
   let orders = mongoUtil.orders();
 
-  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: setorder}, function(err, result){
+  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: setorder, $currentDate: {"accepted": {$type: "date"}}}, function(err, result){
     if(err) { res.sendStatus(400); }
     console.log( "Order accepted: " + JSON.stringify(orderid) + JSON.stringify(setorder) );
     res.sendStatus(201);
