@@ -89,12 +89,14 @@ app.post("/orders/cancel", jsonParser, (req, res) => {
 app.post("/orders/accept", jsonParser, (req, res) => {
   let setorder = req.body.dataset || {};
   let orderid = setorder._id;
-  //delete setorder._id;
+  delete setorder._id;
+  console.log( "Order before: " + JSON.stringify(orderid) + JSON.stringify(setorder) );
+
   let orders = mongoUtil.orders();
 
-  orders.findOneAndReplace({_id: new ObjectID(orderid)}, {$set: {setorder}}, function(err, result){
-    if(err) { res.sendStatus(400); }
+  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: setorder}, function(err, result){
     console.log( "Order accepted: " + JSON.stringify(orderid) + JSON.stringify(setorder) );
+    if(err) { res.sendStatus(400); }
     res.sendStatus(201);
   });
 });
