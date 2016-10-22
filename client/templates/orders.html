@@ -49,6 +49,7 @@
         </tr>
         <tr>
           <td colspan="3">
+            <span ng-show="!isResolve(order.status)">Завершён: {{ order.resolved | date:'dd.MM HH:mm'}}, Оценка: {{ order.stars }}, Комментарий {{ order.comment | limitTo:50 }}</span>
             <span ng-show="!isCancel(order.status)">Отменён: {{ order.cancelled | date:'dd.MM HH:mm'}}</span>
             <form class="formx" name="AcceptForm" ng-show="isAccept(order.status)&&role==0" ng-submit="Accept(order._id, accorder)"/>
               <label class="form-label" for="time2go">Буду через:</label>
