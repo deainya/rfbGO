@@ -379,6 +379,28 @@ table {
 }
 
 /*-----------------------------------------------
+*   TableXX
+-----------------------------------------------*/
+
+.tablexx {
+  border-top: 1px solid #bfc0c0;
+  border-collapse: inherit;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.tablexx thead,
+.tablexx td {
+  /*border-right: 1px solid #bfc0c0;
+  border-top: 1px solid #bfc0c0;*/
+  font-size: 20px;
+  line-height: 1.5;
+  padding: 10px 20px;
+  vertical-align: center;
+}
+
+/*-----------------------------------------------
 *   TableXXX
 -----------------------------------------------*/
 
@@ -394,7 +416,7 @@ table {
 .tablexxx td {
   /*border-right: 1px solid #bfc0c0;
   border-top: 1px solid #bfc0c0;*/
-  font-size: 24px;
+  font-size: 14px;
   line-height: 1.5;
   padding: 10px 20px;
   vertical-align: center;
