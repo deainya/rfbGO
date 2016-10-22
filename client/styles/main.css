@@ -109,7 +109,7 @@ table {
 .card:focus,
 .card:hover {
   border-color: #808080;
-  background-color: #ffe3dc;
+  /*background-color: #ffe3dc;*/
 }
 
 /* ----- States ----- */
@@ -390,6 +390,7 @@ table {
   width: 100%;
 }
 
+.tablexxx thead,
 .tablexxx td {
   /*border-right: 1px solid #bfc0c0;
   border-top: 1px solid #bfc0c0;*/
@@ -413,4 +414,5 @@ table {
 
 .opt {
   background-color: #f0f0f0;
+  border-top: 1px dashed #bfc0c0;
 }
