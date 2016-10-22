@@ -16,9 +16,9 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   };
 
   $scope.Accept = function(orderid){
-    var entity = Entity.get();
+    //var entity = Entity.get();
     var setorder = {};
-    angular.extend(setorder, {_id:orderid, "status":"Принят", consultant:entity}); //get for consultant
+    angular.extend(setorder, {_id:orderid, "status":"Принят", consultant:Entity.get()}); //get for consultant
     console.log(setorder);
     dataSource.set('/orders/accept', setorder).then(function(){
       $state.go("orders");
@@ -30,10 +30,10 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
     var url ='';
     switch(state){
       case "Отменить": url = '/orders/cancel'; break;
-      case "Принять":
-        url = '/orders/accept';
+      //case "Принять":
+      //  url = '/orders/accept';
         //???
-        break;
+      //  break;
       case "Завершить": url = '/orders/resolve'; break;
       default: console.log("Ouch :)");
     }

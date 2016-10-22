@@ -90,8 +90,6 @@ app.post("/orders/accept", jsonParser, (req, res) => {
   let setorder = req.body.dataset || {};
   let orderid = setorder._id;
   delete setorder._id;
-  console.log( "Order before: " + JSON.stringify(orderid) + JSON.stringify(setorder) );
-
   let orders = mongoUtil.orders();
 
   orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: setorder}, function(err, result){
