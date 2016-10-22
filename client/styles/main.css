@@ -379,6 +379,27 @@ table {
 }
 
 /*-----------------------------------------------
+*   TableXXX
+-----------------------------------------------*/
+
+.tablexxx {
+  border: 0px; /*solid #bfc0c0;*/
+  border-collapse: inherit;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.tablexxx td {
+  /*border-right: 1px solid #bfc0c0;
+  border-top: 1px solid #bfc0c0;*/
+  font-size: 24px;
+  line-height: 1.5;
+  padding: 10px 20px;
+  vertical-align: center;
+}
+
+/*-----------------------------------------------
 *   Tools
 -----------------------------------------------*/
 
