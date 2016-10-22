@@ -23,7 +23,14 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
       $state.reload();
     });
   };
-  //get for consultant
+
+  $scope.Resolve = function(orderid, setorder){
+    angular.extend(setorder, {_id:orderid, "status":"Завершён", resolved:new Date()});
+    console.log(setorder);
+    dataSource.set('/orders/resolve', setorder).then(function(){
+      $state.reload();
+    });
+  };
 
   $scope.changeStatus = function(state, orderid){
     var url ='';
@@ -33,7 +40,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
       //  url = '/orders/accept';
         //???
       //  break;
-      case "Завершить": url = '/orders/resolve'; break;
+      //case "Завершить": url = '/orders/resolve'; break;
       default: console.log("Ouch :)");
     }
     console.log(url);

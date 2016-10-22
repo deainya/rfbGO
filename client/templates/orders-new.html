@@ -16,6 +16,14 @@
     <input class="form-input" type="email" id="email" ng-model="neworder.contact.email"/>
   </div>
 <br>
+  <div class="form-field">
+    <label class="form-label" for="place2go">E-mail:</label>
+    <select class="form-input" id="place2go" required ng-model="neworder.place2go" ng-init="neworder.place2go = '0'">
+      <option value="0">Иду с клиентом</option>
+      <option value="1">Подойди ко мне</option>
+    </select>
+  </div>
+<br>
   <input class="btn" type="submit" value="Создать" />
 
 </form>
