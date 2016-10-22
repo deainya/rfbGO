@@ -182,18 +182,15 @@ table {
 
 /* Input */
 
+/* Input */
+
 .formx-input {
   border: 1px solid #bfc0c0;
   border-radius: 8px;
   display: inline-block;
   box-sizing: border-box;
-  /*flex-basis: 33%;*/
-  padding: 0 20px;
-  /*padding: 10px;*/
+  padding: 8px;
 }
-
-  /*line-height: 2.5;
-  transition: 0.2s ease-in-out;*/
 
 /*-----------------------------------------------
 *   Form
