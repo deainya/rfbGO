@@ -3,31 +3,32 @@
 <div class="card" ng-repeat="order in orders">
   <div class="act" ng-click="order._active=!order._active">
 
-    <table class="table">
+    <table class="tablexxx">
       <tbody>
         <tr>
           <td width="20%">{{ order.client }}</td>
           <td width="20%">{{ order.created }}</td>
           <td width="20%">{{ order.status }}</td>
-          <td width="20%" ng-show="order.place2go==0">Иду с клиентом</td>
-          <td width="20%" ng-show="order.place2go==1">Подойди ко мне</td>
           <td width="20%" ng-show="role==0">{{ order.partner.name }}</td>
           <td width="20%" ng-show="role==1">{{ order.consultant.name }}</td>
         </tr>
       </tbody>
     </table>
+    <span ng-show="order.place2go==0">Иду с клиентом</span>
+    <span ng-show="order.place2go==1">Подойди ко мне</span>
 
-  <div class="opt" ng-show="order._active==true">
-    <table class="table">
-      <tbody>
-        <tr>
-          <td>Торговая точка: {{ order.partner.tradepoint }}</td>
-        </tr>
-        <tr ng-show="role==1">
-          <td>Адрес: {{ order.partner.address }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="opt" ng-show="order._active==true">
+      <table class="tablexxx">
+        <tbody>
+          <tr ng-show="role==1">
+            <td>Торговая точка: {{ order.partner.tradepoint }}</td>
+          </tr>
+          <tr ng-show="role==1">
+            <td>Адрес: {{ order.partner.address }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
-
 </div>
