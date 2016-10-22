@@ -42,7 +42,7 @@
             <td width="34%">Адрес: {{ order.partner.address }}</td>
           </tr>
           <tr>
-            <td colspan="3">Действие...
+            <td colspan="3">
               <form class="formx" name="AcceptForm" ng-show="isAccept(order.status)&&role==0" ng-submit="Accept(order._id, accorder)"/>
                 <label class="form-label" for="time2go">Буду через:</label>
                 <select class="formx-input" id="time2go" ng-model="accorder.time2go" ng-init="accorder.time2go = '3'">

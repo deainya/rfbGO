@@ -406,13 +406,9 @@ table {
 }
 
 .tablexx th {
-  /*border-right: 1px solid #bfc0c0;*/
+  border-bottom: 1px solid #bfc0c0;
   padding: 10px 20px;
   text-align: left;
-}
-
-.tablexx th:last-child {
-  border-right: 0;
 }
 
 /*-----------------------------------------------
