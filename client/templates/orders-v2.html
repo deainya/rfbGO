@@ -1,28 +1,30 @@
 <h2>Список вызовов</h2>
 
-<div class="cell" ng-repeat="order in orders">
-  <div class="card" ng-click="order._active=!order._active">
-    <ul class="list">
-      <li>Клиент: {{ order.client }}</li>
-      <li>Создан: {{ order.created }}</li>
-      <li>Статус: {{ order.status }}</li>
-      <li ng-show="order.place2go==0">Куда: Иду с клиентом</li>
-      <li ng-show="order.place2go==1">Куда: Подойди ко мне</li>
-      <li ng-show="role==0">Партнёр: {{ order.partner.name }}</li>
-      <li ng-show="role==1">Консультант: {{ order.consultant.name }}</li>
-    </ul>
-  </div>
+<div class="card" ng-repeat="order in orders">
+  <div class="act" ng-click="order._active=!order._active">
 
-  <div class="cell" ng-show="order._active==true">
-    <table class="tablex">
+    <table class="table">
       <tbody>
         <tr>
-          <td>Торговая точка:</td>
-          <td>{{ order.partner.tradepoint }}</td>
+          <td>{{ order.client }}</td>
+          <td>{{ order.created }}</td>
+          <td>{{ order.status }}</td>
+          <td ng-show="order.place2go==0">Иду с клиентом</td>
+          <td ng-show="order.place2go==1">Подойди ко мне</td>
+          <td ng-show="role==0">>{{ order.partner.name }}</td>
+          <td ng-show="role==1">>{{ order.consultant.name }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+  <div class="opt" ng-show="order._active==true">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td>Торговая точка: {{ order.partner.tradepoint }}</td>
         </tr>
         <tr ng-show="role==1">
-          <td>Адрес:</td>
-          <td>{{ order.partner.address }}</td>
+          <td>Адрес: {{ order.partner.address }}</td>
         </tr>
       </tbody>
     </table>
