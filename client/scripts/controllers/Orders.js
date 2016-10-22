@@ -22,6 +22,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
     console.log(setorder);
     dataSource.set('/orders/accept', setorder).then(function(){
       $state.go("orders");
+      console.log("???");
     });
   };
   //get for consultant
