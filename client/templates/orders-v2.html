@@ -1,0 +1,30 @@
+<h2>Список вызовов</h2>
+
+<div class="cell" ng-repeat="order in orders">
+  <div class="card">
+    <ul class="act" ng-click="order._active=!order._active">
+      <li>Клиент: {{ order.client }}</li>
+      <li>Создан: {{ order.created }}</li>
+      <li>Статус: {{ order.status }}</li>
+      <li>Место: {{ order.place2go }}</li>
+      <li ng-show="role==0">Партнёр: {{ order.partner.name }}</li>
+      <li ng-show="role==1">Консультант: {{ order.consultant.name }}</li>
+    </ul>
+  </div>
+
+  <div class="cell" ng-show="order._active==true">
+    <table class="tablex">
+      <tbody>
+        <tr>
+          <td>Торговая точка:</td>
+          <td>{{ order.tradepoint }}</td>
+        </tr>
+        <tr ng-show="role==1">
+          <td>Адрес:</td>
+          <td>{{ order.address }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

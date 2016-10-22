@@ -48,6 +48,16 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
     controller: 'ordersCtrl'
   })
 
+  .state('orders-v2', {
+    url: '/orders',
+    templateUrl: 'templates/orders-v2.html',
+    resolve: {
+      dataSource: 'dataSource',
+      get: function(dataSource){ return dataSource.get('/orders'); }
+    },
+    controller: 'ordersCtrl'
+  })
+
   .state('orders-new', {
     url: '/orders/new',
     templateUrl: 'templates/orders-new.html',

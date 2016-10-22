@@ -29,6 +29,10 @@
             <a class="card-link" ui-sref="orders">Список вызовов</a>
           </div></li>
           <li>&nbsp;</li>
+          <li><div class="card" ng-hide="!role">
+            <a class="card-link" ui-sref="orders-v2">Список вызовов в.2</a>
+          </div></li>
+          <li>&nbsp;</li>
           <li><div class="card" ng-show="role==1">
             <a class="card-link" ui-sref="orders-new">Новый вызов</a>
           </div></li>
