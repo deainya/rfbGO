@@ -1,12 +1,13 @@
 <h2>Список вызовов</h2>
 
 <div class="cell" ng-repeat="order in orders">
-  <div class="card">
-    <ul class="act" ng-click="order._active=!order._active">
+  <div class="card" ng-click="order._active=!order._active">
+    <ul class="list">
       <li>Клиент: {{ order.client }}</li>
       <li>Создан: {{ order.created }}</li>
       <li>Статус: {{ order.status }}</li>
-      <li>Место: {{ order.place2go }}</li>
+      <li ng-show="order.place2go==0">Куда: Иду с клиентом</li>
+      <li ng-show="order.place2go==1">Куда: Подойди ко мне</li>
       <li ng-show="role==0">Партнёр: {{ order.partner.name }}</li>
       <li ng-show="role==1">Консультант: {{ order.consultant.name }}</li>
     </ul>
@@ -17,11 +18,11 @@
       <tbody>
         <tr>
           <td>Торговая точка:</td>
-          <td>{{ order.tradepoint }}</td>
+          <td>{{ order.partner.tradepoint }}</td>
         </tr>
         <tr ng-show="role==1">
           <td>Адрес:</td>
-          <td>{{ order.address }}</td>
+          <td>{{ order.partner.address }}</td>
         </tr>
       </tbody>
     </table>
