@@ -6,13 +6,13 @@
     <table class="table">
       <tbody>
         <tr>
-          <td>{{ order.client }}</td>
-          <td>{{ order.created }}</td>
-          <td>{{ order.status }}</td>
-          <td ng-show="order.place2go==0">Иду с клиентом</td>
-          <td ng-show="order.place2go==1">Подойди ко мне</td>
-          <td ng-show="role==0">>{{ order.partner.name }}</td>
-          <td ng-show="role==1">>{{ order.consultant.name }}</td>
+          <td width="20%">{{ order.client }}</td>
+          <td width="20%">{{ order.created }}</td>
+          <td width="20%">{{ order.status }}</td>
+          <td width="20%" ng-show="order.place2go==0">Иду с клиентом</td>
+          <td width="20%" ng-show="order.place2go==1">Подойди ко мне</td>
+          <td width="20%" ng-show="role==0">{{ order.partner.name }}</td>
+          <td width="20%" ng-show="role==1">{{ order.consultant.name }}</td>
         </tr>
       </tbody>
     </table>
