@@ -385,26 +385,15 @@ table {
 .tablexx {
   border-collapse: inherit;
   /*border-radius: 8px;*/
-  margin-bottom: 18px;
+  margin-bottom: 20px;
   width: 100%;
 }
 
-.tablexx tbody {
-  border-bottom: 1px dashed #bfc0c0;
-}
-
-.tablexx thead,
-.tablexx td {
-  /*border-right: 1px solid #bfc0c0;
-  border-top: 1px solid #bfc0c0;*/
-  font-size: 20px;
+.tablexx thead {
+  font-size: 18px;
   line-height: 1.5;
   padding: 10px 20px;
   vertical-align: center;
-}
-
-.tablexx thead {
-  border-top: 0;
   text-align: left;
 }
 
@@ -414,12 +403,20 @@ table {
   text-align: left;
 }
 
+.tablexx td {
+  border-bottom: 1px dashed #bfc0c0;
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 10px 20px;
+  vertical-align: center;
+}
+
 /*-----------------------------------------------
 *   TableXXX
 -----------------------------------------------*/
 
 .tablexxx {
-  border: 0px; /*solid #bfc0c0;*/
+  border: 0px;
   border-collapse: inherit;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -428,8 +425,6 @@ table {
 
 .tablexxx thead,
 .tablexxx td {
-  /*border-right: 1px solid #bfc0c0;
-  border-top: 1px solid #bfc0c0;*/
   font-size: 14px;
   line-height: 1.5;
   padding: 10px 20px;
