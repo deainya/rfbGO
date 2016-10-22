@@ -59,7 +59,7 @@ app.get("/orders", (req, res) => {
 
   orders.find().toArray((err,docs) => {
     if (err) { res.sendStatus(400); }
-    //console.log( JSON.stringify(docs) );
+    console.log( JSON.stringify(docs) );
     res.json( docs ); // orders
   });
 });
