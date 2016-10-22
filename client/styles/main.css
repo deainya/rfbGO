@@ -385,7 +385,7 @@ table {
 .tablexx {
   border-collapse: inherit;
   /*border-radius: 8px;*/
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
   width: 100%;
 }
 
@@ -419,7 +419,7 @@ table {
   border: 0px;
   border-collapse: inherit;
   border-radius: 8px;
-  margin-bottom: 20px;
+  /*margin-bottom: 20px;*/
   width: 100%;
 }
 
