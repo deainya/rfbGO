@@ -52,7 +52,8 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
     }
   };
 
-  $scope.isCancel = function(status){ return status === "Новый" || status === "Принят" }; //show
-  $scope.isAccept = function(status){ return status === "Новый" }; //show
-  $scope.isResolve = function(status){ return status === "Принят" }; //show
+  $scope.isAccept = function(status){ return status === "Новый" };
+  $scope.isAccept = function(status){ return status === "Принят" };
+  $scope.isResolve = function(status){ return status === "Завершён" };
+  $scope.isCancel = function(status){ return status === "Отменён" };
 };

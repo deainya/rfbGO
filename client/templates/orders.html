@@ -42,16 +42,17 @@
           <td width="33%">Торговая точка: {{ order.partner.tradepoint }}</td>
           <td width="34%">Адрес: {{ order.partner.address }}</td>
         </tr>
-        <tr ng-show="role==1&&!isAccept(order.status)">
+        <tr ng-show="role==1&&isAccept(order.status)">
           <td width="33%">Принят: {{ order.accepted | date:'dd.MM HH:mm'}}</td>
           <td width="33%">Время прибытия: {{ order.time2go }} мин.</td>
           <td width="34%">Контакт: {{ order.consultant.email }}</td>
         </tr>
         <tr>
           <td colspan="3">
-            <span ng-show="!isResolve(order.status)">Завершён: {{ order.resolved | date:'dd.MM HH:mm'}}, Оценка: {{ order.stars }}, Комментарий {{ order.comment | limitTo:50 }}</span>
-            <span ng-show="!isCancel(order.status)">Отменён: {{ order.cancelled | date:'dd.MM HH:mm'}}</span>
-            <form class="formx" name="AcceptForm" ng-show="isAccept(order.status)&&role==0" ng-submit="Accept(order._id, accorder)"/>
+            <span ng-show="isResolve(order.status)">Завершён: {{ order.resolved | date:'dd.MM HH:mm'}}, Оценка: {{ order.stars }}, Комментарий: {{ order.comment | limitTo:50 }}</span>
+            <span ng-show="isCancel(order.status)">Отменён: {{ order.cancelled | date:'dd.MM HH:mm'}}</span>
+
+            <form class="formx" name="AcceptForm" ng-show="role==0&&isNew(order.status)" ng-submit="Accept(order._id, accorder)"/>
               <label class="form-label" for="time2go">Буду через:</label>
               <select class="formx-input" id="time2go" ng-model="accorder.time2go" ng-init="accorder.time2go = '3'">
                 <option value="3">3 мин.</option>
@@ -61,8 +62,7 @@
               <input class="btnx" type="submit" value="Принять" />
             </form>
 
-            <form class="formx" name="ResolveForm" ng-show="isResolve(order.status)&&role==1" ng-submit="Resolve(order._id, resorder)"/>
-              <!--label class="form-label" for="stars">Оцените вызов:</label-->
+            <form class="formx" name="ResolveForm" ng-show="role==1&&isAccept(order.status)" ng-submit="Resolve(order._id, resorder)"/>
               <select class="formx-input" id="stars" ng-model="resorder.stars" ng-init="resorder.stars = '0'">
                 <option value="0">Оценка</option>
                 <option value="1">1</option>
@@ -71,11 +71,11 @@
                 <option value="4">4</option>
                 <option value="5">5</option>
               </select>
-              <!--label class="form-label" for="comment">Комментарий:</label-->
               <input class="formx-input" placeholder="Оставьте отзыв" id="comment" ng-model="resorder.comment"/>
               <input class="btnx" type="submit" value="Завершить" />
             </form>
-            <form class="formx" ng-show="isCancel(order.status)&&role==1" ng-submit="changeStatus('Отменить',order._id)"/>
+
+            <form class="formx" ng-show="role==1&&(isNew(order.status)||isAccept(order.status))" ng-submit="changeStatus('Отменить',order._id)"/>
               <input class="btnx" type="submit" value="Отменить" />
             </form>
 
