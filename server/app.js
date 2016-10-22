@@ -45,7 +45,7 @@ app.get("/partners", (req, res) => {
 app.get("/tradepoints", (req, res) => {
   let tradepoints = mongoUtil.tradepoints();
 
-  tradepoints.find().toArray((err,docs) => {
+  tradepoints.find({}, {"_id":false}).toArray((err,docs) => {
     if(err) { res.sendStatus(400); }
     console.log( JSON.stringify(docs) );
     //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
@@ -93,8 +93,8 @@ app.post("/orders/accept", jsonParser, (req, res) => {
   let orders = mongoUtil.orders();
 
   orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: setorder}, function(err, result){
-    console.log( "Order accepted: " + JSON.stringify(orderid) + JSON.stringify(setorder) );
     if(err) { res.sendStatus(400); }
+    console.log( "Order accepted: " + JSON.stringify(orderid) + JSON.stringify(setorder) );
     res.sendStatus(201);
   });
 });
