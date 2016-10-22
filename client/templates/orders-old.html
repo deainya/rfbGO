@@ -1,0 +1,62 @@
+<h2>Список вызовов консультанта</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Клиент</th>
+      <th>Телефон</th>
+      <!--th>E-mail</th-->
+      <th>Партнёр</th>
+      <th>Торговая точка</th>
+      <!--th>Адрес</th-->
+      <th>Статус</th>
+      <!--th>Действие</th-->
+    </tr>
+  </thead>
+  <tbody ng-repeat="order in orders">
+    <tr class="act" ng-click="order._active=!order._active">
+      <td>{{ order.client }}</td>
+      <td>{{ order.contact.phone }}</td>
+      <!--td>{{ order.contact.email }}</td-->
+      <td>{{ order.partner.name }}</td>
+      <td>{{ order.partner.tradepoint }}</td>
+      <!--td>{{ order.partner.address }}</td-->
+      <td>{{ order.status }}</td>
+      <!--td></td-->
+    </tr>
+    <tr class="opt" ng-show="order._active==true">
+      <td colspan="2">
+        <form class="formx" name="AcceptForm" ng-show="isAccept(order.status)&&role==0" ng-submit="Accept(order._id, accorder)"/>
+          <label class="form-label" for="time2go">Буду через:</label>
+          <select class="formx-input" id="time2go" ng-model="accorder.time2go" ng-init="accorder.time2go = '3'">
+            <option value="3">3 мин.</option>
+            <option value="5">5 мин.</option>
+            <option value="10">10 мин.</option>
+          </select>
+          <input class="btnx" type="submit" value="Принять" />
+        </form>
+
+        <form class="formx" name="ResolveForm" ng-show="isResolve(order.status)&&role==1" ng-submit="Resolve(order._id, resorder)"/>
+          <!--label class="form-label" for="stars">Оцените вызов:</label-->
+          <select class="formx-input" id="stars" ng-model="resorder.stars" ng-init="resorder.stars = '0'">
+            <option value="0">Оценка</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <!--label class="form-label" for="comment">Комментарий:</label-->
+          <input class="formx-input" placeholder="Оставьте отзыв" id="comment" ng-model="resorder.comment"/>
+          <input class="btnx" type="submit" value="Завершить" />
+        </form>
+        <form class="formx" ng-show="isCancel(order.status)&&role==1" ng-submit="changeStatus('Отменить',order._id)"/>
+          <input class="btnx" type="submit" value="Отменить" />
+        </form>
+      </td>
+      <td colspan="3">
+        Адрес: {{ order.partner.address }}
+      </td>
+    </tr>
+  </tbody>
+</table>
