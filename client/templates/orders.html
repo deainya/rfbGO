@@ -28,8 +28,7 @@
       <td colspan="2">
         <form class="formx" name="AcceptForm" ng-show="isAccept(order.status)&&role==0" ng-submit="Accept(order._id, setorder)"/>
           <label class="form-label" for="time2go">Буду через:</label>
-          <select class="formx-input" id="time2go" ng-model="setorder.time2go"  ng-init="setorder.time2go = 5">
-            <option value="">5 мин.</option>
+          <select class="formx-input" id="time2go" ng-model="setorder.time2go" ng-init="setorder.time2go = '3'">
             <option value="3">3 мин.</option>
             <option value="5">5 мин.</option>
             <option value="10">10 мин.</option>

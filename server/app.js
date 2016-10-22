@@ -65,7 +65,7 @@ app.get("/orders", (req, res) => {
 });
 
 app.post("/orders/create", jsonParser, (req, res) => {
-  let neworder = req.body.dataset || {$currentDate: {"created": {$type: "date"}}};
+  let neworder = req.body.dataset || {};
   let orders = mongoUtil.orders();
 
   orders.insert(neworder, function(err, result){
@@ -92,7 +92,7 @@ app.post("/orders/accept", jsonParser, (req, res) => {
   delete setorder._id;
   let orders = mongoUtil.orders();
 
-  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: setorder, $currentDate: {"accepted": {$type: "date"}}}, function(err, result){
+  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: setorder}, function(err, result){
     if(err) { res.sendStatus(400); }
     console.log( "Order accepted: " + JSON.stringify(orderid) + " - " + JSON.stringify(setorder) );
     res.sendStatus(201);

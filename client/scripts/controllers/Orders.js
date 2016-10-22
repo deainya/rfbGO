@@ -7,7 +7,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
 
   $scope.Create = function(neworder){
     //var entity = Entity.get();
-    angular.extend(neworder, {"status":"Новый", partner:Entity.get()}); //get for partner
+    angular.extend(neworder, {"status":"Новый", partner:Entity.get(), created:new Date()}); //get for partner
     delete neworder.partner.role;
     console.log(neworder);
     dataSource.set('/orders/create', neworder).then(function(){
@@ -16,7 +16,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   };
 
   $scope.Accept = function(orderid, setorder){
-    angular.extend(setorder, {_id:orderid, "status":"Принят", consultant:Entity.get()}); //get for consultant
+    angular.extend(setorder, {_id:orderid, "status":"Принят", consultant:Entity.get(), accepted:new Date()}); //get for consultant
     delete setorder.consultant.role;
     console.log(setorder);
     dataSource.set('/orders/accept', setorder).then(function(){
