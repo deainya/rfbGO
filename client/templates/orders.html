@@ -27,7 +27,7 @@
             <span ng-show="order.place2go==0">У консультанта</span>
             <span ng-show="order.place2go==1">Подойти к клиенту</span>&nbsp;
           </td>
-          <td width="25%">{{ order.created | date:'dd.MM.yyyy'}}</td>
+          <td width="25%">{{ order.created | date:'dd.MM HH:mm'}}</td>
           <td width="25%">{{ order.status }}</td>
         </tr>
       </tbody>
@@ -42,8 +42,14 @@
           <td width="33%">Торговая точка: {{ order.partner.tradepoint }}</td>
           <td width="34%">Адрес: {{ order.partner.address }}</td>
         </tr>
+        <tr ng-show="role==1&&isAccept(order.status)">
+          <td width="33%">Принят: {{ order.accepted | date:'dd.MM HH:mm'}}</td>
+          <td width="33%">Время прибытия: {{ order.time2go }} мин.</td>
+          <td width="34%">Контакт: {{ order.consultant.email }}</td>
+        </tr>
         <tr>
           <td colspan="3">
+            <span ng-show="isCancel(order.status)">Отменён: {{ order.cancelled | date:'dd.MM HH:mm'}}</span>
             <form class="formx" name="AcceptForm" ng-show="isAccept(order.status)&&role==0" ng-submit="Accept(order._id, accorder)"/>
               <label class="form-label" for="time2go">Буду через:</label>
               <select class="formx-input" id="time2go" ng-model="accorder.time2go" ng-init="accorder.time2go = '3'">
