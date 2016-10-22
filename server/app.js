@@ -92,7 +92,7 @@ app.post("/orders/accept", jsonParser, (req, res) => {
   //delete setorder._id;
   let orders = mongoUtil.orders();
 
-  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: {setorder}}, function(err, result){
+  orders.findOneAndReplace({_id: new ObjectID(orderid)}, {$set: {setorder}}, function(err, result){
     if(err) { res.sendStatus(400); }
     console.log( "Order accepted: " + JSON.stringify(orderid) + JSON.stringify(setorder) );
     res.sendStatus(201);
