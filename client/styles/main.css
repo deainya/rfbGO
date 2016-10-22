@@ -383,11 +383,14 @@ table {
 -----------------------------------------------*/
 
 .tablexx {
-  border-top: 1px dashed #bfc0c0;
   border-collapse: inherit;
   /*border-radius: 8px;*/
   margin-bottom: 18px;
   width: 100%;
+}
+
+.tablexx tbody {
+  border-bottom: 1px dashed #bfc0c0;
 }
 
 .tablexx thead,
