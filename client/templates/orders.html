@@ -26,16 +26,14 @@
     </tr>
     <tr class="opt" ng-show="order._active==true">
       <td colspan="2">
-        Действие:
+        Буду через:
         <form class="formx" ng-show="isAccept(order.status)&&role==0" ng-submit="Accept(order._id, setorder)"/>
-          <input class="btnx" type="submit" value="Принять" />
-
-          <label class="form-label" for="client">Буду через:</label>
-          <select class="form-input" id="time2go" name="cars" required ng-model="setorder.time2go">
+          <select class="formx-input" id="time2go" name="cars" required ng-model="setorder.time2go" ng-init="5">
             <option value="3">3 мин.</option>
             <option value="5" selected>5 мин.</option>
             <option value="10">10 мин.</option>
           </select>
+          <input class="btnx" type="submit" value="Принять" />
         </form>
 
         <form class="formx" ng-show="isResolve(order.status)&&role==1" ng-submit="changeStatus('Завершить',order._id)"/>

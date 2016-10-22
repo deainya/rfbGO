@@ -180,6 +180,16 @@ table {
   display: inline-block;
 }
 
+/* Input */
+
+.formx-input {
+  border: 1px solid #bfc0c0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  flex-basis: 33%;
+  padding: 10px;
+}
+
 /*-----------------------------------------------
 *   Form
 -----------------------------------------------*/
