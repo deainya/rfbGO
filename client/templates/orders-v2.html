@@ -7,7 +7,7 @@
       <tbody>
         <tr>
           <td width="25%">{{ order.client }}</td>
-          <td width="25%">{{ order.created }}</td>
+          <td width="25%">{{ order.created | date:'dd.MM.yyyy'}}</td>
           <td width="25%">{{ order.status }}</td>
           <td width="25%" ng-show="role==0">{{ order.partner.name }}</td>
           <td width="25%" ng-show="role==1">{{ order.consultant.name }}</td>
