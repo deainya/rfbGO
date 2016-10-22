@@ -21,8 +21,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
     delete setorder.consultant.role;
     console.log(setorder);
     dataSource.set('/orders/accept', setorder).then(function(){
-      $state.go("orders");
-      console.log("???");
+      $state.reload();
     });
   };
   //get for consultant
