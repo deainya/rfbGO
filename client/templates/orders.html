@@ -37,20 +37,19 @@
         </form>
 
         <form class="formx" name="ResolveForm" ng-show="isResolve(order.status)&&role==1" ng-submit="Resolve(order._id, resorder)"/>
-          <label class="form-label" for="stars">Оцените вызов:</label>
+          <!--label class="form-label" for="stars">Оцените вызов:</label-->
           <select class="formx-input" id="stars" ng-model="resorder.stars" ng-init="resorder.stars = '0'">
-            <option value="0">оценка</option>
+            <option value="0">Оценка</option>
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
           </select>
-          <label class="form-label" for="comment">Комментарий:</label>
-          <input class="formx-input" id="comment" placeholder="Оставьте отзыв" ng-model="resorder.comment"/>
+          <!--label class="form-label" for="comment">Комментарий:</label-->
+          <input class="formx-input" placeholder="Оставьте отзыв" id="comment" ng-model="resorder.comment"/>
           <input class="btnx" type="submit" value="Завершить" />
         </form>
-
         <form class="formx" ng-show="isCancel(order.status)&&role==1" ng-submit="changeStatus('Отменить',order._id)"/>
           <input class="btnx" type="submit" value="Отменить" />
         </form>
