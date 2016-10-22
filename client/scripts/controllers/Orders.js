@@ -15,8 +15,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
     });
   };
 
-  $scope.Accept = function(orderid){
-    var setorder = {};
+  $scope.Accept = function(orderid, setorder){
     angular.extend(setorder, {_id:orderid, "status":"Принят", consultant:Entity.get()}); //get for consultant
     delete setorder.consultant.role;
     console.log(setorder);
