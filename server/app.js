@@ -94,7 +94,7 @@ app.post("/orders/accept", jsonParser, (req, res) => {
 
   orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: setorder, $currentDate: {"accepted": {$type: "date"}}}, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( "Order accepted: " + JSON.stringify(orderid) + JSON.stringify(setorder) );
+    console.log( "Order accepted: " + JSON.stringify(orderid) + " - " + JSON.stringify(setorder) );
     res.sendStatus(201);
   });
 });
