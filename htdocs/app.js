@@ -25,7 +25,7 @@ app.use( express.static(__dirname + "/../client") ); // default App route
 app.get("/consultants", (req, res) => {
   let consultants = mongoUtil.users();//consultants();
 
-  consultants.find({"role":"0"}).limit(1).next((err,doc) => { // query
+  consultants.find({"role":"0"}, {"_id":false}).limit(1).next((err,doc) => { // query
     if (err) { res.sendStatus(400); }
     console.log( JSON.stringify(doc) );
     res.json( doc ); // 1st consultant from collection
@@ -59,7 +59,7 @@ app.get("/orders", (req, res) => {
 
   orders.find().toArray((err,docs) => {
     if (err) { res.sendStatus(400); }
-    //console.log( JSON.stringify(docs) );
+    console.log( JSON.stringify(docs) );
     res.json( docs ); // orders
   });
 });
@@ -79,7 +79,7 @@ app.post("/orders/cancel", jsonParser, (req, res) => {
   let orderid = req.body.dataset || {};
   let orders = mongoUtil.orders();
 
-  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: {status: "Отменён"}}, function(err, result){
+  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: {status: "Отменён"}, $currentDate: {"cancelled": {$type: "date"}}}, function(err, result){
     if(err) { res.sendStatus(400); }
     console.log( "Order cancelled: " + JSON.stringify(orderid) );
     res.sendStatus(201);
@@ -87,23 +87,27 @@ app.post("/orders/cancel", jsonParser, (req, res) => {
 });
 
 app.post("/orders/accept", jsonParser, (req, res) => {
-  let orderid = req.body.dataset || {};
+  let setorder = req.body.dataset || {};
+  let orderid = setorder._id;
+  delete setorder._id;
   let orders = mongoUtil.orders();
 
-  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: {status: "Принят"}}, function(err, result){
+  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: setorder}, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( "Order accepted: " + JSON.stringify(orderid) );
+    console.log( "Order accepted: " + JSON.stringify(orderid) + " - " + JSON.stringify(setorder) );
     res.sendStatus(201);
   });
 });
 
 app.post("/orders/resolve", jsonParser, (req, res) => {
-  let orderid = req.body.dataset || {};
+  let setorder = req.body.dataset || {};
+  let orderid = setorder._id;
+  delete setorder._id;
   let orders = mongoUtil.orders();
 
-  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: {status: "Завершён"}}, function(err, result){
+  orders.findOneAndUpdate({_id: new ObjectID(orderid)}, {$set: setorder}, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( "Order accepted: " + JSON.stringify(orderid) );
+    console.log( "Order resolved: " + JSON.stringify(orderid) + " - " + JSON.stringify(setorder) );
     res.sendStatus(201);
   });
 });
