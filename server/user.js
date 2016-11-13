@@ -1,6 +1,6 @@
 // get an instance of mongoose and mongoose.Schema
 var mongoose = require('mongoose');
-var schema = mongoose.schema;
+var schema = mongoose.Schema;
 var bcrypt = require('bcrypt');
 
 // set up a mongoose model
