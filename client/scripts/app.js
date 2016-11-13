@@ -5,19 +5,22 @@ import 'angular-resource'
 var dataSourceService = require('./services/dataSource');
 var EntityFactory = require('./services/Entity');
 var GravatarFactory = require('./services/Gravatar');
+var signupCtrl = require('./controllers/Signup');
 var profileCtrl = require('./controllers/Profile');
 var ordersCtrl = require('./controllers/Orders');
 
 angular.module('rfbgo', ["ui.router", "ngResource"])
-
 .config(($stateProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise('/')
-
   $stateProvider
   .state('home', {
     url: '/'
   })
-
+  .state('signup', {
+    url: '/signup',
+    templateUrl: 'templates/signup.html',
+    controller: 'signupCtrl'
+  })
   .state('profile', {
     url: '/consultants',
     templateUrl: 'templates/profile.html',
@@ -27,7 +30,6 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
     },
     controller: 'profileCtrl'
   })
-
   .state('partner', {
     url: '/partners',
     templateUrl: 'templates/profile.html',
@@ -37,7 +39,6 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
     },
     controller: 'profileCtrl'
   })
-
   .state('orders', {
     url: '/orders',
     templateUrl: 'templates/orders.html',
@@ -47,7 +48,6 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
     },
     controller: 'ordersCtrl'
   })
-
   .state('orders-new', {
     url: '/orders/new',
     templateUrl: 'templates/orders-new.html',
@@ -57,11 +57,11 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
     },
     controller: 'ordersCtrl'
   })
-
 })
 
 .service('dataSource', ['$http', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
+.controller('signupCtrl', ['$scope', signupCtrl])
 .controller('profileCtrl', ['$scope', '$rootScope', 'get', 'Entity', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
