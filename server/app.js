@@ -117,6 +117,7 @@ app.post("/orders/resolve", jsonParser, (req, res) => {
 let apiRoutes = express.Router(); // get an instance of the router for api routes
 
 apiRoutes.post('/signup', function(req, res) {
+  console.log(req.body);
   User.findOne({ email: req.body.email }, function(err, existingUser) {
     if (existingUser) {
       return res.status(409).send({ success: false, message: 'E-mail is already taken' });
