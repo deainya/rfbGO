@@ -1,5 +1,5 @@
 // Signup controller
-module.exports = function ($scope, dataSource) {
+module.exports = function ($scope, $state, dataSource) {
   $scope.Register = function(user){
     angular.extend(user, {created:new Date()});
     dataSource.set('/auth/signup', user).then(function(){
