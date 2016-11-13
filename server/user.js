@@ -8,8 +8,12 @@ var userSchema = new schema({
   email: String,
   password: String,
   name: String,
+  phone: String,
+  city: String,
   tradepoint: String,
-  address: String
+  address: String,
+  atWork: Boolean,
+  role: Number
 });
 
 userSchema.pre('save', function (next) {
