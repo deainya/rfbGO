@@ -117,23 +117,21 @@ app.post("/orders/resolve", jsonParser, (req, res) => {
 let apiRoutes = express.Router(); // get an instance of the router for api routes
 
 apiRoutes.post('/signup', function(req, res) {
-  console.log( req.body );
   User.findOne({ email: req.body.email }, function(err, existingUser) {
-    console.log( existingUser );
     if (existingUser) {
       return res.status(409).send({ success: false, message: 'E-mail is already taken' });
     }
-    if (!req.body.email || !req.body.password) {
+    if (!req.body.dataset.email || !req.body.dataset.password) {
       return res.status(400).send({ success: false, message: 'Bad credentials' });
     }
     var user = new User({
-      email: req.body.email,
-      password: req.body.password,
-      name: req.body.name,
-      phone: req.body.phone,
-      city: req.body.city,
-      tradepoint: req.body.tradepoint,
-      address: req.body.address,
+      email: req.body.dataset.email,
+      password: req.body.dataset.password,
+      name: req.body.dataset.name,
+      phone: req.body.dataset.phone,
+      city: req.body.dataset.city,
+      tradepoint: req.body.dataset.tradepoint,
+      address: req.body.dataset.address,
       atWork: false,
       role: '0'
     });
@@ -150,13 +148,13 @@ apiRoutes.post('/signup', function(req, res) {
 });
 
 apiRoutes.post('/login', function(req, res) {
-  User.findOne({ email: req.body.email }, function(err, user) {
+  User.findOne({ email: req.body.dataset.email }, function(err, user) {
     if (err) throw err;
     if (!user) {
       //res.json({ success: false, message: 'Authentication failed. Wrong creditenials.' });
       return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials' }); // User not found
     }
-    user.comparePassword(req.body.password, function(err, isMatch) {
+    user.comparePassword(req.body.dataset.password, function(err, isMatch) {
       if (!isMatch) {
         //res.json({ success: false, message: 'Authentication failed. Wrong creditenials.' });
         return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials' }); // Wrong password
