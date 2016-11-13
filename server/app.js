@@ -189,4 +189,4 @@ apiRoutes.get('/users', function(req, res) {
 app.use('/auth', apiRoutes);
 
 // Start the server           ==================================================
-app.listen(port, () => console.log( "App is listening on " + port ) );
+app.listen(Config.port, () => console.log( "App is listening on port " + Config.port ) );
