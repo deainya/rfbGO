@@ -13,11 +13,11 @@ module.exports = function ($http, session) {
      */
     logIn: function(credentials){
       return $http
-        .post('/api/login', credentials)
+        .post('/auth/login', credentials)
         .then(function(response){
           var data = response.data;
-          session.setUser(data.user);
-          session.setAccessToken(data.accessToken);
+          session.setUser(data.user); //?
+          session.setAccessToken(data.token);
         });
     },
     /* Log out
@@ -25,7 +25,7 @@ module.exports = function ($http, session) {
      */
     logOut: function(){
       return $http
-        .get('/api/logout')
+        .get('/auth/logout')
         .then(function(response){
           // Destroy session in the browser
           session.destroy();

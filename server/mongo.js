@@ -5,6 +5,7 @@ let client = mongo.MongoClient;
 let _db;
 
 module.exports = {
+  ObjID: mongo.ObjectID,
   connect(url) {
     client.connect(url, (err, db) => {
       if(err) {
