@@ -1,5 +1,5 @@
 // Signup controller
-module.exports = function ($q, $scope, $state, dataSource) {
+module.exports = function ($http, $q, $scope, $state, dataSource) {
   $scope.Register = function(user){
 
     return $q(function(resolve, reject) {
