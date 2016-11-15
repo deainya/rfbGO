@@ -11,6 +11,7 @@ module.exports = function ($q, $scope, $state, dataSource) {
           reject(result.data.message);
         }
       });
+    };
 
     //angular.extend(user, {created:new Date()});
     //dataSource.set('/auth/signup', user).then(function(){
