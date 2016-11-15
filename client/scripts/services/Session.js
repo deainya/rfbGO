@@ -1,4 +1,4 @@
-// services/Auth.js
+// services/Session.js
 module.exports = function ($log, localStorage) {
   // Instantiate data when service is loaded
   this._user = JSON.parse(localStorage.getItem('session.user'));

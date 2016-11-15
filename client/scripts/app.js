@@ -2,7 +2,9 @@ import angular from 'angular'
 import 'angular-ui-router'
 import 'angular-resource'
 
+var Auth = require('./services/Auth');
 var dataSourceService = require('./services/dataSource');
+var Session = require('./services/Session');
 var EntityFactory = require('./services/Entity');
 var GravatarFactory = require('./services/Gravatar');
 var signupCtrl = require('./controllers/Signup');
@@ -59,9 +61,11 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
   })
 })
 
+.service('auth', ['$http', 'session', Auth])
 .service('dataSource', ['$http', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
+.service('session', ['$log', 'localStorage', Session])
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
-.controller('signupCtrl', ['$scope', '$state', 'dataSource', signupCtrl])
+.controller('signupCtrl', ['$q', '$scope', '$state', 'dataSource', signupCtrl])
 .controller('profileCtrl', ['$scope', '$rootScope', 'get', 'Entity', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
