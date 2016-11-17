@@ -78,10 +78,7 @@ angular
 .controller('profileCtrl', ['$scope', '$rootScope', 'get', 'Entity', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
 
-.run(assignServicesToRootScope)
-
-/*function assignServicesToRootScope($rootScope, auth, session){
+.run(function ($rootScope, auth, session) {
   $rootScope.auth = auth;
   $rootScope.session = session;
-};
-assignServicesToRootScope.$inject = ['$rootScope', 'auth', 'session'];*/
+});
