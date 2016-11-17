@@ -5,7 +5,7 @@ module.exports = function ($http, session) {
      | @returns boolean
      */
     isLoggedIn: function(url){
-      return (session.getUser() !== null) && (session.getUser() !== undefined);
+      return session.getUser() !== undefined;
     },
     /* Log in
      | @params credentials
