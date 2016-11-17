@@ -4,7 +4,6 @@ module.exports = function ($http, $q, $scope, $state, dataSource) {
   $scope.Login = function(user){
     return $q(function(resolve, reject) {
       $http.post('/auth/login', user).then(function(result) {
-        console.log(result.data);
         if (result.data.success) { resolve(result.data.message); } else { reject(result.data.message); }
       });
     });
@@ -13,7 +12,6 @@ module.exports = function ($http, $q, $scope, $state, dataSource) {
   $scope.Signup = function(user){
     return $q(function(resolve, reject) {
       $http.post('/auth/signup', user).then(function(result) {
-        console.log(result.data);
         if (result.data.success) { resolve(result.data.message); } else { reject(result.data.message); }
       });
     });

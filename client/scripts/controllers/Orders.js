@@ -36,11 +36,6 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
     var url ='';
     switch(state){
       case "Отменить": url = '/orders/cancel'; break;
-      //case "Принять":
-      //  url = '/orders/accept';
-        //???
-      //  break;
-      //case "Завершить": url = '/orders/resolve'; break;
       default: console.log("Ouch :)");
     }
     console.log(url);

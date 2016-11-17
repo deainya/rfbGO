@@ -89,7 +89,7 @@ angular
   /*$rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl){
     if(!auth.isLoggedIn()){
       // Redirect to login
-      $state.go('login');
+
       // Prevent location change
       event.preventDefault();
     }
