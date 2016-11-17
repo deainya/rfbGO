@@ -5,6 +5,8 @@ module.exports = function ($log, localStorage) {
   this._accessToken = JSON.parse(localStorage.getItem('session.accessToken'));
   return {
     getUser: function(){
+      console.log(JSON.parse(localStorage.getItem('session.user')));
+      console.log(this._user);
       return this._user;
     },
     setUser: function(user){
