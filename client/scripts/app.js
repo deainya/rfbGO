@@ -83,4 +83,25 @@ angular
 .run(function ($rootScope, auth, session) {
   $rootScope.auth = auth;
   $rootScope.session = session;
-});
+})
+.run(function ($rootScope, $state, auth) {
+  // Listen for location changes this happens before route or state changes
+  $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl){
+    if(!auth.isLoggedIn()){
+      // Redirect to login
+      $state.go('login');
+      // Prevent location change
+      event.preventDefault();
+    }
+  });
+  // Listen for state changes when using ui-router
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+    // Here we simply check if logged in but you can implement more complex logic that inspects the state to see if access is allowed or not
+    if(!auth.isLoggedIn()){
+      // Redirect to login
+      $state.go('login');
+      // Prevent state change
+      event.preventDefault();
+    }
+  });
+})
