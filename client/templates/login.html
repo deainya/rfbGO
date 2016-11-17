@@ -1,0 +1,15 @@
+<h2>Вход</h2>
+<br>
+<form class="form" name="LoginForm" ng-submit="Login(user)"/>
+  <div class="form-field">
+    <label class="form-label" for="email">E-mail:</label>
+    <input class="form-input" type="email" id="email" required ng-model="user.email"/>
+  </div>
+  <div class="form-field">
+    <label class="form-label" for="password">Пароль:</label>
+    <input class="form-input" type="password" id="password" required ng-model="user.password"/>
+  </div>
+  <input class="btn" type="submit" value="Войти" />
+</form>
+<br>
+<a ui-sref="signup" ng-switch-default>Регистрация</a>

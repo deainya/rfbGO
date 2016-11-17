@@ -11,18 +11,34 @@ var signupCtrl = require('./controllers/Signup');
 var profileCtrl = require('./controllers/Profile');
 var ordersCtrl = require('./controllers/Orders');
 
-angular.module('rfbgo', ["ui.router", "ngResource"])
+function assignServicesToRootScope($rootScope, auth, session){
+  $rootScope.auth = auth;
+  $rootScope.session = session;
+}
+
+assignServicesToRootScope.$inject = ['$rootScope', 'auth', 'session'];
+
+
+angular
+.module('rfbgo', ["ui.router", "ngResource"])
 .config(($stateProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise('/')
   $stateProvider
   .state('home', {
     url: '/'
   })
+
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'signupCtrl'
+  })
   .state('signup', {
     url: '/signup',
     templateUrl: 'templates/signup.html',
     controller: 'signupCtrl'
   })
+
   .state('profile', {
     url: '/consultants',
     templateUrl: 'templates/profile.html',
@@ -69,3 +85,5 @@ angular.module('rfbgo', ["ui.router", "ngResource"])
 .controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
 .controller('profileCtrl', ['$scope', '$rootScope', 'get', 'Entity', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
+
+.run(assignServicesToRootScope)

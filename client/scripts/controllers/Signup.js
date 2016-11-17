@@ -1,25 +1,29 @@
 // Signup controller
 module.exports = function ($http, $q, $scope, $state, dataSource) {
-  $scope.Register = function(user){
 
+  $scope.Login = function(user){
+    return $q(function(resolve, reject) {
+      $http.post('/auth/login', user).then(function(result) {
+        console.log(result.data);
+        if (result.data.success) { resolve(result.data.message); } else { reject(result.data.message); }
+      });
+    });
+  };
+
+  $scope.Signup = function(user){
     return $q(function(resolve, reject) {
       $http.post('/auth/signup', user).then(function(result) {
         console.log(result.data);
-        if (result.data.success) {
-          resolve(result.data.message);
-        } else {
-          reject(result.data.message);
-        }
+        if (result.data.success) { resolve(result.data.message); } else { reject(result.data.message); }
       });
     });
+  };
+};
 
     //angular.extend(user, {created:new Date()});
     //dataSource.set('/auth/signup', user).then(function(){
     //  $state.go("profile");
     //});
-  };
-};
-
 
 /*
 var register = function(user) {

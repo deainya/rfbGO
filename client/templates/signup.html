@@ -1,5 +1,5 @@
-<h2>Регистрация</h2><br>
-
+<h2>Регистрация</h2>
+<br>
 <form class="form" name="SignupForm" ng-submit="Register(user)"/>
   <div class="form-field">
     <input class="form-input" id="name" placeholder="Имя" required ng-model="user.name"/>
@@ -13,17 +13,15 @@
   <div class="form-field">
     <input class="form-input" type="tel" id="phone" placeholder="Телефон" required ng-model="user.phone"/>
   </div>
-  <select class="formx-input" id="city" ng-model="user.city" ng-init="user.city = '_'">
-    <option value="_">Город</option>
-    <option value="Самара">Самара</option>
-    <option value="Москва">Москва</option>
-  </select>
+  <div class="form-field">
+    <input class="form-input" id="city" placeholder="Город" required ng-model="user.city"/>
+  </div>
   <div class="form-field">
     <input class="form-input" id="tradepoint" placeholder="Торговая точка" required ng-model="user.tradepoint"/>
   </div>
   <div class="form-field">
     <input class="form-input" id="address" placeholder="Адрес" required ng-model="user.address"/>
   </div>
-<!-- atWork role -->
+  <!-- atWork role -->
   <input class="btn" type="submit" value="Зарегистрироваться" />
 </form>
