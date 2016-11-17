@@ -75,7 +75,7 @@ angular
 .service('session', ['$log', 'localStorage', Session])
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
-.factory('localStorage', ['$window', localStorageFactory]);
+.factory('localStorage', ['$window', localStorageFactory])
 .controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
 .controller('profileCtrl', ['$scope', '$rootScope', 'get', 'Entity', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
