@@ -7,6 +7,7 @@ var dataSourceService = require('./services/dataSource');
 var Session = require('./services/Session');
 var EntityFactory = require('./services/Entity');
 var GravatarFactory = require('./services/Gravatar');
+var localStorageFactory = require('./services/localStorage');
 var signupCtrl = require('./controllers/Signup');
 var profileCtrl = require('./controllers/Profile');
 var ordersCtrl = require('./controllers/Orders');
@@ -74,6 +75,7 @@ angular
 .service('session', ['$log', 'localStorage', Session])
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
+.factory('localStorage', ['$window', localStorageFactory]);
 .controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
 .controller('profileCtrl', ['$scope', '$rootScope', 'get', 'Entity', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
