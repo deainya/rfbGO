@@ -14,10 +14,8 @@ var ordersCtrl = require('./controllers/Orders');
 function assignServicesToRootScope($rootScope, auth, session){
   $rootScope.auth = auth;
   $rootScope.session = session;
-}
-
+};
 assignServicesToRootScope.$inject = ['$rootScope', 'auth', 'session'];
-
 
 angular
 .module('rfbgo', ["ui.router", "ngResource"])
