@@ -97,7 +97,9 @@ angular
   // Listen for state changes when using ui-router
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     // Here we simply check if logged in but you can implement more complex logic that inspects the state to see if access is allowed or not
+    console.log(toState);
     if(!auth.isLoggedIn()){
+      console.log(fromState);
       // Prevent state change
       event.preventDefault();
       // Redirect to login
