@@ -101,7 +101,9 @@ angular
     if(!auth.isLoggedIn()){
       //console.log(fromState);
       // Redirect to login
-      $state.go('login');
+      if (next.name !== 'login') {
+        $state.go('login');
+      }
       // Prevent state change
       event.preventDefault();
     }
