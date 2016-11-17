@@ -98,7 +98,7 @@ angular
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     // Here we simply check if logged in but you can implement more complex logic that inspects the state to see if access is allowed or not
     if(!auth.isLoggedIn()){
-      if (toState.name !== 'login') {
+      if (toState.name !== 'login' || toState.name !== 'signup') {
         // Redirect to login
         $state.go('login');
         // Prevent state change
