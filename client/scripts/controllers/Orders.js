@@ -8,13 +8,13 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   console.log("uno");
   console.log($scope.orders);
 
-  /*$scope._from = new Date();
+  $scope._from = new Date();
   $scope._from.setHours(0, 0, 0, 0);
-  $scope._to = new Date() + 1;
+  /*$scope._to = new Date() + 1;
   $scope._to.setHours(0, 0, 0, 0);*/
 
   $scope.Filter = function(){
-    $scope.orders = dataSource.getFiltered('/orders', {from: $scope._from, to: $scope._to});
+    $scope.orders = dataSource.getFiltered('/orders', {from: $scope._from, to: $scope._to}).data;
     console.log("duo");
     console.log($scope.orders);
     //$state.reload();
