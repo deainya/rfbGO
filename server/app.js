@@ -60,20 +60,20 @@ app.get("/orders", (req, res) => {
   let _to = req.query.to || {};
   let orders = Mongo.orders();
 
-  console.log(req.query);
-  console.log(req.params);
-  console.log({ created: { $gte: _from, $lt: _to } });
+  //console.log(req.query);
+  //console.log(req.params);
+  //console.log({ created: { $gte: _from, $lt: _to } });
 
   if (!_from && !_to) {
-    orders.find({ created: { $gte: _from, $lt: _to } }).toArray((err,docs) => {
+    orders.find({ "created": { "$gte": _from, "$lt": _to } }).toArray((err,docs) => {
       if (err) { res.sendStatus(400); }
-      console.log( JSON.stringify(docs) );
+      console.log( "uno" );
       res.json( docs ); // orders
     });
   } else {
     orders.find().toArray((err,docs) => {
       if (err) { res.sendStatus(400); }
-      console.log( JSON.stringify(docs) );
+      console.log( "duo" );
       res.json( docs ); // orders
     });
   }
