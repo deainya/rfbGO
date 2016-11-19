@@ -12,7 +12,8 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   $scope._to.setHours(0, 0, 0, 0);*/
 
   $scope.Filter = function(){
-    dataSource.getFiltered('/orders', {from: $scope._from, to: $scope._to});
+    $scope.orders = dataSource.getFiltered('/orders', {from: $scope._from, to: $scope._to});
+    $state.reload();
   };
 
   $scope.Create = function(neworder){
