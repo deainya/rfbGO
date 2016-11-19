@@ -8,7 +8,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
 
   $scope._from = new Date();
   $scope._from.setHours(0, 0, 0, 0);
-  $scope._to = $scope._from + 1;
+  $scope._to = new Date($scope._from.getDate() + 1);
 
   $scope.Filter = function(){
     dataSource.getFiltered('/orders', {from: _from, to: _to});

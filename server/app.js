@@ -56,13 +56,23 @@ app.get("/tradepoints", (req, res) => {
 
 // Orders routing             ==================================================
 app.get("/orders", (req, res) => {
+  let _from = req.params.from || {};
+  let _to = req.params.to || {};
   let orders = Mongo.orders();
-
-  orders.find().toArray((err,docs) => {
-    if (err) { res.sendStatus(400); }
-    console.log( JSON.stringify(docs) );
-    res.json( docs ); // orders
-  });
+  
+  if (!_from && !_to) {
+    orders.find({ created: { $gte: _from, $lt: _to }).toArray((err,docs) => {
+      if (err) { res.sendStatus(400); }
+      console.log( JSON.stringify(docs) );
+      res.json( docs ); // orders
+    });
+  } else {
+    orders.find().toArray((err,docs) => {
+      if (err) { res.sendStatus(400); }
+      console.log( JSON.stringify(docs) );
+      res.json( docs ); // orders
+    });
+  }
 });
 
 app.post("/orders/create", jsonParser, (req, res) => {
