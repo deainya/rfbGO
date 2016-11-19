@@ -56,8 +56,8 @@ app.get("/tradepoints", (req, res) => {
 
 // Orders routing             ==================================================
 app.get("/orders", (req, res) => {
-  let _from = req.params.from || {};
-  let _to = req.params.to || {};
+  let _from = req.query.from || {};
+  let _to = req.query.to || {};
   let orders = Mongo.orders();
 
   console.log(req.query);
