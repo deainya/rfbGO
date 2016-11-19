@@ -60,6 +60,8 @@ app.get("/orders", (req, res) => {
   let _to = req.params.to || {};
   let orders = Mongo.orders();
 
+  console.log(req.query);
+  console.log(req.params);
   console.log({ created: { $gte: _from, $lt: _to } });
 
   if (!_from && !_to) {
