@@ -101,7 +101,7 @@
 <form class="form" name="OrderForm" ng-submit="Filter()"/>
   <div class="form-field">
     <label class="form-label" for="from">Дата с:</label>
-    <input class="form-input" type="datetime-local" id="from" ng-model="_from"/>
+    <input class="form-input" type="datetime-local" id="from" ng-model="_from">{{_from | date:'dd.MM HH:mm'}}<input/>
   </div>
   <div class="form-field">
     <label class="form-label" for="to">Дата по:</label>
