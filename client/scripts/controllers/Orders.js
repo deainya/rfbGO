@@ -15,7 +15,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   $scope._to.setDate($scope._to.getDate() + 1);
 
   $scope.Filter = function(){
-    $scope.orders = dataSource.getFiltered('/orders', {from: $scope._from, to: $scope._to}).data;
+    $scope.orders = dataSource.getFiltered('/orders', {from: $scope._from, to: $scope._to});
     console.log("duo");
     console.log($scope.orders);
     //$state.reload();
