@@ -6,7 +6,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
 
   $scope.orders = get.data;
 
-  $scope._from = new Date()
+  $scope._from = new Date();
   $scope._from.setHours(0, 0, 0, 0);
   $scope._to = new Date() + 1;
   $scope._to.setHours(0, 0, 0, 0);
