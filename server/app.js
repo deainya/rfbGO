@@ -62,13 +62,14 @@ app.get("/orders", (req, res) => {
 
   //console.log(req.query);
   //console.log(req.params);
-  //console.log({ created: { $gte: _from, $lt: _to } });
+  console.log({ created: { $gte: _from, $lt: _to } });
 
-  orders.find({ "created": { "$gte": _from, "$lt": _to } }).toArray((err,docs) => {
-    if (err) { res.sendStatus(400); }
-    console.log( "uno" );
-    res.json( docs ); // orders
-  });
+    orders.find({ created: { $gte: _from, $lt: _to } }, {}).toArray((err,docs) => {
+      if (err) { res.sendStatus(400); }
+      console.log( JSON.stringify(docs) );
+      res.json( docs ); // orders
+    });
+
 });
 
 app.post("/orders/create", jsonParser, (req, res) => {
