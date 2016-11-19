@@ -5,6 +5,8 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   // Assign getObject to $scope
 
   $scope.orders = get.data;
+  console.log("uno");
+  console.log($scope.orders);
 
   /*$scope._from = new Date();
   $scope._from.setHours(0, 0, 0, 0);
@@ -13,6 +15,8 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
 
   $scope.Filter = function(){
     $scope.orders = dataSource.getFiltered('/orders', {from: $scope._from, to: $scope._to});
+    console.log("duo");
+    console.log($scope.orders);
     //$state.reload();
   };
 
