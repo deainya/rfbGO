@@ -16,7 +16,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
 
   $scope.Filter = function(){
     dataSource.getFiltered('/orders', {from: $scope._from, to: $scope._to}).then(function(res) {
-      $scope.orders = return res.data;
+      $scope.orders = res.data;
     });
     console.log("duo");
     console.log($scope.orders);
