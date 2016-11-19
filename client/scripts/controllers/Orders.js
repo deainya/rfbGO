@@ -13,7 +13,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
 
   $scope.Filter = function(){
     $scope.orders = dataSource.getFiltered('/orders', {from: $scope._from, to: $scope._to});
-    $state.reload();
+    //$state.reload();
   };
 
   $scope.Create = function(neworder){
