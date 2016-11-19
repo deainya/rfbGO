@@ -59,9 +59,9 @@ app.get("/orders", (req, res) => {
   let _from = req.params.from || {};
   let _to = req.params.to || {};
   let orders = Mongo.orders();
-  
+
   if (!_from && !_to) {
-    orders.find({ created: { $gte: _from, $lt: _to }).toArray((err,docs) => {
+    orders.find({ created: { $gte: _from, $lt: _to } }).toArray((err,docs) => {
       if (err) { res.sendStatus(400); }
       console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
