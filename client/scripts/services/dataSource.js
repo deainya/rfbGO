@@ -8,12 +8,18 @@ module.exports = function ($http, $q) {
       return $http({method: 'POST', url: url, data: {dataset}});
     },
 
-    getFiltered: function(url, pms){
+    /*getFiltered: function(url, pms){
       pms = pms || {};
       return $q(function(resolve, reject) {
         $http.get(url, {params: pms}).then(function(result) {
           resolve(result.data);
         });
+      });
+    }*/
+    getFiltered: function(url, pms){
+      pms = pms || {};
+      return $http.get(url, {params: pms}).then(function(data) {
+        resolve(data);
       });
     }
 
