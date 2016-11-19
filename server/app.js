@@ -60,6 +60,8 @@ app.get("/orders", (req, res) => {
   let _to = req.params.to || {};
   let orders = Mongo.orders();
 
+  console.log({ created: { $gte: _from, $lt: _to } });
+
   if (!_from && !_to) {
     orders.find({ created: { $gte: _from, $lt: _to } }).toArray((err,docs) => {
       if (err) { res.sendStatus(400); }
