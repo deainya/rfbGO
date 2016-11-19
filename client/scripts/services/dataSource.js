@@ -18,8 +18,8 @@ module.exports = function ($http, $q) {
     }*/
     getFiltered: function(url, pms){
       pms = pms || {};
-      return $http.get(url, {params: pms}).then(function(data) {
-        resolve(data);
+      return $http.get(url, {params: pms}).then(function(res) {
+        return res.data;
       });
     }
 
