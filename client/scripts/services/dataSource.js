@@ -11,7 +11,7 @@ module.exports = function ($http, $q) {
     getFiltered: function(url, pms){
       pms = pms || {};
       return $q(function(resolve, reject) {
-        $http.get(url, params: pms).then(function(result) {
+        $http.get(url, {params: pms}).then(function(result) {
           resolve(result.data);
         });
       });
