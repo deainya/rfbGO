@@ -3,7 +3,16 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   // Log getObject when controller executes
   //console.log(get);
   // Assign getObject to $scope
+
   $scope.orders = get.data;
+
+  $scope._from = new Date();
+  $scope._from.setHours(0, 0, 0, 0);
+  $scope._to = $scope._from + 1;
+
+  $scope.Filter = function(){
+    dataSource.getFiltered('/orders', {from: _from, to: _to});
+  };
 
   $scope.Create = function(neworder){
     //var entity = Entity.get();
