@@ -1,5 +1,5 @@
 // User profile controller
-module.exports = function ($scope, session, Gravatar) {
+module.exports = function ($scope, $state, session, Gravatar) {
   // Log getObject when controller executes
   //console.log(get);
   // Assign getObject to $scope
@@ -27,4 +27,5 @@ module.exports = function ($scope, session, Gravatar) {
 
   //$scope.points = get.data;
   $scope.gravatarUrl = Gravatar.generate(session._user.email, 80);
+  $state.go("profile.tradepoints");
 };
