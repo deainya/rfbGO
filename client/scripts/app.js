@@ -33,10 +33,10 @@ angular
   .state('profile', {
     url: '/profile',
     templateUrl: 'templates/profile.html',
-    resolve: {
-      dataSource: 'dataSource', // A string value resolves to a Service
-      get: function(dataSource){ return dataSource.get('/tradepoints')/*.$promise*/; } // A function value resolves to the return value of the function
-    },
+    //resolve: {
+    //  dataSource: 'dataSource', // A string value resolves to a Service
+    //  get: function(dataSource){ return dataSource.get('/tradepoints')/*.$promise*/; } // A function value resolves to the return value of the function
+    //},
     controller: 'profileCtrl'
   })
   /*.state('partner', {
@@ -76,7 +76,7 @@ angular
 .factory('localStorage', ['$window', localStorageFactory])
 .controller('tradepointsCtrl', ['$scope', 'get', 'session', tradepointsCtrl])
 //.controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
-.controller('profileCtrl', ['$scope', '$state', 'get', 'session', 'Gravatar', profileCtrl])
+.controller('profileCtrl', ['$scope', '$state', 'session', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
 
 .run(function ($rootScope, auth, session) {

@@ -27,6 +27,12 @@ module.exports = function ($scope, $state, get, session, Gravatar) {
 
   //$scope.points = get.data;
   $scope.gravatarUrl = Gravatar.generate(session._user.email, 80);
-  $scope.points = get.data;
+
+  $scope.Filter = function(){
+    dataSource.getFiltered('/tradepoints').then(function(res) {
+      $scope.points = res.data;
+    });
+    console.log($scope.points);
+  };
 
 };
