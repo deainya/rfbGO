@@ -23,8 +23,8 @@ angular
 
   .state('login', {
     url: '/login',
-    templateUrl: 'templates/login.html',
-    controller: 'signupCtrl'
+    templateUrl: 'templates/login.html'//,
+    //controller: 'signupCtrl'
   })
   .state('signup', {
     url: '/signup',
@@ -98,13 +98,13 @@ angular
   // Listen for state changes when using ui-router
   $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     // Here we simply check if logged in but you can implement more complex logic that inspects the state to see if access is allowed or not
-    /*if(!auth.isLoggedIn()){
+    if(!auth.isLoggedIn()){
       if (toState.name !== 'login' && toState.name !== 'signup') {
         // Redirect to login
         $state.go('login');
         // Prevent state change
         event.preventDefault();
       }
-    }*/
+    }
   });
 })
