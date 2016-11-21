@@ -132,7 +132,7 @@ app.post("/orders/resolve", jsonParser, (req, res) => {
 // API routes                 ==================================================
 let apiRoutes = express.Router(); // get an instance of the router for api routes
 
-apiRoutes.post('/signup', function(req, res) {
+apiRoutes.post('/register', function(req, res) {
   console.log(req.body);
   User.findOne({ email: req.body.email }, function(err, existingUser) {
     if (existingUser) {

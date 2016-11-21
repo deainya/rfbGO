@@ -26,22 +26,22 @@ angular
     templateUrl: 'templates/login.html'//,
     //controller: 'signupCtrl'
   })
-  .state('signup', {
-    url: '/signup',
-    templateUrl: 'templates/signup.html',
-    controller: 'signupCtrl'
+  .state('register', {
+    url: '/register',
+    templateUrl: 'templates/register.html'//,
+    //controller: 'signupCtrl'
   })
 
   .state('profile', {
     url: '/profile',
-    templateUrl: 'templates/profile.html'//,
+    templateUrl: 'templates/profile.html',
     //resolve: {
     //  dataSource: 'dataSource', // A string value resolves to a Service
     //  get: function(dataSource){ return dataSource.get('/tradepoints')/*.$promise*/; } // A function value resolves to the return value of the function
     //},
-    //controller: 'profileCtrl'
+    controller: 'profileCtrl'
   })
-  .state('partner', {
+  /*.state('partner', {
     url: '/partners',
     templateUrl: 'templates/test.html',
     resolve: {
@@ -49,7 +49,7 @@ angular
       get: function(dataSource){ return dataSource.get('/partners'); }
     },
     controller: 'profileCtrl'
-  })
+  })*/
   .state('orders', {
     url: '/orders',
     templateUrl: 'templates/orders.html',
