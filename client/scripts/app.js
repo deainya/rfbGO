@@ -46,7 +46,7 @@ angular
     templateUrl: 'templates/profile.html',
     resolve: {
       dataSource: 'dataSource',
-      get: function(dataSource){ return dataSource.get('/partners'); }
+      get: function(dataSource){ return dataSource.get('/tradepoints'); }
     },
     controller: 'profileCtrl'
   })
