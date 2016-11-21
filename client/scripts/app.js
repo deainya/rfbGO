@@ -8,7 +8,7 @@ var Session = require('./services/Session');
 var EntityFactory = require('./services/Entity');
 var GravatarFactory = require('./services/Gravatar');
 var localStorageFactory = require('./services/localStorage');
-var signupCtrl = require('./controllers/Signup');
+//var signupCtrl = require('./controllers/Signup');
 var profileCtrl = require('./controllers/Profile');
 var ordersCtrl = require('./controllers/Orders');
 
@@ -20,18 +20,14 @@ angular
   .state('home', {
     url: '/'
   })
-
   .state('login', {
     url: '/login',
-    templateUrl: 'templates/login.html'//,
-    //controller: 'signupCtrl'
+    templateUrl: 'templates/login.html'
   })
   .state('register', {
     url: '/register',
-    templateUrl: 'templates/register.html'//,
-    //controller: 'signupCtrl'
+    templateUrl: 'templates/register.html'
   })
-
   .state('profile', {
     url: '/profile',
     templateUrl: 'templates/profile.html',
@@ -76,8 +72,8 @@ angular
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
 .factory('localStorage', ['$window', localStorageFactory])
-.controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
-.controller('profileCtrl', ['$scope', /*'get', */'session', 'Gravatar', profileCtrl])
+//.controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
+.controller('profileCtrl', ['$scope', 'get', 'session', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
 
 .run(function ($rootScope, auth, session) {

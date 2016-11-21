@@ -1,5 +1,5 @@
 // services/Auth.js
-module.exports = function ($http, session) {
+module.exports = function ($http, $sate, session) {
   return {
     /* Check whether the user is logged in
      | @returns boolean
@@ -16,6 +16,7 @@ module.exports = function ($http, session) {
           session.setAccessToken(data.token);
           console.log(data.user);
           console.log(data.token);
+          $state.go("profile");
         });
     },
     /* Log in
