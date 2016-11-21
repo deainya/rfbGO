@@ -8,7 +8,7 @@ module.exports = function ($http, session) {
     isLoggedIn: function(url){
       return session.getUser() !== undefined;
     },
-    Register: function(){
+    Register: function(credentials){
       return $http
         .post('/auth/register', credentials)
         .then(function(response){
