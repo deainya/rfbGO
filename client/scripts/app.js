@@ -33,11 +33,11 @@ angular
   })
 
   .state('profile', {
-    url: '/consultants',
+    url: '/profile',
     templateUrl: 'templates/profile.html',
     resolve: {
       dataSource: 'dataSource', // A string value resolves to a Service
-      get: function(dataSource){ return dataSource.get('/tradepoints')/*.$promise*/; } // A function value resolves to the return value of the function
+      get: function(dataSource){ return dataSource.get('/profile')/*.$promise*/; } // A function value resolves to the return value of the function
     },
     controller: 'profileCtrl'
   })
@@ -77,7 +77,7 @@ angular
 .factory('Gravatar', GravatarFactory)
 .factory('localStorage', ['$window', localStorageFactory])
 .controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
-.controller('profileCtrl', ['$scope', '$rootScope', 'get', 'Entity', 'Gravatar', profileCtrl])
+.controller('profileCtrl', ['$scope', 'get', 'Entity', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
 
 .run(function ($rootScope, auth, session) {

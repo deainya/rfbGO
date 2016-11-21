@@ -23,15 +23,15 @@
     </tr>
     <tr> <!-- ng-show="role==1"-->
       <td>Юр. лицо:</td>
-      <td>{{ tps.name }}</td> <!-- -->
+      <!--td>{{ tps.name }}</td> <!-->
     </tr>
     <tr> <!-- ng-show="role==1"-->
       <td>Торговая точка:</td>
-      <td>{{ tps.tradepoint }}</td> <!-- -->
+      <!--td>{{ tps.tradepoint }}</td> <!-->
     </tr>
     <tr> <!--ng-show="role==1"-->
       <td>Адрес:</td>
-      <td>{{ tps.address }}</td>
+      <!--td>{{ tps.address }}</td> <!-->
     </tr>
   </tbody>
 </table>
@@ -70,7 +70,7 @@
           <td width="20%">{{ point.tradepoint }}</td>
           <td width="25%">{{ point.city}}</td>
           <td width="25%">{{ point.address }}</td>
-          <td><div ng-show="point._active">+</div></td>
+          <td><div ng-show="point._active==true">+</div></td>
         </tr>
       </tbody>
     </table>
