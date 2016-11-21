@@ -169,12 +169,12 @@ apiRoutes.post('/login', function(req, res) {
     if (err) throw err;
     if (!user) {
       //res.json({ success: false, message: 'Authentication failed. Wrong creditenials.' });
-      return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials' }); // User not found
+      return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials 1' }); // User not found
     }
     user.comparePassword(req.body.password, function(err, isMatch) {
       if (!isMatch) {
         //res.json({ success: false, message: 'Authentication failed. Wrong creditenials.' });
-        return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials' }); // Wrong password
+        return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials 2' }); // Wrong password
       }
       // if user is found and password is right then create a token
       var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
