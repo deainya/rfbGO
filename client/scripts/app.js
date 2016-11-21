@@ -66,7 +66,7 @@ angular
   })
 })
 
-.service('auth', ['$http', 'session', Auth])
+.service('auth', ['$http', '$state', 'session', Auth])
 .service('dataSource', ['$http', '$q', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
 .service('session', ['$log', 'localStorage', Session])
 .factory('Entity', EntityFactory)
