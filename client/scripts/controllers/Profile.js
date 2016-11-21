@@ -31,8 +31,8 @@ module.exports = function ($scope, $state, dataSource, session, Gravatar) {
   $scope.Filter = function(){
     dataSource.get('/tradepoints').then(function(res) {
       $scope.points = res.data;
+      console.log($scope.points);
     });
-    console.log($scope.points);
   };
 
 };
