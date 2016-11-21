@@ -12,6 +12,8 @@ module.exports = function ($scope, get, Entity, Gravatar) {
 */
 
   $scope.points = get.data; //get
+  console.log(points);
+  console.log(session._user);
   $scope.SavePoints = function(points){
     //var tps = new Array();
     var j = 0;

@@ -41,7 +41,7 @@ angular
     },
     controller: 'profileCtrl'
   })
-  .state('partner', {
+  /*.state('partner', {
     url: '/partners',
     templateUrl: 'templates/profile.html',
     resolve: {
@@ -49,7 +49,7 @@ angular
       get: function(dataSource){ return dataSource.get('/partners'); }
     },
     controller: 'profileCtrl'
-  })
+  })*/
   .state('orders', {
     url: '/orders',
     templateUrl: 'templates/orders.html',
