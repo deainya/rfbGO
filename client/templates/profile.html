@@ -4,15 +4,15 @@
   <tbody>
     <tr>
       <td><!--img ng-src="{{gravatarUrl}}"/--></td>
-      <td>{{ $root.getUser().name }}</td>
+      <td>{{ $root.session._user.name }}</td>
     </tr>
     <tr>
       <td>E-mail:</td>
-      <td>{{ $root._user.email }}</td>
+      <td>{{ $root.session._user.email }}</td>
     </tr>
     <tr>
       <td>Телефон:</td>
-      <td>{{ $root.auth._user.phone }}</td>
+      <td>{{ $root.session._user.phone }}</td>
     </tr>
     <tr>
       <td>Город:</td>
