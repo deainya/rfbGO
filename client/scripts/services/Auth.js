@@ -12,7 +12,6 @@ module.exports = function ($http, session) {
      | @returns {*|Promise}
      */
     logIn: function(credentials){
-      console.log(credentials);
       return $http
         .post('/auth/login', credentials)
         .then(function(response){
@@ -21,7 +20,6 @@ module.exports = function ($http, session) {
           session.setAccessToken(data.token);
           console.log(data.user);
           console.log(data.token);
-
         });
     },
     /* Log out

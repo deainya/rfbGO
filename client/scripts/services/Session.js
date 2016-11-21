@@ -2,6 +2,7 @@
 module.exports = function ($log, localStorage) {
   // Instantiate data when service is loaded
   this._user = JSON.parse(localStorage.getItem('session.user'));
+  console.log(localStorage.getItem('session.accessToken'));
   this._accessToken = JSON.parse(localStorage.getItem('session.accessToken'));
   return {
     getUser: function(){
