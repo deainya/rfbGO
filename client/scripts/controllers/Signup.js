@@ -16,7 +16,7 @@ module.exports = function ($http, $q, $scope, $state, dataSource) {
 
   $scope.Signup = function(user){
     return $q(function(resolve, reject) {
-      $http.post('/auth/signup', user).then(function(result) {
+      $http.post('/auth/signup', user).then(function(res) {
         if (res.data.success) {
           resolve(res.data.message);
         }
