@@ -1,0 +1,83 @@
+<span ng-switch="role">
+  <h2 ng-switch-when="1">Карточка партнёра</h2>
+  <h2 ng-switch-default>Карточка консультанта</h2>
+</span>
+
+<table class="tablex">
+  <tbody>
+    <tr>
+      <td><img ng-src="{{gravatarUrl}}"/></td>
+      <td>{{ $root.session._user.name }}</td> <!--profile.-->
+    </tr>
+    <tr>
+      <td>E-mail:</td>
+      <td>{{ $root.session._user.email }}</td>
+    </tr>
+    <tr>
+      <td>Телефон:</td>
+      <td>{{ $root.session._user.phone }}</td>
+    </tr>
+    <tr>
+      <td>Город:</td>
+      <td>{{ $root.session._user.city }}</td>
+    </tr>
+    <!--tr> <ng-show="role==1">
+      <td>Юр. лицо:</td>
+      <td>{{ tps.name }}</td>
+    </tr>
+    <tr> <ng-show="role==1">
+      <td>Торговая точка:</td>
+      <td>{{ tps.tradepoint }}</td>
+    </tr>
+    <tr> <ng-show="role==1">
+      <td>Адрес:</td>
+      <td>{{ tps.address }}</td>
+    </tr-->
+  </tbody>
+</table>
+
+<div class="cell">
+    <ul class="grid list list--unstyled mbl" ng-cloak>
+      <li><div class="card act" ng-hide="!role">
+        <a class="card-link" ui-sref="orders">Список вызовов</a>
+      </div></li>
+      <li>&nbsp;</li>
+      <li><div class="card act" ng-show="role==1">
+        <a class="card-link" ui-sref="orders-new">Новый вызов</a>
+      </div></li>
+    </ul>
+</div>
+
+<!--trade points list-->
+
+<table class="tablexx">
+  <thead>
+    <tr>
+      <th width="20%">Юр. лицо</th>
+      <th width="20%">Торговая точка</th>
+      <th width="20%">Город</th>
+      <th width="40%">Адрес</th>
+      <th></th>
+    </tr>
+  </thead>
+</table>
+<div class="cell" ng-repeat="point in points">
+  <div class="act" ng-click="point._active=!point._active">
+    <table class="tablexx">
+      <tbody>
+        <tr>
+          <td width="20%">{{ point.name }}</td>
+          <td width="20%">{{ point.tradepoint }}</td>
+          <td width="25%">{{ point.city}}</td>
+          <td width="25%">{{ point.address }}</td>
+          <td><div ng-show="point._active==true">+</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<form class="form" name="TradepointForm" ng-submit="SavePoints(points)"/>
+  <!-- atWork role -->
+  <input class="btn" type="submit" value="Сохранить" />
+</form>
