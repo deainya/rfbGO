@@ -1,5 +1,5 @@
 // User profile controller
-module.exports = function ($scope, get, Entity, Gravatar) {
+module.exports = function ($scope, /*get, Entity, */ Gravatar) {
   // Log getObject when controller executes
   //console.log(get);
   // Assign getObject to $scope
