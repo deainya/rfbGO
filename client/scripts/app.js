@@ -34,7 +34,7 @@ angular
 
   .state('profile', {
     url: '/profile',
-    templateUrl: 'templates/test.html'//,
+    templateUrl: 'templates/profile.html'//,
     //resolve: {
     //  dataSource: 'dataSource', // A string value resolves to a Service
     //  get: function(dataSource){ return dataSource.get('/tradepoints')/*.$promise*/; } // A function value resolves to the return value of the function
@@ -43,10 +43,10 @@ angular
   })
   .state('partner', {
     url: '/partners',
-    templateUrl: 'templates/profile.html',
+    templateUrl: 'templates/test.html',
     resolve: {
       dataSource: 'dataSource',
-      get: function(dataSource){ return dataSource.get('/tradepoints'); }
+      get: function(dataSource){ return dataSource.get('/partners'); }
     },
     controller: 'profileCtrl'
   })
