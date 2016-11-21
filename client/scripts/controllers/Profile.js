@@ -25,6 +25,7 @@ module.exports = function ($scope, /*get, */session, Gravatar) {
     }
   }*/
 
+  $scope.points = get.data;
   $scope.gravatarUrl = Gravatar.generate(session._user.email, 80);
 
 };
