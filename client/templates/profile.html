@@ -23,33 +23,4 @@
 </table>
 <br>
 
-<table class="tablexx">
-  <thead>
-    <tr>
-      <th width="20%">Юр. лицо</th>
-      <th width="20%">Торговая точка</th>
-      <th width="20%">Город</th>
-      <th width="40%">Адрес</th>
-      <th>&nbsp;</th>
-    </tr>
-  </thead>
-</table>
-<div class="cell" ng-repeat="point in points">
-  <div class="act" ng-click="point._active=!point._active">
-    <table class="tablexx">
-      <tbody>
-        <tr>
-          <td width="20%">{{ point.name }}</td>
-          <td width="20%">{{ point.tradepoint }}</td>
-          <td width="25%">{{ point.city}}</td>
-          <td width="25%">{{ point.address }}</td>
-          <td><div ng-show="point._active==true">+</div></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-<br>
-<!--form class="form" name="TradepointForm" ng-submit="SavePoints(points)"/>
-  <input class="btn" type="submit" value="Сохранить" />
-</form-->
+<div class="cell" ui-view></div>

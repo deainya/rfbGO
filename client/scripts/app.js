@@ -8,6 +8,8 @@ var Session = require('./services/Session');
 var EntityFactory = require('./services/Entity');
 var GravatarFactory = require('./services/Gravatar');
 var localStorageFactory = require('./services/localStorage');
+
+var tradepointsCtrl = require('./controllers/Tradepoints');
 //var signupCtrl = require('./controllers/Signup');
 var profileCtrl = require('./controllers/Profile');
 var ordersCtrl = require('./controllers/Orders');
@@ -36,6 +38,15 @@ angular
       get: function(dataSource){ return dataSource.get('/tradepoints')/*.$promise*/; } // A function value resolves to the return value of the function
     },
     controller: 'profileCtrl'
+  })
+  .state('profile.tradepoints', {
+    url: '/tradepoints',
+    templateUrl: 'templates/tradepoints.html',
+    resolve: {
+      dataSource: 'dataSource', // A string value resolves to a Service
+      get: function(dataSource){ return dataSource.get('/tradepoints')/*.$promise*/; } // A function value resolves to the return value of the function
+    },
+    controller: 'tradepointsCtrl'
   })
   /*.state('partner', {
     url: '/partners',
@@ -72,8 +83,9 @@ angular
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
 .factory('localStorage', ['$window', localStorageFactory])
+.controller('tradepointsCtrl', ['$scope', 'get', 'session', tradepointsCtrl])
 //.controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
-.controller('profileCtrl', ['$scope', 'get', 'session', 'Gravatar', profileCtrl])
+.controller('profileCtrl', ['$scope', 'session', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
 
 .run(function ($rootScope, auth, session) {

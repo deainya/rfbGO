@@ -14,7 +14,6 @@ module.exports = function ($http, $sate, session) {
           var data = response.data;
           session.setUser(data.user);
           session.setAccessToken(data.token);
-          $state.go("profile");
         });
     },
     /* Log in
@@ -30,7 +29,6 @@ module.exports = function ($http, $sate, session) {
           session.setAccessToken(data.token);
           console.log(data.user);
           console.log(data.token);
-          $state.go("profile");
         });
     },
     /* Log out
