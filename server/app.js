@@ -43,7 +43,7 @@ app.get("/partners", (req, res) => {
   });
 });
 
-app.get("/profile", (req, res) => {
+app.get("/tradepoints", (req, res) => {
   let tradepoints = Mongo.tradepoints();
 
   tradepoints.find().toArray((err,docs) => {

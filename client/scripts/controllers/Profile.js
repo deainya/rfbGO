@@ -17,9 +17,9 @@ module.exports = function ($scope, get, Entity, Gravatar) {
   $scope.SavePoints = function(points){
     //var tps = new Array();
     var j = 0;
-    for (var i=0; i<points.length; i++){
-      if (points._active) {
-        $scope.tps[j] = points[i];
+    for (var i=0; i<$scope.points.length; i++){
+      if ($scope.points._active) {
+        $scope.tps[j] = $scope.points[i];
         j++;
       }
     }
