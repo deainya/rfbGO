@@ -50,7 +50,7 @@ app.get("/tradepoints", (req, res) => {
     if(err) { res.sendStatus(400); }
     console.log( JSON.stringify(docs) );
     //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
-    res.json( pointsNames ); // the list of tradepoints names + addresses
+    //res.json( pointsNames ); // the list of tradepoints names + addresses
   });
 });
 
