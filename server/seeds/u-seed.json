@@ -1,4 +1,4 @@
 [
-  {"role":"0", "name":"Евгений", "email":"deain@ya.ru"},
-  {"role":"1", "name":"Аня Радуга", "email":"radyga-dyga@ya.ru", "tradepoint":"М.Видео", "address":"Самара, Московское ш., 81а"}
+  {"role":"0", "name":"Евгений", "email":"deain@"},
+  {"role":"1", "name":"Аня Радуга", "email":"radyga-dyga@", "tradepoint":"М.Видео", "address":"Самара, Московское ш., 81а"}
 ]
