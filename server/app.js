@@ -156,7 +156,7 @@ apiRoutes.post('/signup', function(req, res) {
       if (err) { res.status(500).send({ success: false, message: err.message }); }
       var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
       res.json({ success: true, message: 'User & token created',
-                 user: {email: user.email, name: user.name, phone: user.phone, city: user.city, atWork: user.atWork, role: user.role},
+                 'user': {email: user.email, name: user.name, phone: user.phone, city: user.city, atWork: user.atWork, role: user.role},
                  //tradepoint: user.tradepoint,  address: user.address,
                  token: token });
       //res.send({ token: token });
