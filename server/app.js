@@ -156,9 +156,9 @@ apiRoutes.post('/signup', function(req, res) {
       if (err) { res.status(500).send({ success: false, message: err.message }); }
       var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
       res.json({ success: true, message: 'User & token created',
-                 email: user.email, name: user.name, phone: user.phone, city: user.city,
-                 tradepoint: user.tradepoint,  address: user.address, atWork: user.atWork,
-                 role: user.role, token: token });
+                 user: {email: user.email, name: user.name, phone: user.phone, city: user.city, atWork: user.atWork, role: user.role}
+                 //tradepoint: user.tradepoint,  address: user.address,
+                 token: token });
       //res.send({ token: token });
     });
   });
@@ -179,9 +179,9 @@ apiRoutes.post('/login', function(req, res) {
       // if user is found and password is right then create a token
       var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
       res.json({ success: true, message: 'Token created',
-                 email: user.email, name: user.name, phone: user.phone, city: user.city,
-                 tradepoint: user.tradepoint,  address: user.address, atWork: user.atWork,
-                 role: user.role, token: token });
+                 user: {email: user.email, name: user.name, phone: user.phone, city: user.city, atWork: user.atWork, role: user.role},
+                 //tradepoint: user.tradepoint,  address: user.address,
+                 token: token });
       //res.send({ token: token });
     });
   });

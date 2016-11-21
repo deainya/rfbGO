@@ -7,27 +7,31 @@
   <tbody>
     <tr>
       <td><img ng-src="{{gravatarUrl}}"/></td>
-      <td>{{ profile.name }}</td>
+      <td>{{ _user.name }}</td> <!--profile.-->
     </tr>
     <tr>
       <td>E-mail:</td>
-      <td>{{ profile.email }}</td>
+      <td>{{ _user.email }}</td>
     </tr>
     <tr>
       <td>Телефон:</td>
-      <td>{{ profile.phone }}</td>
+      <td>{{ _user.phone }}</td>
     </tr>
     <tr>
       <td>Город:</td>
-      <td>{{ profile.city }}</td>
+      <td>{{ _user.city }}</td>
     </tr>
-    <tr ng-show="role==1">
+    <tr> <!-- ng-show="role==1"-->
+      <td>Юр. лицо:</td>
+      <td>{{ tps.name }}</td> <!-- -->
+    </tr>
+    <tr> <!-- ng-show="role==1"-->
       <td>Торговая точка:</td>
-      <td>{{ profile.tradepoint }}</td>
+      <td>{{ tps.tradepoint }}</td> <!-- -->
     </tr>
-    <tr ng-show="role==1">
+    <tr> <!--ng-show="role==1"-->
       <td>Адрес:</td>
-      <td>{{ profile.address }}</td>
+      <td>{{ tps.address }}</td>
     </tr>
   </tbody>
 </table>
@@ -43,3 +47,37 @@
       </div></li>
     </ul>
 </div>
+
+<!--trade points list-->
+
+<table class="tablexx">
+  <thead>
+    <tr>
+      <th width="20%">Юр. лицо</th>
+      <th width="20%">Торговая точка</th>
+      <th width="20%">Город</th>
+      <th width="40%">Адрес</th>
+      <th></th>
+    </tr>
+  </thead>
+</table>
+<div class="cell" ng-repeat="point in points">
+  <div class="act" ng-click="point._active=!point._active">
+    <table class="tablexx">
+      <tbody>
+        <tr>
+          <td width="20%">{{ point.name }}</td>
+          <td width="20%">{{ point.tradepoint }}</td>
+          <td width="25%">{{ point.city}}</td>
+          <td width="25%">{{ point.address }}</td>
+          <td><div ng-show="point._active">+</div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<form class="form" name="TradepointForm" ng-submit="SavePoints(points)"/>
+  <!-- atWork role -->
+  <input class="btn" type="submit" value="Сохранить" />
+</form>

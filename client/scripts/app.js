@@ -85,6 +85,7 @@ angular
   $rootScope.session = session;
 })
 .run(function ($rootScope, $state, auth) {
+  // The first... Do we realy need it?
   // Listen for location changes this happens before route or state changes
   /*$rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl){
     if(!auth.isLoggedIn()){

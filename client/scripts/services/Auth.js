@@ -16,7 +16,7 @@ module.exports = function ($http, session) {
         .post('/auth/login', credentials)
         .then(function(response){
           var data = response.data;
-          session.setUser(data.user); //?
+          session.setUser(data.user);
           session.setAccessToken(data.token);
         });
     },
