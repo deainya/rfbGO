@@ -1,7 +1,7 @@
 // services/Session.js
 module.exports = function ($log, localStorage) {
   // Instantiate data when service is loaded
-  this._user = JSON.parse(localStorage.getItem('session.user'));
+  this._user = localStorage.getItem('session.user'); //JSON.parse();
   this._accessToken = localStorage.getItem('session.accessToken');
   console.log(this._user);
   console.log(this._accessToken);
@@ -11,7 +11,7 @@ module.exports = function ($log, localStorage) {
     },
     setUser: function(user){
       this._user = user;
-      localStorage.setItem('session.user', JSON.stringify(user));
+      localStorage.setItem('session.user', user/*JSON.stringify(user)*/);
       return this;
     },
     getAccessToken: function(){
