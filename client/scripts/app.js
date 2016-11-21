@@ -37,7 +37,7 @@ angular
     templateUrl: 'templates/profile.html',
     resolve: {
       dataSource: 'dataSource', // A string value resolves to a Service
-      get: function(dataSource){ return dataSource.get('/consultants')/*.$promise*/; } // A function value resolves to the return value of the function
+      get: function(dataSource){ return dataSource.get('/tradepoints')/*.$promise*/; } // A function value resolves to the return value of the function
     },
     controller: 'profileCtrl'
   })
