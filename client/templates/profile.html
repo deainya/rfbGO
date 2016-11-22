@@ -19,6 +19,20 @@
       <td>{{ user.city }}</td>
     </tr>
 
+    <tr>
+      <div class="opt" ng-repeat="pt in tps">
+        <table class="tablexxx">
+          <tbody>
+            <tr>
+              <td>{{ pt.name }}</td>
+              <td>{{ pt.tradepoint }}</td>
+              <td>{{ pt.address }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </tr>
+
   </tbody>
 </table>
 <br>
@@ -63,6 +77,10 @@
   </div>
 </div>
 <br>
-<form class="form" name="TradepointForm" ng-submit="Filter()"/>
-  <input class="btn" type="submit" value="Тест" />
+<form class="formx" name="TradepointForm" ng-submit="Filter()"/>
+  <input class="btnx" type="submit" value="Тест" />
+</form>
+
+<form class="formx" name="TradepointForm" ng-submit="Filter()"/>
+  <input class="btnx" type="submit" value="Тест" />
 </form>

@@ -14,7 +14,7 @@ module.exports = function ($scope, $rootScope, dataSource, Gravatar) {
   //$scope.points = get.data; //get
   //console.log(points);
   //console.log(session._user);
-  /*$scope.SavePoints = function(points){
+  $scope.SavePoints = function(points){
     //var tps = new Array();
     var j = 0;
     for (var i=0; i<$scope.points.length; i++){
@@ -23,7 +23,7 @@ module.exports = function ($scope, $rootScope, dataSource, Gravatar) {
         j++;
       }
     }
-  }*/
+  }
 
   //$scope.points = get.data;
   $scope.gravatarUrl = Gravatar.generate($rootScope.user.email, 80);
