@@ -37,12 +37,12 @@
   <div class="opt" ng-show="order._active==true">
     <table class="tablexxx">
       <tbody>
-        <tr ng-show="role==0">
+        <tr ng-show="user.role==0">
           <td width="33%">Контакт: {{ order.partner.phone }}</td>
           <td width="33%">Торговая точка: {{ order.partner.tradepoint }}</td>
           <td width="34%">Адрес: {{ order.partner.address }}</td>
         </tr>
-        <tr ng-show="role==1&&isAccept(order.status)">
+        <tr ng-show="user.role==1&&isAccept(order.status)">
           <td width="33%">Принят: {{ order.accepted | date:'dd.MM HH:mm'}}</td>
           <td width="33%">Время прибытия: {{ order.time2go }} мин.</td>
           <td width="34%">Контакт: {{ order.consultant.email }}</td>
