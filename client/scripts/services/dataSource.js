@@ -1,5 +1,5 @@
 // services/dataSource.js
-module.exports = function ($http, session) {
+module.exports = function ($http) {
   return {
     get: function(url, params){
       //$http.defaults.headers.common['X-Auth-Token'] = session.token;

@@ -44,9 +44,10 @@ app.get("/partners", (req, res) => {
 });
 
 app.get("/tradepoints", (req, res) => {
+  let city = req.query.city || {};
   let tradepoints = Mongo.tradepoints();
 
-  tradepoints.find().toArray((err,docs) => {
+  tradepoints.find({"city":city}, {"_id":false}).toArray((err,docs) => {
     if(err) { res.sendStatus(400); }
     console.log( JSON.stringify(docs) );
     //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));

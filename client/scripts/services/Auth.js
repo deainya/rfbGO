@@ -1,5 +1,5 @@
 // services/Auth.js
-module.exports = function ($http, $sate, session) {
+module.exports = function ($http, session) {
   return {
     /* Check whether the user is logged in
      | @returns boolean

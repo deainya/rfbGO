@@ -93,19 +93,17 @@
       </tbody>
     </table>
   </div>
-
 </div>
-
 <br>
 
 <form class="form" name="OrderForm" ng-submit="Filter()"/>
   <div class="form-field">
     <label class="form-label" for="from">Дата с:</label>
-    <input class="form-input" type="datetime-local" id="from" ng-model="_from"/>
+    <input class="form-input" type="date" id="from" ng-model="_from"/>
   </div>
   <div class="form-field">
     <label class="form-label" for="to">Дата по:</label>
-    <input class="form-input" type="datetime-local" id="to" ng-model="_to"/>
+    <input class="form-input" type="date" id="to" ng-model="_to"/>
   </div>
   <input class="btn" type="submit" value="Фильтр" />
 </form>

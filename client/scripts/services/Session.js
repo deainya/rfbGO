@@ -1,5 +1,5 @@
 // services/Session.js
-module.exports = function ($log, localStorage) {
+module.exports = function ($log, $rootScope, localStorage) {
   // Instantiate data when service is loaded
   //this._user = JSON.parse(localStorage.getItem('session.user'));
   //this._accessToken = localStorage.getItem('session.accessToken');
@@ -7,20 +7,20 @@ module.exports = function ($log, localStorage) {
   //console.log(this._accessToken);
   return {
     getUser: function(){
-      return this._user;
+      return $rootScope.user;
     },
     setUser: function(user){
-      this._user = user;
+      $rootScope.user = user;
       localStorage.setItem('session.user', JSON.stringify(user));
-      return this;
+      return $rootScope.user;
     },
     getAccessToken: function(){
-      return this._accessToken;
+      return $rootScope.accessToken;
     },
     setAccessToken: function(token){
-      this._accessToken = token;
+      $rootScope.accessToken = token;
       localStorage.setItem('session.accessToken', token);
-      return this;
+      return $rootScope.accessToken;
     },
     /* Destroy session
      */

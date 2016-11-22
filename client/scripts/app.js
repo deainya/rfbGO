@@ -68,22 +68,22 @@ angular
   })
 })
 
-.service('auth', ['$http', '$state', 'session', Auth])
-.service('dataSource', ['$http', '$q', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
-.service('session', ['$log', 'localStorage', Session])
+.service('auth', ['$http', 'session', Auth])
+.service('dataSource', ['$http', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
+.service('session', ['$log', '$rootScope', 'localStorage', Session])
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
 .factory('localStorage', ['$window', localStorageFactory])
 .controller('tradepointsCtrl', ['$scope', 'get', 'session', tradepointsCtrl])
 //.controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
-.controller('profileCtrl', ['$scope', '$state', 'dataSource', 'session', 'Gravatar', profileCtrl])
+.controller('profileCtrl', ['$scope', '$rootScope', 'dataSource', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
 
 .run(function ($rootScope, auth, session) {
   $rootScope.auth = auth;
   $rootScope.session = session;
 })
-.run(function ($rootScope, $state, auth) {
+//.run(function ($rootScope, $state, auth) {
   // The first... Do we realy need it?
   // Listen for location changes this happens before route or state changes
   /*$rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl){
@@ -95,7 +95,7 @@ angular
     }
   });*/
   // Listen for state changes when using ui-router
-  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+//  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     // Here we simply check if logged in but you can implement more complex logic that inspects the state to see if access is allowed or not
     /*if(!auth.isLoggedIn()){
       if (toState.name !== 'login' && toState.name !== 'signup') {
@@ -105,5 +105,5 @@ angular
         event.preventDefault();
       }
     }*/
-  });
-})
+//  });
+//})

@@ -4,23 +4,36 @@
   <tbody>
     <tr>
       <td><img ng-src="{{gravatarUrl}}"/></td>
-      <td>{{ $root.session._user.name }}</td>
+      <td>{{ user.name }}</td>
     </tr>
     <tr>
       <td>E-mail:</td>
-      <td>{{ $root.session._user.email }}</td>
+      <td>{{ user.email }}</td>
     </tr>
     <tr>
       <td>Телефон:</td>
-      <td>{{ $root.session._user.phone }}</td>
+      <td>{{ user.phone }}</td>
     </tr>
     <tr>
       <td>Город:</td>
-      <td>{{ $root.session._user.city }}</td>
+      <td>{{ user.city }}</td>
     </tr>
 
   </tbody>
 </table>
+<br>
+
+<div class="cell">
+    <ul class="grid list list--unstyled mbl" ng-cloak>
+      <li><div class="card act" ng-hide="!user.role">
+        <a class="card-link" ui-sref="orders">Список вызовов</a>
+      </div></li>
+      <li>&nbsp;</li>
+      <li><div class="card act" ng-show="user.role==1">
+        <a class="card-link" ui-sref="orders-new">Новый вызов</a>
+      </div></li>
+    </ul>
+</div>
 <br>
 
 <table class="tablexx">

@@ -1,5 +1,5 @@
 // User profile controller
-module.exports = function ($scope, $state, dataSource, session, Gravatar) {
+module.exports = function ($scope, $rootScope, dataSource, Gravatar) {
   // Log getObject when controller executes
   //console.log(get);
   // Assign getObject to $scope
@@ -26,10 +26,10 @@ module.exports = function ($scope, $state, dataSource, session, Gravatar) {
   }*/
 
   //$scope.points = get.data;
-  $scope.gravatarUrl = Gravatar.generate(session._user.email, 80);
+  $scope.gravatarUrl = Gravatar.generate($rootScope.user.email, 80);
 
   $scope.Filter = function(){
-    dataSource.get('/tradepoints').then(function(res) {
+    dataSource.getFiltered('/tradepoints', {city: $rootScope.user.city}).then(function(res) {
       $scope.points = res.data;
       console.log($scope.points);
     });
