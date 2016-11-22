@@ -23,7 +23,7 @@ module.exports = function ($scope, $rootScope, $state, dataSource, Gravatar) {
         j++;
       }
     }
-    console.log(tps);
+    console.log($scope.tps);
     $state.reload();
   }
 
