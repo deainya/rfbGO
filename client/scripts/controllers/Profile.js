@@ -15,7 +15,7 @@ module.exports = function ($scope, $rootScope, $state, dataSource, Gravatar) {
   //console.log(points);
   //console.log(session._user);
   $scope.SavePoints = function(points){
-    console.log(points);
+    //console.log(points);
     $scope.tps = new Array();
     var j = 0;
     for (var i=0; i<points.length; i++){
@@ -25,7 +25,7 @@ module.exports = function ($scope, $rootScope, $state, dataSource, Gravatar) {
       }
     }
     console.log($scope.tps);
-    $state.reload();
+    //$state.reload();
   }
 
   //$scope.points = get.data;
