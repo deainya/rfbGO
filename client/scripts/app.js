@@ -85,7 +85,7 @@ angular
 .factory('localStorage', ['$window', localStorageFactory])
 .controller('tradepointsCtrl', ['$scope', 'get', tradepointsCtrl])
 //.controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
-.controller('profileCtrl', ['$scope', '$rootScope', 'dataSource', 'Gravatar', profileCtrl])
+.controller('profileCtrl', ['$scope', '$rootScope', '$state', 'dataSource', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
 
 .run(function ($rootScope, auth, session) {

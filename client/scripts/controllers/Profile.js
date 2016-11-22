@@ -1,5 +1,5 @@
 // User profile controller
-module.exports = function ($scope, $rootScope, dataSource, Gravatar) {
+module.exports = function ($scope, $rootScope, $state, dataSource, Gravatar) {
   // Log getObject when controller executes
   //console.log(get);
   // Assign getObject to $scope
@@ -15,7 +15,7 @@ module.exports = function ($scope, $rootScope, dataSource, Gravatar) {
   //console.log(points);
   //console.log(session._user);
   $scope.SavePoints = function(points){
-    //var tps = new Array();
+    $scope.tps = new Array();
     var j = 0;
     for (var i=0; i<$scope.points.length; i++){
       if ($scope.points._active) {
@@ -23,6 +23,8 @@ module.exports = function ($scope, $rootScope, dataSource, Gravatar) {
         j++;
       }
     }
+    console.log(tps);
+    $state.reload();
   }
 
   //$scope.points = get.data;
