@@ -19,7 +19,7 @@ module.exports = function ($scope, $rootScope, $state, dataSource, Gravatar) {
     $scope.tps = new Array();
     var j = 0;
     for (var i=0; i<points.length; i++){
-      if (points._active) {
+      if (points[i]._active) {
         $scope.tps[j] = points[i];
         j++;
       }
