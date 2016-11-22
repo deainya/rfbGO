@@ -29,7 +29,7 @@ module.exports = function ($scope, $rootScope, dataSource, Gravatar) {
   $scope.gravatarUrl = Gravatar.generate($rootScope.user.email, 80);
 
   $scope.Filter = function(){
-    dataSource.getFiltered('/tradepoints', {city: $rootScope.user.city}).then(function(res) {
+    dataSource.getFiltered('/profile/tradepoints', {city: $rootScope.user.city}).then(function(res) {
       $scope.points = res.data;
       console.log($scope.points);
     });

@@ -43,7 +43,7 @@ app.get("/partners", (req, res) => {
   });
 });
 
-app.get("/tradepoints", (req, res) => {
+app.get("/profile/tradepoints", (req, res) => {
   let city = req.query.city || {};
   let tradepoints = Mongo.tradepoints();
 
