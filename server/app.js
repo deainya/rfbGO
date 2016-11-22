@@ -55,6 +55,17 @@ app.get("/profile/tradepoints", (req, res) => {
   });
 });
 
+app.get("/tradepoints", (req, res) => {
+  let tradepoints = Mongo.tradepoints();
+
+  tradepoints.find().toArray((err,docs) => {
+    if(err) { res.sendStatus(400); }
+    console.log( JSON.stringify(docs) );
+    //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
+    //res.json( pointsNames ); // the list of tradepoints names + addresses
+  });
+});
+
 // Orders routing             ==================================================
 app.get("/orders", (req, res) => {
   let _from = req.query.from || {};

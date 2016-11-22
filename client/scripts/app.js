@@ -39,6 +39,15 @@ angular
     //},
     controller: 'profileCtrl'
   })
+  .state('tradepoints', {
+    url: '/tradepoints',
+    templateUrl: 'templates/tradepoints.html',
+    resolve: {
+      dataSource: 'dataSource', // A string value resolves to a Service
+      get: function(dataSource){ return dataSource.get('/tradepoints')/*.$promise*/; } // A function value resolves to the return value of the function
+    },
+    controller: 'tradepointsCtrl'
+  })
   /*.state('partner', {
     url: '/partners',
     templateUrl: 'templates/test.html',
@@ -74,7 +83,7 @@ angular
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
 .factory('localStorage', ['$window', localStorageFactory])
-.controller('tradepointsCtrl', ['$scope', 'get', 'session', tradepointsCtrl])
+.controller('tradepointsCtrl', ['$scope', 'get', tradepointsCtrl])
 //.controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
 .controller('profileCtrl', ['$scope', '$rootScope', 'dataSource', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
