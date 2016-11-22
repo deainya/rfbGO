@@ -15,11 +15,12 @@ module.exports = function ($scope, $rootScope, $state, dataSource, Gravatar) {
   //console.log(points);
   //console.log(session._user);
   $scope.SavePoints = function(points){
+    console.log(points);
     $scope.tps = new Array();
     var j = 0;
-    for (var i=0; i<$scope.points.length; i++){
-      if ($scope.points._active) {
-        $scope.tps[j] = $scope.points[i];
+    for (var i=0; i<points.length; i++){
+      if (points._active) {
+        $scope.tps[j] = points[i];
         j++;
       }
     }
