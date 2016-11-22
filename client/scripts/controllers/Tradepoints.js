@@ -1,4 +1,5 @@
 // Tradepoints controller
 module.exports = function ($scope, get) {
-  $scope.points = get.data;
+  $scope.pts = get.data;
+  console.log($scope.pts)
 };

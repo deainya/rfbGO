@@ -50,6 +50,8 @@ app.get("/profile/tradepoints", (req, res) => {
   tradepoints.find({"city":city}, {"_id":false}).toArray((err,docs) => {
     if(err) { res.sendStatus(400); }
     console.log( JSON.stringify(docs) );
+    res.json( docs );
+
     //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
     //res.json( pointsNames ); // the list of tradepoints names + addresses
   });
@@ -61,6 +63,8 @@ app.get("/tradepoints", (req, res) => {
   tradepoints.find().toArray((err,docs) => {
     if(err) { res.sendStatus(400); }
     console.log( JSON.stringify(docs) );
+    res.json( docs );
+
     //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
     //res.json( pointsNames ); // the list of tradepoints names + addresses
   });
