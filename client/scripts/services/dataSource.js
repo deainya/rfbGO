@@ -7,6 +7,7 @@ module.exports = function ($http) {
       return $http.get(url, {params: pms});
     },
     set: function(url, dataset){
+      //$http.defaults.headers.common['X-Auth-Token'] = session.token;
       return $http({method: 'POST', url: url, data: {dataset}});
     }
   }
