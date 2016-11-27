@@ -1,7 +1,7 @@
 // User profile controller
 module.exports = function ($rootScope, $scope, $state, dataSource, Gravatar) {
   //$scope.points = get.data; //get
-  $scope.gravatarUrl = Gravatar.generate(user.email, 80); //???
+  $scope.gravatarUrl = Gravatar.generate($rootScope.user.email, 80); //???
 
   $scope.SavePoints = function(points){
     $scope.tps = new Array();
