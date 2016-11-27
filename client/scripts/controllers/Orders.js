@@ -1,26 +1,26 @@
 // Orders controller
-module.exports = function ($scope, $state, get, dataSource, Entity) {
+module.exports = function ($rootScope, $scope, $state, dataSource, Entity) {
   // Log getObject when controller executes
   //console.log(get);
   // Assign getObject to $scope
-
-  $scope.orders = get.data;
-  console.log("duo");
-
-  $scope._from = new Date(); $scope._from.setHours(0, 0, 0, 0);
-  $scope._to = new Date(); $scope._to.setHours(0, 0, 0, 0);
-  $scope._to.setDate($scope._to.getDate() + 1);
+  //$scope.orders = get.data;
+  dataSource.get('/orders', $rootScope.filter).then(function(res) { //remove to Entity in future or $scope!!!
+    $scope.orders = res.data;
+  });
 
   $scope.Filter = function(){
-    dataSource.get('/orders', {from: $scope._from, to: $scope._to}).then(function(res) {
-      $scope.orders = res.data;
-    });
+    $state.reload();
+    //dataSource.get('/orders', $rootScope.filter).then(function(res) {
+    //  $scope.orders = res.data;
+    //});
   };
 
   $scope.Create = function(neworder){
     //var entity = Entity.get();
-    angular.extend(neworder, {"status":"Новый", partner:Entity.get(), created:new Date()}); //get for partner
-    delete neworder.partner.role;
+    //partner//partner:Entity.get()
+    var obj = {"status":"Новый", partner: {name: $rootScope.user.name, email: $rootScope.user.email}, created:new Date()};
+    angular.extend(neworder, obj); //get for partner
+    //delete neworder.partner.role;
     console.log(neworder);
     dataSource.set('/orders/create', neworder).then(function(){
       $state.go("orders");
@@ -28,8 +28,10 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   };
 
   $scope.Accept = function(orderid, setorder){
-    angular.extend(setorder, {_id:orderid, "status":"Принят", consultant:Entity.get(), accepted:new Date()}); //get for consultant
-    delete setorder.consultant.role;
+    //consultant//consultant:Entity.get()
+    var obj = {_id:orderid, "status":"Принят", consultant: {name: $rootScope.user.name, email: $rootScope.user.email}, accepted:new Date()};
+    angular.extend(setorder, obj); //get for consultant
+    //delete setorder.consultant.role;
     console.log(setorder);
     dataSource.set('/orders/accept', setorder).then(function(){
       $state.reload();

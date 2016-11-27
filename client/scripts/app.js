@@ -70,12 +70,16 @@ angular
 
 //.controller('tradepointsCtrl', ['$scope', 'get', tradepointsCtrl])
 //.controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
-.controller('profileCtrl', ['$scope', '$rootScope', '$state', 'dataSource', 'Gravatar', profileCtrl])
-.controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])
+.controller('profileCtrl', ['$rootScope', '$scope', '$state', 'dataSource', 'Gravatar', profileCtrl])
+.controller('ordersCtrl' , ['$rootScope', '$scope', '$state', 'dataSource', 'Entity'  , ordersCtrl])
 
 .run(function ($rootScope, auth, session) {
   $rootScope.auth = auth;
   $rootScope.session = session;
+
+  var _from = new Date(); _from.setHours(0, 0, 0, 0);
+  var _to = new Date(); _to.setHours(0, 0, 0, 0); _to.setDate(_to.getDate() + 1);
+  $rootScope.filter = {from:_from, to:_to};
 })
 //.run(function ($rootScope, $state, auth) {
   // The first... Do we realy need it?

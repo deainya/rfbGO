@@ -90,14 +90,12 @@ app.get("/orders", (req, res) => {
   if (!req.query) {
     orders.find().toArray((err,docs) => {
       if (err) { res.sendStatus(400); }
-      console.log( "uno" );
       console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
     });
   } else {
     orders.find({ created: { $gte: _from, $lt: _to } }, {}).toArray((err,docs) => {
       if (err) { res.sendStatus(400); }
-      console.log( "duo" );
       console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
     });
