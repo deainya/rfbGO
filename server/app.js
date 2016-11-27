@@ -43,11 +43,23 @@ app.get("/partners", (req, res) => {
   });
 });
 
-app.get("/profile/tradepoints", (req, res) => {
-  let city = req.query.city || {};
+
+app.post("/orders/cancel", jsonParser, (req, res) => {
+  let orders = Mongo.orders();
+
+    if(err) { res.sendStatus(400); }
+    console.log( "Order cancelled: " + JSON.stringify(orderid) );
+    res.sendStatus(201);
+  });
+});
+
+app.post("/profile/tradepoints", (req, res) => {
+  let tradepointid = req.body.dataset || {};
   let tradepoints = Mongo.tradepoints();
 
-  tradepoints.find({"city":city}, {"_id":false}).toArray((err,docs) => {
+  tradepoints.findOneAndUpdate({_id: new mongo.ObjID(tradepointid)}, {$set: {"tradepoint": tradepoints}}, function(err, result){
+
+  //tradepoints.find({"city":city}, {"_id":false}).toArray((err,docs) => {
     if(err) { res.sendStatus(400); }
     console.log( JSON.stringify(docs) );
     res.json( docs );
@@ -60,7 +72,7 @@ app.get("/profile/tradepoints", (req, res) => {
 app.get("/tradepoints", (req, res) => {
   let tradepoints = Mongo.tradepoints();
 
-  tradepoints.find().toArray((err,docs) => {
+  tradepoints.find({"city":city}, {}).toArray((err,docs) => {
     if(err) { res.sendStatus(400); }
     console.log( JSON.stringify(docs) );
     res.json( docs );
@@ -165,8 +177,8 @@ apiRoutes.post('/register', function(req, res) {
       city: req.body.city,
       tradepoint: req.body.tradepoint,
       address: req.body.address,
-      atWork: false,
-      role: '0'
+      role: req.body.role,
+      atWork: false
     });
     user.save(function(err, result) {
       if (err) { res.status(500).send({ success: false, message: err.message }); }

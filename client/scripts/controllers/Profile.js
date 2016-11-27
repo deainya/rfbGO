@@ -25,14 +25,19 @@ module.exports = function ($scope, $rootScope, $state, dataSource, Gravatar) {
       }
     }
     console.log($scope.tps);
+
     //$state.reload();
+    dataSource.set('/profile/tradepoints', $scope.tps).then(function(){
+      $state.reload();
+    });
+
   }
 
   //$scope.points = get.data;
   $scope.gravatarUrl = Gravatar.generate($rootScope.user.email, 80);
 
   $scope.Filter = function(){
-    dataSource.getFiltered('/profile/tradepoints', {city: $rootScope.user.city}).then(function(res) {
+    dataSource.getFiltered('/tradepoints', {city: $rootScope.user.city}).then(function(res) {
       $scope.points = res.data;
       console.log($scope.points);
     });
