@@ -47,13 +47,13 @@ app.post("/profile/tradepoint", (req, res) => {
   let dataset = req.body.dataset;
   let email = req.body.dataset.email;
   let tp = req.body.dataset.tradepoint;
-  let users = Mongo.users();
+  //let users = Mongo.users();
 
   console.log(dataset);
   console.log(email);
   console.log(tp);
 
-  users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tp}}, function(err, result){
+  User.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tp}}, function(err, result){
     if(err) { res.sendStatus(400); }
     console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
     res.sendStatus(201);
