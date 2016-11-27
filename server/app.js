@@ -43,16 +43,19 @@ app.get("/partners", (req, res) => {
   });
 });
 
-app.post("/profile/tradepoints", (req, res) => {
-  let email = req.body.dataset.email;
-  let tps = req.body.dataset.tps;
+app.post("/profile/tradepoint", (req, res) => {
+  let dataset = req.body.dataset;
+  let email = dataset.email;
+  let tp = dataset.tradepoint;
   let users = Mongo.users();
 
-  console.log(req.body.dataset);
+  console.log(dataset);
+  console.log(email);
+  console.log(tp);
 
-  users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tps}}, function(err, result){
+  users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tp}}, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tps) );
+    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
     res.sendStatus(201);
 
     //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
