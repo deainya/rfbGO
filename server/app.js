@@ -64,7 +64,7 @@ app.get("/tradepoints", (req, res) => {
   let city = req.query.city || {};
   let tradepoints = Mongo.tradepoints();
 
-  tradepoints.find({"city":city}, {}).toArray((err,docs) => {
+  tradepoints.find({"city":city}, {"_id":false}).toArray((err,docs) => {
     if(err) { res.sendStatus(400); }
     console.log( JSON.stringify(docs) );
     res.json( docs );

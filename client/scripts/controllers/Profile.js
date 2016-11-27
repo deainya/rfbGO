@@ -21,16 +21,18 @@ module.exports = function ($scope, $rootScope, $state, dataSource, Gravatar) {
     for (var i=0; i<points.length; i++){
       if (points[i]._active) {
         $scope.tps[j] = points[i];
+        delete $scope.tps._active;
         j++;
       }
     }
     console.log($scope.tps);
 
     //$state.reload();
-    angular.extend($scope.tps, {email:$rootScope.user.email}); //get for consultant
-    console.log($scope.tps);
+    var obj = {email:$rootScope.user.email};
+    angular.extend(obj, {tradepoint:$scope.tps} ); //get for consultant
+    console.log(obj);
 
-    dataSource.set('/profile/tradepoints', $scope.tps).then(function(){
+    dataSource.set('/profile/tradepoints', obj).then(function(){
       $state.reload();
     });
 
