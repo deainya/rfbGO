@@ -44,7 +44,7 @@ angular
     templateUrl: 'templates/orders.html',
     resolve: {
       dataSource: 'dataSource',
-      get: function(dataSource){ return dataSource.get('/orders'); }
+      get: function(dataSource){ console.log("uno"); return dataSource.get('/orders'); }
     },
     controller: 'ordersCtrl'
   })

@@ -5,6 +5,7 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
   // Assign getObject to $scope
 
   $scope.orders = get.data;
+  console.log("duo");
 
   $scope._from = new Date(); $scope._from.setHours(0, 0, 0, 0);
   $scope._to = new Date(); $scope._to.setHours(0, 0, 0, 0);
