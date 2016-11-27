@@ -81,11 +81,12 @@ app.get("/tradepoints", (req, res) => {
 app.get("/orders", (req, res) => {
   let _from = req.query.from || {};
   let _to = req.query.to || {};
+  let _status = req.query.status || {};
   let orders = Mongo.orders();
 
   //console.log(req.query);
   //console.log(req.params);
-  console.log({ created: { $gte: _from, $lt: _to } });
+  console.log({ created: { $gte: _from, $lt: _to }, status: _status });
 
   if (!req.query) {
     orders.find().toArray((err,docs) => {
