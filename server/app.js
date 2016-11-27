@@ -197,8 +197,8 @@ apiRoutes.post('/login', function(req, res) {
       // if user is found and password is right then create a token
       var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
       res.json({ success: true, message: 'Token created',
-                 user: {email: user.email, name: user.name, phone: user.phone, city: user.city, atWork: user.atWork, role: user.role},
-                 //tradepoint: user.tradepoint,  address: user.address,
+                 user: {email: user.email, name: user.name, phone: user.phone, city: user.city, role: user.role, atWork: user.atWork},
+                 tradepoint: user.tradepoint, // address: user.address,
                  token: token });
       //res.send({ token: token });
     });
