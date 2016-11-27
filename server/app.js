@@ -43,24 +43,15 @@ app.get("/partners", (req, res) => {
   });
 });
 
-
-app.post("/orders/cancel", jsonParser, (req, res) => {
-  let orders = Mongo.orders();
-
-    if(err) { res.sendStatus(400); }
-    console.log( "Order cancelled: " + JSON.stringify(orderid) );
-    res.sendStatus(201);
-  });
-});
-
 app.post("/profile/tradepoints", (req, res) => {
-  let tradepointid = req.body.dataset || {};
-  let tradepoints = Mongo.tradepoints();
+  let email = req.body.dataset.email;
+  let tps = req.body.dataset.tps;
+  let users = Mongo.users();
 
-  tradepoints.findOneAndUpdate({_id: new mongo.ObjID(tradepointid)}, {$set: {"tradepoint": tradepoints}}, function(err, result){
+  tradepoints.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tps}}, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( JSON.stringify(docs) );
-    res.json( docs );
+    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tps) );
+    res.sendStatus(201);
 
     //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
     //res.json( pointsNames ); // the list of tradepoints names + addresses

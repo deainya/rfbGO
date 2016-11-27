@@ -27,6 +27,9 @@ module.exports = function ($scope, $rootScope, $state, dataSource, Gravatar) {
     console.log($scope.tps);
 
     //$state.reload();
+    angular.extend($scope.tps, {email:$rootScope.user.email}); //get for consultant
+    console.log($scope.tps);
+
     dataSource.set('/profile/tradepoints', $scope.tps).then(function(){
       $state.reload();
     });
