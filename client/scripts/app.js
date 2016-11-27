@@ -42,10 +42,10 @@ angular
   .state('orders', {
     url: '/orders',
     templateUrl: 'templates/orders.html',
-    resolve: {
-      dataSource: 'dataSource',
-      get: function(dataSource){ console.log("uno"); return dataSource.get('/orders'); }
-    },
+    //resolve: {
+    //  dataSource: 'dataSource',
+    //  get: function(dataSource){ console.log("uno"); return dataSource.get('/orders'); }
+    //},
     controller: 'ordersCtrl'
   })
   .state('orders-new', {

@@ -95,7 +95,7 @@ app.get("/orders", (req, res) => {
       res.json( docs ); // orders
     });
   } else {
-    orders.find({ created: { $gte: _from, $lt: _to } }, {}).toArray((err,docs) => {
+    orders.find({ created: { $gte: _from, $lt: _to }, status: _status }, {}).toArray((err,docs) => {
       if (err) { res.sendStatus(400); }
       console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
