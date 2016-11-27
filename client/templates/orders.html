@@ -105,5 +105,15 @@
     <label class="form-label" for="to">Дата по:</label>
     <input class="formx-input" type="date" id="to" ng-model="filter.to"/>
   </div>
+  <div class="form-field">
+    <label class="form-label" for="place2go">Статус:</label>
+    <select class="form-input" id="place2go" required ng-model="filter.status" ng-init="filter.status = ''">
+      <option value=""></option>
+      <option value="Новый">Новый</option>
+      <option value="Принят">Принят</option>
+      <option value="Завершён">Завершён</option>
+      <option value="Отменён">Отменён</option>
+    </select>
+  </div>
   <input class="btn" type="submit" value="Фильтр" />
 </form>
