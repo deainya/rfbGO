@@ -4,6 +4,7 @@ module.exports = function ($rootScope, $scope, $state, dataSource, Gravatar) {
   $scope.gravatarUrl = Gravatar.generate($rootScope.user.email, 80); //???
   $scope.atWork = function(){
     $rootScope.user.atWork = !$rootScope.user.atWork;
+    navigator.notification.beep(2000);
   };
 
   $scope.SavePoints = function(points){
