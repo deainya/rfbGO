@@ -58,8 +58,6 @@ app.post("/profile/tradepoints", (req, res) => {
   let tradepoints = Mongo.tradepoints();
 
   tradepoints.findOneAndUpdate({_id: new mongo.ObjID(tradepointid)}, {$set: {"tradepoint": tradepoints}}, function(err, result){
-
-  //tradepoints.find({"city":city}, {"_id":false}).toArray((err,docs) => {
     if(err) { res.sendStatus(400); }
     console.log( JSON.stringify(docs) );
     res.json( docs );
