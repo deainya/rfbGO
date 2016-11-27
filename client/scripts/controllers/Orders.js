@@ -6,14 +6,12 @@ module.exports = function ($scope, $state, get, dataSource, Entity) {
 
   $scope.orders = get.data;
 
-  $scope._from = new Date();
-  $scope._from.setHours(0, 0, 0, 0);
-  $scope._to = new Date();
-  $scope._to.setHours(0, 0, 0, 0);
+  $scope._from = new Date(); $scope._from.setHours(0, 0, 0, 0);
+  $scope._to = new Date(); $scope._to.setHours(0, 0, 0, 0);
   $scope._to.setDate($scope._to.getDate() + 1);
 
   $scope.Filter = function(){
-    dataSource.getFiltered('/orders', {from: $scope._from, to: $scope._to}).then(function(res) {
+    dataSource.get('/orders', {from: $scope._from, to: $scope._to}).then(function(res) {
       $scope.orders = res.data;
     });
   };

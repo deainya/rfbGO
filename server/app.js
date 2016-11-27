@@ -23,7 +23,7 @@ app.use(morgan('dev')); // use morgan to log requests to the console
 app.use( express.static(__dirname + "/../client") ); // default route
 
 // Routing                    ==================================================
-app.get("/consultants", (req, res) => {
+/*app.get("/consultants", (req, res) => {
   let consultants = Mongo.users();//consultants();
 
   consultants.find({"role":"0"}, {"_id":false}).limit(1).next((err,doc) => { // query
@@ -41,12 +41,12 @@ app.get("/partners", (req, res) => {
     console.log( JSON.stringify(doc) );
     res.json( doc ); // 1st partner from collection
   });
-});
+});*/
 
 app.post("/profile/tradepoint", (req, res) => {
   let dataset = req.body.dataset;
-  let email = dataset.email;
-  let tp = dataset.tradepoint;
+  let email = req.body.dataset.email;
+  let tp = req.body.dataset.tradepoint;
   let users = Mongo.users();
 
   console.log(dataset);

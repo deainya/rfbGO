@@ -3,14 +3,14 @@ import 'angular-ui-router'
 import 'angular-resource'
 
 var Auth = require('./services/Auth');
-var dataSourceService = require('./services/dataSource');
 var Session = require('./services/Session');
+
+var dataSourceService = require('./services/dataSource');
+
 var EntityFactory = require('./services/Entity');
 var GravatarFactory = require('./services/Gravatar');
 var localStorageFactory = require('./services/localStorage');
 
-var tradepointsCtrl = require('./controllers/Tradepoints');
-//var signupCtrl = require('./controllers/Signup');
 var profileCtrl = require('./controllers/Profile');
 var ordersCtrl = require('./controllers/Orders');
 
@@ -22,13 +22,13 @@ angular
   .state('home', {
     url: '/'
   })
-  .state('login', {
-    url: '/login',
-    templateUrl: 'templates/login.html'
-  })
   .state('register', {
     url: '/register',
     templateUrl: 'templates/register.html'
+  })
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html'
   })
   .state('profile', {
     url: '/profile',
@@ -39,16 +39,16 @@ angular
     //},
     controller: 'profileCtrl'
   })
-  .state('tradepoints', {
+  /*.state('tradepoints', {
     url: '/tradepoints',
     templateUrl: 'templates/tradepoints.html',
     resolve: {
       dataSource: 'dataSource', // A string value resolves to a Service
       get: function(dataSource){ return dataSource.get('/tradepoints')/*.$promise*/; } // A function value resolves to the return value of the function
-    },
+  /*  },
     controller: 'tradepointsCtrl'
   })
-  /*.state('partner', {
+  .state('partner', {
     url: '/partners',
     templateUrl: 'templates/test.html',
     resolve: {
@@ -78,12 +78,15 @@ angular
 })
 
 .service('auth', ['$http', 'session', Auth])
-.service('dataSource', ['$http', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
 .service('session', ['$log', '$rootScope', 'localStorage', Session])
+
+.service('dataSource', ['$http', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
+
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
 .factory('localStorage', ['$window', localStorageFactory])
-.controller('tradepointsCtrl', ['$scope', 'get', tradepointsCtrl])
+
+//.controller('tradepointsCtrl', ['$scope', 'get', tradepointsCtrl])
 //.controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
 .controller('profileCtrl', ['$scope', '$rootScope', '$state', 'dataSource', 'Gravatar', profileCtrl])
 .controller('ordersCtrl', ['$scope', '$state', 'get', 'dataSource', 'Entity', ordersCtrl])

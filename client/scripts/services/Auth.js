@@ -28,7 +28,7 @@ module.exports = function ($http, session) {
           session.setUser(data.user);
           session.setAccessToken(data.token);
           console.log(data.user);
-          console.log(data.token);
+          //console.log(data.token);
         });
     },
     /* Log out
