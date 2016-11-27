@@ -2,6 +2,9 @@
 module.exports = function ($rootScope, $scope, $state, dataSource, Gravatar) {
   //$scope.points = get.data; //get
   $scope.gravatarUrl = Gravatar.generate($rootScope.user.email, 80); //???
+  $scope.atWork = function(){
+    $rootScope.user.atWork = !$rootScope.user.atWork;
+  };
 
   $scope.SavePoints = function(points){
     $scope.tps = new Array();
@@ -20,7 +23,7 @@ module.exports = function ($rootScope, $scope, $state, dataSource, Gravatar) {
     dataSource.set('/profile/tradepoint', obj).then(function(){
       $state.reload();
     });
-  }
+  };
 
   $scope.Filter = function(){
     dataSource.get('/tradepoints', {city: $rootScope.user.city}).then(function(res) {

@@ -20,13 +20,23 @@
     </tr>
 
     <tr>
-      <div class="opt" ng-repeat="pt in tps">
+      <td>На работе:</td>
+      <td>
+        {{ user.atWork}}
+        <form class="formx" name="ActionForm" ng-submit="atWork()"/>
+          <input class="btnx" type="submit" value="На работе" />
+        </form>
+      </td>
+    </tr>
+
+    <tr>
+      <div class="opt" ng-repeat="point in user.tradepoint">
         <table class="tablexxx">
           <tbody>
             <tr>
-              <td>{{ pt.name }}</td>
-              <td>{{ pt.tradepoint }}</td>
-              <td>{{ pt.address }}</td>
+              <td>{{ point.name }}</td>
+              <td>{{ point.tradepoint }}</td>
+              <td>{{ point.address }}</td>
             </tr>
           </tbody>
         </table>
