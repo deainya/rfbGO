@@ -117,7 +117,7 @@ app.post("/orders/cancel", jsonParser, (req, res) => {
   let orderid = req.body.dataset || {};
   let orders = Mongo.orders();
 
-  orders.findOneAndUpdate({_id: new mongo.ObjID(orderid)}, {$set: {status: "Отменён"}, $currentDate: {"cancelled": {$type: "date"}}}, function(err, result){
+  orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: {status: "Отменён"}, $currentDate: {"cancelled": {$type: "date"}}}, function(err, result){
     if(err) { res.sendStatus(400); }
     console.log( "Order cancelled: " + JSON.stringify(orderid) );
     res.sendStatus(201);
