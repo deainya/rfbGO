@@ -20,12 +20,13 @@
     </tr>
 
     <tr>
-      <td>На работе:</td>
+      <td> </td>
       <td>
-        {{ user.atWork}}
+        <div ng-show="user.atWork==false">Нет</div>
         <form class="formx" name="ActionForm" ng-submit="atWork()"/>
           <input class="btnx" type="submit" value="На работе" />
         </form>
+        <div ng-show="user.atWork==true">Да</div>
       </td>
     </tr>
 
@@ -82,7 +83,7 @@
           <td width="20%">{{ point.tradepoint }}</td>
           <td width="25%">{{ point.city }}</td>
           <td width="25%">{{ point.address }}</td>
-          <td><div ng-show="point._active==true">+</div></td>
+          <td><div ng-show="point._active==true">&#10004;</div></td>
         </tr>
       </tbody>
     </table>

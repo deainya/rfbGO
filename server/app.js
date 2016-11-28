@@ -53,9 +53,10 @@ app.post("/profile/tradepoint", (req, res) => {
   console.log(email);
   console.log(tp);
 
-  User.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tp}}, function(err, result){
+  User.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tp}, {upsert:true, returnNewDocument:true }}, function(err, doc){
     if(err) { res.sendStatus(400); }
     console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
+    console.log( JSON.stringify(doc) );
     res.sendStatus(201);
 
     //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
