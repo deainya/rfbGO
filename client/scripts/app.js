@@ -1,7 +1,7 @@
 import angular from 'angular'
 import 'angular-ui-router'
 import 'angular-resource'
-import 'cordova'
+//import 'cordova'
 
 var Auth = require('./services/Auth');
 var Session = require('./services/Session');
