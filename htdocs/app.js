@@ -23,7 +23,7 @@ app.use(morgan('dev')); // use morgan to log requests to the console
 app.use( express.static(__dirname + "/../client") ); // default route
 
 // Routing                    ==================================================
-app.get("/consultants", (req, res) => {
+/*app.get("/consultants", (req, res) => {
   let consultants = Mongo.users();//consultants();
 
   consultants.find({"role":"0"}, {"_id":false}).limit(1).next((err,doc) => { // query
@@ -41,9 +41,29 @@ app.get("/partners", (req, res) => {
     console.log( JSON.stringify(doc) );
     res.json( doc ); // 1st partner from collection
   });
+});*/
+
+app.post("/profile/tradepoint", (req, res) => {
+  let dataset = req.body.dataset;
+  let email = req.body.dataset.email;
+  let tp = req.body.dataset.tradepoint;
+  //let users = Mongo.users();
+
+  console.log(dataset);
+  console.log(email);
+  console.log(tp);
+
+  User.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tp}}, function(err, result){
+    if(err) { res.sendStatus(400); }
+    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
+    res.sendStatus(201);
+
+    //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
+    //res.json( pointsNames ); // the list of tradepoints names + addresses
+  });
 });
 
-app.get("/profile/tradepoints", (req, res) => {
+app.get("/tradepoints", (req, res) => {
   let city = req.query.city || {};
   let tradepoints = Mongo.tradepoints();
 
@@ -57,40 +77,26 @@ app.get("/profile/tradepoints", (req, res) => {
   });
 });
 
-app.get("/tradepoints", (req, res) => {
-  let tradepoints = Mongo.tradepoints();
-
-  tradepoints.find().toArray((err,docs) => {
-    if(err) { res.sendStatus(400); }
-    console.log( JSON.stringify(docs) );
-    res.json( docs );
-
-    //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
-    //res.json( pointsNames ); // the list of tradepoints names + addresses
-  });
-});
-
 // Orders routing             ==================================================
 app.get("/orders", (req, res) => {
   let _from = req.query.from || {};
   let _to = req.query.to || {};
+  let _status = req.query.status || {};
   let orders = Mongo.orders();
 
   //console.log(req.query);
   //console.log(req.params);
-  console.log({ created: { $gte: _from, $lt: _to } });
+  console.log({ created: { $gte: _from, $lt: _to }, status: _status });
 
   if (!req.query) {
     orders.find().toArray((err,docs) => {
       if (err) { res.sendStatus(400); }
-      console.log( "uno" );
       console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
     });
   } else {
     orders.find({ created: { $gte: _from, $lt: _to } }, {}).toArray((err,docs) => {
       if (err) { res.sendStatus(400); }
-      console.log( "duo" );
       console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
     });
@@ -112,7 +118,7 @@ app.post("/orders/cancel", jsonParser, (req, res) => {
   let orderid = req.body.dataset || {};
   let orders = Mongo.orders();
 
-  orders.findOneAndUpdate({_id: new mongo.ObjID(orderid)}, {$set: {status: "Отменён"}, $currentDate: {"cancelled": {$type: "date"}}}, function(err, result){
+  orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: {status: "Отменён"}, $currentDate: {"cancelled": {$type: "date"}}}, function(err, result){
     if(err) { res.sendStatus(400); }
     console.log( "Order cancelled: " + JSON.stringify(orderid) );
     res.sendStatus(201);
@@ -165,8 +171,8 @@ apiRoutes.post('/register', function(req, res) {
       city: req.body.city,
       tradepoint: req.body.tradepoint,
       address: req.body.address,
-      atWork: false,
-      role: '0'
+      role: req.body.role,
+      atWork: false
     });
     user.save(function(err, result) {
       if (err) { res.status(500).send({ success: false, message: err.message }); }
@@ -195,8 +201,8 @@ apiRoutes.post('/login', function(req, res) {
       // if user is found and password is right then create a token
       var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
       res.json({ success: true, message: 'Token created',
-                 user: {email: user.email, name: user.name, phone: user.phone, city: user.city, atWork: user.atWork, role: user.role},
-                 //tradepoint: user.tradepoint,  address: user.address,
+                 user: {email: user.email, name: user.name, phone: user.phone, city: user.city, role: user.role, atWork: user.atWork},
+                 tradepoint: user.tradepoint, // address: user.address,
                  token: token });
       //res.send({ token: token });
     });
