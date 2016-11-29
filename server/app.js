@@ -15,7 +15,7 @@ let User        = require('./user'); // get our mongoose model
 // Initialization            ==================================================
 Mongo.connect(Config.database); // connecting to MongoDB
 mongoose.connect(Config.database); // connect to MongoDB through Mongoose
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise; //WTF???
 
 let jsonParser = bodyParser.json(); // ?
 app.use(bodyParser.json()); // get our request parameters
@@ -71,7 +71,7 @@ app.post("/profile/tradepoint", (req, res) => {
   //});
   User.findOne({ "email": email }, {"_id":false, "__v":false}, function(err, existingUser) {
     if (existingUser) {
-      existingUser.tradepoint = tp;
+      existingUser.tradepoint = "fuck that";//tp;
       console.log( JSON.stringify(existingUser) );
 
       existingUser.save(function(err, result) {
