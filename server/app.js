@@ -43,24 +43,30 @@ app.get("/partners", (req, res) => {
   });
 });*/
 
-app.post("/profile/tradepoint", (req, res) => {
-  let dataset = req.body.dataset;
-  let email = req.body.dataset.email;
-  let tp = req.body.dataset.tradepoint;
+// Profile routing?           ==================================================
+app.post("/profile/atwork", (req, res) => {
+  let email = req.body.dataset.email || {};
+  let aw = req.body.dataset.atwork || {};
   let users = Mongo.users();
 
-  console.log(dataset);
-  console.log(email);
-  console.log(tp);
+  users.findOneAndUpdate({"email": email}, {$set: {"atWork": aw}}, function(err, result){
+    if(err) { res.sendStatus(400); }
+    console.log( "atWork saved: " + JSON.stringify(email) + " " + JSON.stringify(aw) );
+    console.log( JSON.stringify(result) );
+    res.sendStatus(201);
+  });
+});
 
-  users.update({"email": email}, {$set: {"tradepoint": tp}}, function(err, doc){
+app.post("/profile/tradepoint", (req, res) => {
+  let email = req.body.dataset.email || {};
+  let tp = req.body.dataset.tradepoint || {};
+  let users = Mongo.users();
+
+  users.update({"email": email}, {$set: {"tradepoint": tp}}, function(err, result){
     if(err) { res.sendStatus(400); }
     console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
-    console.log( JSON.stringify(doc) );
+    console.log( JSON.stringify(result) );
     res.sendStatus(201);
-
-    //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
-    //res.json( pointsNames ); // the list of tradepoints names + addresses
   });
 });
 

@@ -4,7 +4,13 @@ module.exports = function ($rootScope, $scope, $state, dataSource, Gravatar) {
   $scope.gravatarUrl = Gravatar.generate($rootScope.user.email, 80); //???
   $scope.atWork = function(){
     $rootScope.user.atWork = !$rootScope.user.atWork;
-    navigator.notification.beep(2000);
+
+    var obj = {email:$rootScope.user.email}; //{name: $rootScope.user.name, email: $rootScope.user.email}, action:"На работе", created:new Date()};
+    angular.extend(obj, {atwork:$rootScope.user.atWork} );
+    dataSource.set('/profile/atwork', obj).then(function(){
+      $state.reload();
+    });
+    //navigator.notification.beep(2000);
   };
 
   $scope.SavePoints = function(points){
@@ -20,7 +26,6 @@ module.exports = function ($rootScope, $scope, $state, dataSource, Gravatar) {
 
     var obj = {email:$rootScope.user.email};
     angular.extend(obj, {tradepoint:$scope.tps} );
-
     dataSource.set('/profile/tradepoint', obj).then(function(){
       $state.reload();
     });
