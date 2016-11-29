@@ -44,14 +44,13 @@ app.get("/partners", (req, res) => {
 });*/
 
 // Profile routing?           ==================================================
-app.post("/profile/atwork", (req, res) => {
-  let email = req.body.dataset.email || {};
-  let aw = req.body.dataset.atwork || {};
-  let users = Mongo.users();
+app.post("/action/atwork", (req, res) => {
+  let action = req.body.dataset || {};
+  let actions = Mongo.actions();
 
-  users.findOneAndUpdate({"email": email}, {$set: {"atWork": aw}}, function(err, result){
+  actions.insert(action, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( "atWork saved: " + JSON.stringify(email) + " " + JSON.stringify(aw) );
+    console.log( "Action created: " + JSON.stringify( action ) );
     console.log( JSON.stringify(result) );
     res.sendStatus(201);
   });

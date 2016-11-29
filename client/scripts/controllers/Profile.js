@@ -5,10 +5,13 @@ module.exports = function ($rootScope, $scope, $state, dataSource, Gravatar) {
   $scope.atWork = function(){
     $rootScope.user.atWork = !$rootScope.user.atWork;
 
-    var obj = {email:$rootScope.user.email}; //{name: $rootScope.user.name, email: $rootScope.user.email}, action:"На работе", created:new Date()};
-    angular.extend(obj, {atwork:$rootScope.user.atWork} );
-    dataSource.set('/profile/atwork', obj).then(function(){
-      $state.reload();
+    if ($rootScope.user.atWork) {
+      var obj = {action:"На работе", name: $rootScope.user.name, email: $rootScope.user.email, created:new Date()};
+    } else {
+      var obj = {action:"Не на работе", name: $rootScope.user.name, email: $rootScope.user.email, created:new Date()};
+    }
+    dataSource.set('/action/atwork', obj).then(function(){
+      console.log(obj); //$state.reload();
     });
     //navigator.notification.beep(2000);
   };
