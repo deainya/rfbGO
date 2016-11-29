@@ -68,7 +68,7 @@ app.post("/profile/tradepoint", (req, res) => {
     else {
       res.status(201).send({ success: true, message: 'Tradepoint updated' });
     }
-    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tradepoint) );
+    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
     console.log( JSON.stringify(result) );
 
   });
