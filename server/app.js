@@ -63,7 +63,7 @@ app.post("/profile/tradepoint", (req, res) => {
   let tradepoint = req.body.dataset.tradepoint || {};
   let users = Mongo.users();
 
-  users.update({"email": email}, {$set: {"tradepoint": tradepoint}}, function(err, result){
+  users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tradepoint}}, function(err, result){
     if(err) { res.sendStatus(400); }
     console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tradepoint) );
     console.log( JSON.stringify(result) );
