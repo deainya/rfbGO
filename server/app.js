@@ -63,7 +63,7 @@ app.post("/profile/tradepoint", (req, res) => {
   let tp = req.body.dataset.tradepoint || {};
   let users = Mongo.users();
 
-  /*users.update({"email": email}, {$set: {"tradepoint": tp}}, {}, function(err, result){
+  users.update({"email": email}, {$set: {"tradepoint": tp}}, {}, function(err, result){
     if(err) { res.sendStatus(400); }
     else {
       res.status(201).send({ success: true, message: 'Tradepoint updated' });
@@ -71,9 +71,9 @@ app.post("/profile/tradepoint", (req, res) => {
     console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tradepoint) );
     console.log( JSON.stringify(result) );
 
-  });*/
+  });
 
-  User.findOne({ "email": email }, {"__v":false}, function(err, existingUser) {
+  /*User.findOne({ "email": email }, {"__v":false}, function(err, existingUser) {
     if (existingUser) {
       existingUser.tradepoint = tp; //"fuck that";//tp;
       console.log( JSON.stringify(existingUser) );
@@ -88,7 +88,7 @@ app.post("/profile/tradepoint", (req, res) => {
     else {
       return res.status(400).send({ success: false, message: 'User not found' });
     }
-  });
+  });*/
 });
 
 app.get("/tradepoints", (req, res) => {
