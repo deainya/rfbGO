@@ -71,7 +71,7 @@ app.post("/profile/tradepoint", (req, res) => {
   //});
   User.findOne({ "email": email }, function(err, existingUser) {
     if (existingUser) {
-      existingUser.tradepoint = JSON.toJson(tp); //"fuck that";//tp;
+      existingUser.tradepoint = tp; //"fuck that";//tp;
       console.log( JSON.stringify(existingUser) );
 
       existingUser.save(function(err, result) {
