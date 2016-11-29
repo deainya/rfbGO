@@ -58,7 +58,7 @@ app.post("/action/atwork", (req, res) => {
 
 app.post("/profile/tradepoint", (req, res) => {
   let email = req.body.dataset.email || {};
-  let tp =  || {};
+  let tp = req.body.dataset.tradepoint || {};
   //let users = Mongo.users();
 
   //users.update({"email": email}, {$set: {"tradepoint": tp}}, function(err, result){
