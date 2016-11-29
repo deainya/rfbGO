@@ -57,15 +57,29 @@ app.post("/action/atwork", (req, res) => {
 });
 
 app.post("/profile/tradepoint", (req, res) => {
-  let email = req.body.dataset.email || {};
-  let tp = req.body.dataset.tradepoint || {};
-  let users = Mongo.users();
+  //let email = req.body.dataset.email || {};
+  //let tp =  || {};
+  //let users = Mongo.users();
 
-  users.update({"email": email}, {$set: {"tradepoint": tp}}, function(err, result){
-    if(err) { res.sendStatus(400); }
-    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
-    console.log( JSON.stringify(result) );
-    res.sendStatus(201);
+  //users.update({"email": email}, {$set: {"tradepoint": tp}}, function(err, result){
+  //  if(err) { res.sendStatus(400); }
+  //  console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
+  //  console.log( JSON.stringify(result) );
+  //  res.sendStatus(201);
+  //});
+  User.findOne({ email: req.body.dataset.email }, function(err, existingUser) {
+    if (existingUser) {
+      existingUser.tradepoint = req.body.dataset.tradepoint;
+
+      existingUser.save(function(err, result) {
+        if (err) { res.status(400).send({ success: false, message: err.message }); }
+        console.log( JSON.stringify(result) );
+        res.sendStatus(201);
+      });
+    }
+    else {
+      return res.status(400).send({ success: false, message: 'User not found' });
+    }
   });
 });
 
