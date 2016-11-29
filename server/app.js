@@ -60,7 +60,8 @@ app.post("/action/atwork", (req, res) => {
 
 app.post("/profile/tradepoint", (req, res) => {
   let email = req.body.dataset.email || {};
-  let tradepoint = req.body.dataset.tradepoint || {};
+  let tradepoint = req.body.dataset.tp || {};
+
   //let users = Mongo.users();
   //
   //users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tradepoint}}, function(err, result){
@@ -69,9 +70,10 @@ app.post("/profile/tradepoint", (req, res) => {
   //  console.log( JSON.stringify(result) );
   //  res.status(201).send({ success: true, message: 'Tradepoint updated' });
   //});
+
   User.findOne({ "email": email }, function(err, existingUser) {
     if (existingUser) {
-      existingUser.tradepoint = tradepoint; //"fuck that";//tp;
+      existingUser.tradepoint = tp; //"fuck that";//tp;
       console.log( JSON.stringify(existingUser) );
 
       existingUser.save(function(err, result) {
