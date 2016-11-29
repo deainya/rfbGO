@@ -75,9 +75,10 @@ app.post("/profile/tradepoint", (req, res) => {
     if (existingUser) {
       existingUser.tradepoint = tp; //"fuck that";//tp;
       console.log( JSON.stringify(existingUser) );
+      console.log( tp );
 
       existingUser.save(function(err, result) {
-        if (err) { res.status(400).send({ success: false, message: err.message }); }
+        if (err) { return res.status(400).send({ success: false, message: err.message }); }
         console.log( JSON.stringify(result) );
         res.status(201).send({ success: true, message: 'Tradepoint updated' });
       });
