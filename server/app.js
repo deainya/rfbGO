@@ -75,7 +75,7 @@ app.post("/profile/tradepoint", (req, res) => {
 
   User.findOne({ "email": email }, {"__v":false}, function(err, existingUser) {
     if (existingUser) {
-      existingUser.tradepoint = "fuck that";//tp;
+      existingUser.tradepoint = tp; //"fuck that";//tp;
       console.log( JSON.stringify(existingUser) );
       console.log( tp );
 
