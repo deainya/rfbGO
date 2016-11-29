@@ -16,8 +16,8 @@ module.exports = function ($rootScope, $scope, $state, dataSource, Gravatar) {
     //navigator.notification.beep(2000);
   };
 
-  $scope.SavePoints = function(points){
-    $scope.tps = new Array();
+  $scope.SavePoints = function(point){
+    /*$scope.tps = new Array();
     var j = 0;
     for (var i=0; i<points.length; i++){
       if (points[i]._active) {
@@ -25,12 +25,14 @@ module.exports = function ($rootScope, $scope, $state, dataSource, Gravatar) {
         delete $scope.tps[j]._active;
         j++;
       }
-    }
+    }*/
 
-    var obj = {email:$rootScope.user.email};
-    angular.extend(obj, {tradepoint:$scope.tps} );
-    dataSource.set('/profile/tradepoint', obj).then(function(){
-      $state.reload();
+    var obj = {email: $rootScope.user.email, tradepoint: point};
+    dataSource.set('/profile/tradepoint', obj).then(function(res){
+      if (res.data.success) {
+        $rootScope.user.tradepoint = point;
+        $state.reload();
+      }
     });
   };
 

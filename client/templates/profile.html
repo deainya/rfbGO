@@ -31,17 +31,8 @@
     </tr>
 
     <tr>
-      <div class="opt" ng-repeat="point in user.tradepoint">
-        <table class="tablexxx">
-          <tbody>
-            <tr>
-              <td>{{ point.name }}</td>
-              <td>{{ point.tradepoint }}</td>
-              <td>{{ point.address }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <td> </td>
+      <td> {{ user.tradepoint }} </td>
     </tr>
 
   </tbody>
@@ -61,8 +52,6 @@
 </div>
 <br>
 
-
-
 <table class="tablexx">
   <thead>
     <tr>
@@ -70,12 +59,12 @@
       <th width="20%">Торговая точка</th>
       <th width="20%">Город</th>
       <th width="40%">Адрес</th>
-      <th>&nbsp;</th>
+      <!--th>&nbsp;</th-->
     </tr>
   </thead>
 </table>
 <div class="cell" ng-repeat="point in points">
-  <div class="act" ng-click="point._active=!point._active">
+  <div class="act" ng-click="SavePoints(point)"> <!--point._active=!point._active-->
     <table class="tablexx">
       <tbody>
         <tr>
@@ -83,7 +72,7 @@
           <td width="20%">{{ point.tradepoint }}</td>
           <td width="25%">{{ point.city }}</td>
           <td width="25%">{{ point.address }}</td>
-          <td><div ng-show="point._active==true">&#10004;</div></td>
+          <!--td><div ng-show="point._active==true">&#10004;</div></td-->
         </tr>
       </tbody>
     </table>
@@ -94,6 +83,6 @@
 <form class="formx" name="TradepointForm" ng-submit="Filter()"/>
   <input class="btnx" type="submit" value="Указать место работы" />
 </form>
-<form class="formx" name="TradepointForm" ng-submit="SavePoints(points)"/>
+<!--form class="formx" name="TradepointForm" ng-submit="SavePoints(points)"/>
   <input class="btnx" type="submit" value="Сохранить" />
-</form>
+</form-->

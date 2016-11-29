@@ -60,16 +60,16 @@ app.post("/action/atwork", (req, res) => {
 
 app.post("/profile/tradepoint", (req, res) => {
   let email = req.body.dataset.email || {};
-  let tp = req.body.dataset.tradepoint || {};
-  //let users = Mongo.users();
+  let tradepoint = req.body.dataset.tradepoint || {};
+  let users = Mongo.users();
 
-  //users.update({"email": email}, {$set: {"tradepoint": tp}}, function(err, result){
-  //  if(err) { res.sendStatus(400); }
-  //  console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
-  //  console.log( JSON.stringify(result) );
-  //  res.sendStatus(201);
-  //});
-  User.findOne({ "email": email }, function(err, existingUser) {
+  users.update({"email": email}, {$set: {"tradepoint": tradepoint}}, function(err, result){
+    if(err) { res.sendStatus(400); }
+    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tradepoint) );
+    console.log( JSON.stringify(result) );
+    res.status(201).send({ success: true, message: 'Tradepoint updated' });
+  });
+  /*User.findOne({ "email": email }, function(err, existingUser) {
     if (existingUser) {
       existingUser.tradepoint = tp; //"fuck that";//tp;
       console.log( JSON.stringify(existingUser) );
@@ -83,7 +83,7 @@ app.post("/profile/tradepoint", (req, res) => {
     else {
       return res.status(400).send({ success: false, message: 'User not found' });
     }
-  });
+  });*/
 });
 
 app.get("/tradepoints", (req, res) => {
