@@ -15,6 +15,8 @@ let User        = require('./user'); // get our mongoose model
 // Initialization            ==================================================
 Mongo.connect(Config.database); // connecting to MongoDB
 mongoose.connect(Config.database); // connect to MongoDB through Mongoose
+mongoose.Promise = global.Promise;
+
 let jsonParser = bodyParser.json(); // ?
 app.use(bodyParser.json()); // get our request parameters
 app.use(bodyParser.urlencoded({ extended: false }));
