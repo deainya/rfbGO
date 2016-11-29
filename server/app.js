@@ -61,19 +61,21 @@ app.post("/action/atwork", (req, res) => {
 app.post("/profile/tradepoint", (req, res) => {
   let email = req.body.dataset.email || {};
   let tp = req.body.dataset.tradepoint || {};
+  let users = Mongo.users();
 
-  //let users = Mongo.users();
-  //
-  //users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tradepoint}}, function(err, result){
-  //  if(err) { res.sendStatus(400); }
-  //  console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tradepoint) );
-  //  console.log( JSON.stringify(result) );
-  //  res.status(201).send({ success: true, message: 'Tradepoint updated' });
-  //});
+  /*users.update({"email": email}, {$set: {"tradepoint": tp}}, {}, function(err, result){
+    if(err) { res.sendStatus(400); }
+    else {
+      res.status(201).send({ success: true, message: 'Tradepoint updated' });
+    }
+    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tradepoint) );
+    console.log( JSON.stringify(result) );
+
+  });*/
 
   User.findOne({ "email": email }, {"__v":false}, function(err, existingUser) {
     if (existingUser) {
-      existingUser.tradepoint = tp; //"fuck that";//tp;
+      existingUser.tradepoint = "fuck that";//tp;
       console.log( JSON.stringify(existingUser) );
       console.log( tp );
 
