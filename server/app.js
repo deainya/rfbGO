@@ -227,6 +227,7 @@ apiRoutes.post('/login', function(req, res) {
         return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials 2' }); // Wrong password
       }
       // if user is found and password is right then create a token
+      console.log(user);
       var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
       res.json({ success: true, message: 'Token created',
                  user: {email: user.email, name: user.name, phone: user.phone, city: user.city, role: user.role, atWork: user.atWork},
