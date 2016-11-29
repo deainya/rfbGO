@@ -78,7 +78,7 @@ app.post("/profile/tradepoint", (req, res) => {
       console.log( tp );
 
       existingUser.save(function(err, result) {
-        if (err) { return res.status(400).send({ success: false, message: err.message }); }
+        if (err) { console.log(err.message); return res.status(400).send({ success: false, message: err.message }); }
         console.log( JSON.stringify(result) );
         res.status(201).send({ success: true, message: 'Tradepoint updated' });
       });
