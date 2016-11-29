@@ -63,7 +63,7 @@ app.post("/profile/tradepoint", (req, res) => {
   let tp = req.body.dataset.tradepoint || {};
   let users = Mongo.users();
 
-  users.update({"email": email}, {$push: {"tradepoint": tp}}, {}, function(err, result){
+  users.update({"email": email}, {$addToSet: {"tradepoint": tp}}, {}, function(err, result){
     if(err) { res.sendStatus(400); }
     else {
       res.status(201).send({ success: true, message: 'Tradepoint updated' });
