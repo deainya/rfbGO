@@ -20,7 +20,8 @@
     "mongodb": "^2.1.4",
     "mongoose": "^4.4.6",
     "morgan": "^1.7.0",
-    "jsonwebtoken": "7.1.9"
+    "jsonwebtoken": "7.1.9",
+    "sendmail": "1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.2.1",

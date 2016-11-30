@@ -7,6 +7,7 @@ let bodyParser  = require('body-parser'); // will let us get parameters from our
 let mongoose    = require('mongoose');
 let morgan      = require('morgan'); // will log requests to the console so we can see what is happening
 let jwt         = require('jsonwebtoken'); // used to create, sign, and verify tokens
+let sendmail    = require('sendmail')(); //
 
 let Config      = require('./config'); // get our config file
 let Mongo       = require('./mongo'); // get our mongo utils
@@ -140,6 +141,17 @@ app.post("/orders/create", jsonParser, (req, res) => {
     console.log( "Order created: " + JSON.stringify( neworder ) );
     res.sendStatus(201);
   });
+
+  sendmail({
+      from: 'no-reply@deain.ru',
+      to: 'deain@ya.ru',
+      subject: 'Test sendmail',
+      html: 'Mail of test sendmail '
+    },function(err, reply){
+      console.log(err && err.stack);
+      console.dir(reply);
+  });
+
 });
 
 app.post("/orders/cancel", jsonParser, (req, res) => {
