@@ -9,7 +9,6 @@ let morgan      = require('morgan'); // will log requests to the console so we c
 let jwt         = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 let nodemailer  = require('nodemailer'); //
-let sendmail    = require('sendmail')(); //
 
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport('smtps://deainru%40gmail.com:mail4deainru@smtp.gmail.com');
@@ -161,17 +160,6 @@ app.post("/orders/create", jsonParser, (req, res) => {
     console.log( "Order created: " + JSON.stringify( neworder ) );
     res.sendStatus(201);
   });
-
-  sendmail({
-      from: 'no-reply@deain.ru',
-      to: 'deain@ya.ru',
-      subject: 'Test sendmail',
-      html: 'Mail of test sendmail '
-    },function(err, reply){
-      console.log(err && err.stack);
-      console.dir(reply);
-  });
-
 });
 
 app.post("/orders/cancel", jsonParser, (req, res) => {
