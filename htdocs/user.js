@@ -10,7 +10,14 @@ var userSchema = new schema({
   name: String,
   phone: String,
   city: String,
-  tradepoint: String,
+  tradepoint: {
+    tp: String,
+    name: String,
+    wp: String,
+    tradepoint: String,
+    address: String,
+    city: String
+  },
   address: String,
   atWork: Boolean,
   role: Number

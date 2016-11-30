@@ -8,6 +8,21 @@ let mongoose    = require('mongoose');
 let morgan      = require('morgan'); // will log requests to the console so we can see what is happening
 let jwt         = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
+let nodemailer  = require('nodemailer'); //
+let sendmail    = require('sendmail')(); //
+
+// create reusable transporter object using the default SMTP transport
+let transporter = nodemailer.createTransport('smtps://deainru%40gmail.com:mail4deainru@smtp.gmail.com');
+
+// setup e-mail data with unicode symbols
+var mailOptions = {
+    from: '"Dummy" <dummy@deain.ru>', // sender address
+    to: 'deain@ya.ru, deainya@gmail.com', // list of receivers
+    subject: 'Hello ✔', // Subject line
+    text: 'Hello world 🐴', // plaintext body
+    html: '<b>Hello world 🐴</b>' // html body
+};
+
 let Config      = require('./config'); // get our config file
 let Mongo       = require('./mongo'); // get our mongo utils
 let User        = require('./user'); // get our mongoose model
@@ -15,6 +30,8 @@ let User        = require('./user'); // get our mongoose model
 // Initialization            ==================================================
 Mongo.connect(Config.database); // connecting to MongoDB
 mongoose.connect(Config.database); // connect to MongoDB through Mongoose
+mongoose.Promise = global.Promise; //WTF???
+
 let jsonParser = bodyParser.json(); // ?
 app.use(bodyParser.json()); // get our request parameters
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -43,24 +60,56 @@ app.get("/partners", (req, res) => {
   });
 });*/
 
-app.post("/profile/tradepoint", (req, res) => {
-  let dataset = req.body.dataset;
-  let email = req.body.dataset.email;
-  let tp = req.body.dataset.tradepoint;
-  //let users = Mongo.users();
+// Profile routing?           ==================================================
+app.post("/action/atwork", (req, res) => {
+  let action = req.body.dataset || {};
+  let actions = Mongo.actions();
 
-  console.log(dataset);
-  console.log(email);
-  console.log(tp);
-
-  User.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tp}}, function(err, result){
+  actions.insert(action, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
+    console.log( "Action created: " + JSON.stringify( action ) );
+    console.log( JSON.stringify(result) );
     res.sendStatus(201);
-
-    //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
-    //res.json( pointsNames ); // the list of tradepoints names + addresses
   });
+});
+
+app.post("/profile/tradepoint", (req, res) => {
+  let email = req.body.dataset.email || {};
+  let tp = req.body.dataset.tradepoint || {};
+  let users = Mongo.users();
+
+  users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tp}}, {}, function(err, result){
+    if(err) { res.sendStatus(400); }
+    else {
+      res.status(201).send({ success: true, message: 'Tradepoint updated' });
+    }
+    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
+    console.log( JSON.stringify(result) );
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, function(error, info){
+      if(error){ return console.log(error); }
+      console.log('Message sent: ' + info.response);
+    });
+
+  });
+
+  /*User.findOne({ "email": email }, {"__v":false}, function(err, existingUser) {
+    if (existingUser) {
+      existingUser.tradepoint = tp; //"fuck that";//tp;
+      console.log( JSON.stringify(existingUser) );
+      console.log( tp );
+
+      existingUser.save(function(err, result) {
+        if (err) { console.log(err.message); return res.status(400).send({ success: false, message: err.message }); }
+        console.log( JSON.stringify(result) );
+        res.status(201).send({ success: true, message: 'Tradepoint updated' });
+      });
+    }
+    else {
+      return res.status(400).send({ success: false, message: 'User not found' });
+    }
+  });*/
 });
 
 app.get("/tradepoints", (req, res) => {
@@ -112,6 +161,17 @@ app.post("/orders/create", jsonParser, (req, res) => {
     console.log( "Order created: " + JSON.stringify( neworder ) );
     res.sendStatus(201);
   });
+
+  sendmail({
+      from: 'no-reply@deain.ru',
+      to: 'deain@ya.ru',
+      subject: 'Test sendmail',
+      html: 'Mail of test sendmail '
+    },function(err, reply){
+      console.log(err && err.stack);
+      console.dir(reply);
+  });
+
 });
 
 app.post("/orders/cancel", jsonParser, (req, res) => {
@@ -199,6 +259,9 @@ apiRoutes.post('/login', function(req, res) {
         return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials 2' }); // Wrong password
       }
       // if user is found and password is right then create a token
+      console.log(user);
+      console.log(user.tradepoint.tp);
+      console.log(user.tradepoint.wp);
       var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
       res.json({ success: true, message: 'Token created',
                  user: {email: user.email, name: user.name, phone: user.phone, city: user.city, role: user.role, atWork: user.atWork},
