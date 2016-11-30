@@ -19,8 +19,8 @@ var mailOptions = {
     from: '"Dummy" <dummy@deain.ru>', // sender address
     to: 'deain@ya.ru, deainya@gmail.com', // list of receivers
     subject: 'Hello ✔', // Subject line
-    text: 'Hello world 🐴', // plaintext body
-    html: '<b>Hello world 🐴</b>' // html body
+    text: '+Hello world 🐴', // plaintext body
+    html: '<b>+Hello world 🐴</b>' // html body
 };
 
 let Config      = require('./config'); // get our config file
@@ -165,8 +165,8 @@ app.post("/orders/create", jsonParser, (req, res) => {
   sendmail({
       from: 'no-reply@deain.ru',
       to: 'deain@ya.ru',
-      subject: 'Test sendmail',
-      html: 'Mail of test sendmail '
+      subject: 'Test sendmail+',
+      html: 'Mail of test sendmail+'
     },function(err, reply){
       console.log(err && err.stack);
       console.dir(reply);
