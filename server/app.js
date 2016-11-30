@@ -7,7 +7,21 @@ let bodyParser  = require('body-parser'); // will let us get parameters from our
 let mongoose    = require('mongoose');
 let morgan      = require('morgan'); // will log requests to the console so we can see what is happening
 let jwt         = require('jsonwebtoken'); // used to create, sign, and verify tokens
+
+let nodemailer  = require('nodemailer'); //
 let sendmail    = require('sendmail')(); //
+
+// create reusable transporter object using the default SMTP transport
+let transporter = nodemailer.createTransport('smtps://deainru%40gmail.com:mail4deainru@smtp.gmail.com');
+
+// setup e-mail data with unicode symbols
+var mailOptions = {
+    from: '"Dummy" <dummy@deain.ru>', // sender address
+    to: 'deain@ya.ru, deainya@gmail.com', // list of receivers
+    subject: 'Hello ✔', // Subject line
+    text: 'Hello world 🐴', // plaintext body
+    html: '<b>Hello world 🐴</b>' // html body
+};
 
 let Config      = require('./config'); // get our config file
 let Mongo       = require('./mongo'); // get our mongo utils
@@ -71,6 +85,12 @@ app.post("/profile/tradepoint", (req, res) => {
     }
     console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
     console.log( JSON.stringify(result) );
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, function(error, info){
+      if(error){ return console.log(error); }
+      console.log('Message sent: ' + info.response);
+    });
 
   });
 
