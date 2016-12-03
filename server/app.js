@@ -318,6 +318,7 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
       console.log('Message sent: ' + info.response);
     });
   });
+});
 
 apiRoutes.get("/tradepoints", (req, res) => {
   let city = req.query.city || {};
