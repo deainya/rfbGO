@@ -63,7 +63,7 @@ angular
 .service('auth', ['$http', 'session', Auth])
 .service('session', ['$log', '$rootScope', 'localStorage', Session])
 
-.service('dataSource', ['$http', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
+.service('dataSource', ['$http', 'session', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
 
 .factory('Entity', EntityFactory)
 .factory('Gravatar', GravatarFactory)
