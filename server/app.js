@@ -263,6 +263,7 @@ apiRoutes.post('/login', function(req, res) {
 // route middleware to verify a token
 apiRoutes.use(function(req, res, next) {
   var token = req.body.token || req.query.token || req.headers['x-access-token']; // check header or url parameters or post parameters for token
+  console.log(token);
   if (token) {
     jwt.verify(token, Config.secret, function(err, decoded) { // verifies secret and checks exp
       if (err) {
