@@ -285,6 +285,56 @@ apiRoutes.get('/', function(req, res) {
 apiRoutes.get('/users', function(req, res) {
   User.find({}, function(err, users) { res.json(users); });
 });
+
+apiRoutes.post("/user/atwork", (req, res) {
+  let dataset = req.body.dataset || {};
+  let actions = Mongo.actions();
+
+  actions.insert(action, function(err, result){
+    if(err) { res.sendStatus(400); }
+    console.log( "Action created: " + JSON.stringify( action ) );
+    console.log( JSON.stringify(result) );
+    res.sendStatus(201);
+  });
+});
+
+apiRoutes.post("/user/tradepoint", (req, res) => {
+  let dataset = req.body.dataset || {};
+  let email = dataset.email;
+  let tp = dataset.tradepoint;
+  let users = Mongo.users();
+
+  users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tp}}, {}, function(err, result){
+    if(err) { res.sendStatus(400); }
+    else {
+      res.status(201).send({ success: true, message: 'Tradepoint updated' });
+    }
+    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
+    console.log( JSON.stringify(result) );
+
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, function(error, info){
+      if(error){ return console.log(error); }
+      console.log('Message sent: ' + info.response);
+    });
+  });
+
+apiRoutes.get("/tradepoints", (req, res) => {
+  let city = req.query.city || {};
+  let tradepoints = Mongo.tradepoints();
+
+  tradepoints.find({"city":city}, {"_id":false}).toArray((err,docs) => {
+    if(err) { res.sendStatus(400); }
+    console.log( JSON.stringify(docs) );
+    res.json( docs );
+
+    //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
+    //res.json( pointsNames ); // the list of tradepoints names + addresses
+  });
+});
+
+
+
 // apply the api routes
 app.use('/auth', apiRoutes);
 
