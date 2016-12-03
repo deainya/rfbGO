@@ -286,7 +286,7 @@ apiRoutes.get('/users', function(req, res) {
   User.find({}, function(err, users) { res.json(users); });
 });
 
-apiRoutes.post("/user/atwork", (req, res) {
+apiRoutes.post("/user/atwork", (req, res) => {
   let dataset = req.body.dataset || {};
   let actions = Mongo.actions();
 
