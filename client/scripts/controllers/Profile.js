@@ -31,7 +31,6 @@ module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravata
 
     // get/set Tradepoint for User
     $scope.setTradepoint = function(obj){
-      $scope.tradepoints = true;
       dataSource.set('/api/user/tradepoint', {email: $rootScope.user.email, tradepoint: obj}).then(function(res){
         if (res.data.success) {
           $rootScope.user.tradepoint = obj;
@@ -40,6 +39,7 @@ module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravata
       });
     };
     $scope.getTradepoints = function(){
+      $scope._tradepoints = true;
       dataSource.get('/api/tradepoints', {city: $rootScope.user.city}).then(function(res) {
         $scope.points = res.data;
       });
