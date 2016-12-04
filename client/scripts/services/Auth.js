@@ -4,12 +4,12 @@ module.exports = function ($http, session) {
     /* Check whether the user is logged in
      | @returns boolean
      */
-    isLoggedIn: function(url){
+    isLoggedIn: function(){
       return session.getUser() !== undefined;
     },
     Register: function(credentials){
       return $http
-        .post('/auth/register', credentials)
+        .post('/api/register', credentials)
         .then(function(response){
           var data = response.data;
           session.setUser(data.user);
@@ -22,7 +22,7 @@ module.exports = function ($http, session) {
      */
     logIn: function(credentials){
       return $http
-        .post('/auth/login', credentials)
+        .post('/api/login', credentials)
         .then(function(response){
           var data = response.data;
           session.setUser(data.user);
@@ -36,7 +36,7 @@ module.exports = function ($http, session) {
      */
     logOut: function(){
       return $http
-        .get('/auth/logout')
+        .get('/api/logout')
         .then(function(response){
           // Destroy session in the browser
           session.destroy();

@@ -1,6 +1,5 @@
-<h2>Вход</h2>
-<br>
-<form class="form" name="LoginForm" ng-submit="$root.auth.logIn(user)"/>
+<h2>Вход</h2><br>
+<form class="form" name="LoginForm" ng-submit="Login(user)"/>
   <div class="form-field">
     <label class="form-label" for="email">E-mail:</label>
     <input class="form-input" type="email" id="email" required ng-model="user.email"/>
@@ -10,6 +9,5 @@
     <input class="form-input" type="password" id="password" required ng-model="user.password"/>
   </div>
   <input class="btn" type="submit" value="Войти" />
-</form>
-<br>
-<a ui-sref="register">Регистрация</a> | <a ui-sref="profile">Профиль</a>
+</form><br>
+<a ui-sref="register">Регистрация</a>

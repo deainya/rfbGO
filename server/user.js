@@ -18,14 +18,14 @@ var userSchema = new schema({
     address: String,
     city: String
   },
-  address: String,
   atWork: Boolean,
   role: Number
 });
 
 userSchema.pre('save', function (next) {
   var user = this;
-  if (!user.isModified('password')) { return next(); } // not isModified or isNew // if (this.isModified('password') || this.isNew)
+  // not isModified or isNew // if (this.isModified('password') || this.isNew)
+  if (!user.isModified('password')) { return next(); }
   bcrypt.genSalt(10, function (err, salt) {
     if (err) { return next(err); }
     bcrypt.hash(user.password, salt, function (err, hash) {

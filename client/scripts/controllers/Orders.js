@@ -1,68 +1,67 @@
 // Orders controller
-module.exports = function ($rootScope, $scope, $state, dataSource, Entity) {
-  // Log getObject when controller executes
-  //console.log(get);
-  // Assign getObject to $scope
-  //$scope.orders = get.data;
-  dataSource.get('/orders', $rootScope.filter).then(function(res) { //remove to Entity in future or $scope!!!
+module.exports = function ($rootScope, $scope, $state, dataSource) {
+  // Get data when controller executes
+  // $rootScope have to be replaced!!!
+  dataSource.get('/api/orders', $rootScope.filter).then(function(res) {
     $scope.orders = res.data;
   });
 
-  $scope.Filter = function(){
-    $state.reload();
-    //dataSource.get('/orders', $rootScope.filter).then(function(res) {
-    //  $scope.orders = res.data;
-    //});
+  $scope.Refresh = function(state){
+    if (!!state) { $state.go("orders"); } else { $state.reload(); }
   };
 
-  $scope.Create = function(neworder){
-    //var entity = Entity.get();
-    //partner//partner:Entity.get()
-    var obj = {"status":"Новый", partner: {name: $rootScope.user.name, email: $rootScope.user.email}, created:new Date()};
-    angular.extend(neworder, obj); //get for partner
-    //delete neworder.partner.role;
-    console.log(neworder);
-    dataSource.set('/orders/create', neworder).then(function(){
-      $state.go("orders");
-    });
-  };
-
-  $scope.Accept = function(orderid, setorder){
-    //consultant//consultant:Entity.get()
-    var obj = {_id:orderid, "status":"Принят", consultant: {name: $rootScope.user.name, email: $rootScope.user.email}, accepted:new Date()};
-    angular.extend(setorder, obj); //get for consultant
-    //delete setorder.consultant.role;
-    console.log(setorder);
-    dataSource.set('/orders/accept', setorder).then(function(){
-      $state.reload();
-    });
-  };
-
-  $scope.Resolve = function(orderid, setorder){
-    angular.extend(setorder, {_id:orderid, "status":"Завершён", resolved:new Date()});
-    console.log(setorder);
-    dataSource.set('/orders/resolve', setorder).then(function(){
-      $state.reload();
-    });
-  };
-
-  $scope.changeStatus = function(state, orderid){
-    var url ='';
+  //Process Order
+  $scope.Process = function(state, orderid, setorder){
+    var url = '';
+    var obj = setorder || {};
     switch(state){
-      case "Отменить": url = '/orders/cancel'; break;
+      case "Создать":
+        url = '/api/orders/create';
+        angular.extend(obj, {"status":"Новый", partner: {name: $rootScope.user.name, email: $rootScope.user.email}, created:new Date()});
+        break;
+      case "Принять":
+        url = '/api/orders/accept';
+        angular.extend(obj, {_id:orderid, "status":"Принят", consultant: {name: $rootScope.user.name, email: $rootScope.user.email}, accepted:new Date()});
+        break;
+      case "Завершить":
+        url = '/api/orders/resolve';
+        angular.extend(obj, {_id:orderid, "status":"Завершён", resolved:new Date()});
+        break;
+      case "Отменить":
+        url = '/api/orders/cancel';
+        obj = {_id:orderid};
+        break;
       default: console.log("Ouch :)");
     }
-    console.log(url);
-    if (!!url) {
-      dataSource.set(url, orderid).then(function(){
-        console.log(orderid);
-        $state.reload();
+    if (!!url) { dataSource.set(url, obj).then(function(){
+        if (state === "Создать") { $state.go("orders"); } else { $state.reload(); }
       });
-    }
+    } else { console.log("Ouch :("); }
   };
 
+  //Order status check
   $scope.isNew = function(status){ return status === "Новый" };
   $scope.isAccept = function(status){ return status === "Принят" };
   $scope.isResolve = function(status){ return status === "Завершён" };
   $scope.isCancel = function(status){ return status === "Отменён" };
 };
+
+// OLD CODE
+
+// Log getObject when controller executes //console.log(get);
+// Assign getObject to $scope //$scope.orders = get.data;
+
+/*$scope.Accept = function(orderid, setorder){
+  angular.extend(setorder, {_id:orderid, "status":"Принят", consultant: {name: $rootScope.user.name, email: $rootScope.user.email}, accepted:new Date()});
+  console.log(setorder);
+  dataSource.set('/orders/accept', setorder).then(function(){
+    $state.reload();
+  });
+};
+$scope.Resolve = function(orderid, setorder){
+  angular.extend(setorder, {_id:orderid, "status":"Завершён", resolved:new Date()});
+  console.log(setorder);
+  dataSource.set('/orders/resolve', setorder).then(function(){
+    $state.reload();
+  });
+};*/

@@ -5,13 +5,9 @@ import 'angular-resource'
 
 var Auth = require('./services/Auth');
 var Session = require('./services/Session');
-
 var dataSourceService = require('./services/dataSource');
-
-var EntityFactory = require('./services/Entity');
 var GravatarFactory = require('./services/Gravatar');
 var localStorageFactory = require('./services/localStorage');
-
 var profileCtrl = require('./controllers/Profile');
 var ordersCtrl = require('./controllers/Orders');
 
@@ -23,56 +19,40 @@ angular
   .state('home', {
     url: '/'
   })
-  .state('register', {
-    url: '/register',
-    templateUrl: 'templates/register.html'
-  })
   .state('login', {
     url: '/login',
-    templateUrl: 'templates/login.html'
+    templateUrl: 'templates/login.html',
+    controller: 'profileCtrl'
+  })
+  .state('register', {
+    url: '/register',
+    templateUrl: 'templates/register.html',
+    controller: 'profileCtrl'
   })
   .state('profile', {
     url: '/profile',
     templateUrl: 'templates/profile.html',
-    //resolve: {
-    //  dataSource: 'dataSource', // A string value resolves to a Service
-    //  get: function(dataSource){ return dataSource.get('/tradepoints')/*.$promise*/; } // A function value resolves to the return value of the function
-    //},
     controller: 'profileCtrl'
   })
   .state('orders', {
     url: '/orders',
     templateUrl: 'templates/orders.html',
-    //resolve: {
-    //  dataSource: 'dataSource',
-    //  get: function(dataSource){ console.log("uno"); return dataSource.get('/orders'); }
-    //},
     controller: 'ordersCtrl'
   })
   .state('orders-new', {
     url: '/orders/new',
     templateUrl: 'templates/orders-new.html',
-    resolve: {
-      Entity: 'Entity',
-      get: function(Entity){ return Entity.Entity; }
-    },
     controller: 'ordersCtrl'
   })
 })
 
 .service('auth', ['$http', 'session', Auth])
 .service('session', ['$log', '$rootScope', 'localStorage', Session])
-
-.service('dataSource', ['$http', 'session', dataSourceService])//.factory('dataSource', ['$resource', dataSourceService])
-
-.factory('Entity', EntityFactory)
+.service('dataSource', ['$http', 'session', dataSourceService])
 .factory('Gravatar', GravatarFactory)
 .factory('localStorage', ['$window', localStorageFactory])
-
-//.controller('tradepointsCtrl', ['$scope', 'get', tradepointsCtrl])
-//.controller('signupCtrl', ['$http', '$q', '$scope', '$state', 'dataSource', signupCtrl])
 .controller('profileCtrl', ['$rootScope', '$scope', '$state', 'dataSource', 'Gravatar', profileCtrl])
-.controller('ordersCtrl' , ['$rootScope', '$scope', '$state', 'dataSource', 'Entity'  , ordersCtrl])
+.controller('ordersCtrl' , ['$rootScope', '$scope', '$state', 'dataSource' , ordersCtrl])
 
 .run(function ($rootScope, auth, session) {
   $rootScope.auth = auth;

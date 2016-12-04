@@ -1,6 +1,5 @@
-<h2>Регистрация</h2>
-<br>
-<form class="form" name="SignupForm" ng-submit="$root.auth.Register(user)"/>
+<h2>Регистрация</h2><br>
+<form class="form" name="SignupForm" ng-submit="Register(user)"/>
   <div class="form-field">
     <input class="form-input" id="name" placeholder="Имя" required ng-model="user.name"/>
   </div>
@@ -16,21 +15,12 @@
   <div class="form-field">
     <input class="form-input" id="city" placeholder="Город" required ng-model="user.city"/>
   </div>
-  <!--div class="form-field">
-    <input class="form-input" id="tradepoint" placeholder="Торговая точка" required ng-model="user.tradepoint"/>
-  </div>
-  <div class="form-field">
-    <input class="form-input" id="address" placeholder="Адрес" required ng-model="user.address"/>
-  </div-->
   <div class="form-field">
     <select class="form-input" id="place2go" required ng-model="user.role" ng-init="user.role = '1'">
       <option value="0">Консультант</option>
       <option value="1">Партнёр-продавец</option>
     </select>
   </div>
-
-  <!-- atWork role -->
   <input class="btn" type="submit" value="Зарегистрироваться" />
-</form>
-<br>
+</form><br>
 <a ui-sref="login">Вход</a>

@@ -1,4 +1,19 @@
-<h2>Профиль пользователя</h2>
+<h2>Профиль пользователя</h2><br>
+
+<!--a ui-sref="orders">Список вызовов</a> | <a ui-sref="orders-new" ng-show="user.role==1">Новый вызов</a-->
+
+<div class="cell">
+    <ul class="grid list list--unstyled mbl" ng-cloak>
+      <li><div class="card act">
+        <a class="card-link" ui-sref="orders">Список вызовов</a>
+      </div></li>
+      <li>&nbsp;</li>
+      <li><div class="card act" >
+        <a class="card-link" ui-sref="orders-new">Новый вызов</a>
+      </div></li>
+    </ul>
+</div>
+<br>
 
 <table class="tablex">
   <tbody>
@@ -18,7 +33,6 @@
       <td>Город:</td>
       <td>{{ user.city }}</td>
     </tr>
-
     <tr>
       <td> </td>
       <td>
@@ -29,60 +43,41 @@
         <div ng-show="user.atWork==true">Да</div>
       </td>
     </tr>
-
     <tr>
       <td> </td>
       <td> {{ user.tradepoint }} </td>
     </tr>
-
   </tbody>
 </table>
 <br>
 
-<div class="cell">
-    <ul class="grid list list--unstyled mbl" ng-cloak>
-      <li><div class="card act">
-        <a class="card-link" ui-sref="orders">Список вызовов</a>
-      </div></li>
-      <li>&nbsp;</li>
-      <li><div class="card act" ng-show="user.role==1">
-        <a class="card-link" ui-sref="orders-new">Новый вызов</a>
-      </div></li>
-    </ul>
-</div>
-<br>
-
-<table class="tablexx">
-  <thead>
-    <tr>
-      <th width="20%">Юр. лицо</th>
-      <th width="20%">Торговая точка</th>
-      <th width="20%">Город</th>
-      <th width="40%">Адрес</th>
-      <!--th>&nbsp;</th-->
-    </tr>
-  </thead>
-</table>
-<div class="cell" ng-repeat="point in points">
-  <div class="act" ng-click="SavePoints(point)"> <!--point._active=!point._active-->
-    <table class="tablexx">
-      <tbody>
-        <tr>
-          <td width="20%">{{ point.name }}</td>
-          <td width="20%">{{ point.tradepoint }}</td>
-          <td width="25%">{{ point.city }}</td>
-          <td width="25%">{{ point.address }}</td>
-          <!--td><div ng-show="point._active==true">&#10004;</div></td-->
-        </tr>
-      </tbody>
-    </table>
+<div class="cell" ng-show="tradepoints==true">
+  <table class="tablexx">
+    <thead>
+      <tr>
+        <th width="20%">Юр. лицо</th>
+        <th width="20%">Торговая точка</th>
+        <th width="20%">Город</th>
+        <th width="40%">Адрес</th>
+      </tr>
+    </thead>
+  </table>
+  <div class="cell" ng-repeat="point in points">
+    <div class="act" ng-click="setTradepoint(point)">
+      <table class="tablexx">
+        <tbody>
+          <tr>
+            <td width="20%">{{ point.name }}</td>
+            <td width="20%">{{ point.tradepoint }}</td>
+            <td width="25%">{{ point.city }}</td>
+            <td width="25%">{{ point.address }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
+  <br>
 </div>
-<br>
-
-<form class="formx" name="TradepointForm" ng-submit="Filter()"/>
+<form class="formx" name="TradepointForm" ng-submit="getTradepoints()"/>
   <input class="btnx" type="submit" value="Указать место работы" />
 </form>
-<!--form class="formx" name="TradepointForm" ng-submit="SavePoints(points)"/>
-  <input class="btnx" type="submit" value="Сохранить" />
-</form-->

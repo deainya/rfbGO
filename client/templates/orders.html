@@ -1,5 +1,4 @@
-<h2>Список вызовов</h2>
-
+<h2>Список вызовов</h2><br>
 <table class="tablexx">
   <thead>
     <tr>
@@ -61,7 +60,7 @@
           <td colspan="3">
             <span ng-show="isCancel(order.status)">Отменён: {{ order.cancelled | date:'dd.MM HH:mm'}}</span>
 
-            <form class="formx" name="AcceptForm" ng-show="user.role==0&&isNew(order.status)" ng-submit="Accept(order._id, accorder)"/>
+            <form class="formx" name="AcceptForm" ng-show="user.role==0&&isNew(order.status)" ng-submit="Process('Принять', order._id, accorder)"/>
               <label class="form-label" for="time2go">Буду через:</label>
               <select class="formx-input" id="time2go" ng-model="accorder.time2go" ng-init="accorder.time2go = '3'">
                 <option value="3">3 мин.</option>
@@ -71,7 +70,7 @@
               <input class="btnx" type="submit" value="Принять" />
             </form>
 
-            <form class="formx" name="ResolveForm" ng-show="user.role==1&&isAccept(order.status)" ng-submit="Resolve(order._id, resorder)"/>
+            <form class="formx" name="ResolveForm" ng-show="user.role==1&&isAccept(order.status)" ng-submit="Process('Завершить', order._id, resorder)"/>
               <select class="formx-input" id="stars" ng-model="resorder.stars" ng-init="resorder.stars = '0'">
                 <option value="0">Оценка</option>
                 <option value="1">1</option>
@@ -84,10 +83,9 @@
               <input class="btnx" type="submit" value="Завершить" />
             </form>
 
-            <form class="formx" ng-show="user.role==1&&(isNew(order.status)||isAccept(order.status))" ng-submit="changeStatus('Отменить',order._id)"/>
+            <form class="formx" name="CancelForm" ng-show="user.role==1&&(isNew(order.status)||isAccept(order.status))" ng-submit="Process('Отменить', order._id, null)"/>
               <input class="btnx" type="submit" value="Отменить" />
             </form>
-
           </td>
         </tr>
       </tbody>
@@ -96,7 +94,7 @@
 </div>
 <br>
 
-<form class="formx" name="OrderForm" ng-submit="Filter()"/>
+<form class="formx" name="FilterForm"/>
   <div class="form-field">
     <label class="form-label" for="from">Дата с:</label>
     <input class="formx-input" type="date" id="from" ng-model="filter.from"/>
@@ -115,5 +113,10 @@
       <option value="Отменён">Отменён</option>
     </select>
   </div>
-  <input class="btn" type="submit" value="Фильтр" />
+</form>
+<form class="formx" ng-submit="Refresh(null)"/>
+  <input class="btnx" type="submit" value="Фильтр" />
+</form>
+<form class="formx" ng-submit="Refresh(true)"/>
+  <input class="btnx" type="submit" value="Создать новый вызов" />
 </form>
