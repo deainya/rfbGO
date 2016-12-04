@@ -1,7 +1,5 @@
 <h2>Профиль пользователя</h2><br>
 
-<!--a ui-sref="orders">Список вызовов</a> | <a ui-sref="orders-new" ng-show="user.role==1">Новый вызов</a-->
-
 <div class="cell">
     <ul class="grid list list--unstyled mbl" ng-cloak>
       <li><div class="card act">
@@ -13,7 +11,6 @@
       </div></li>
     </ul>
 </div>
-<br>
 
 <table class="tablex">
   <tbody>
@@ -33,7 +30,7 @@
       <td>Город:</td>
       <td>{{ user.city }}</td>
     </tr>
-    <tr ng-show="user.role==1">
+    <tr ng-show="user.role==0">
       <td> </td>
       <td>
         <div ng-show="user.atWork==false">Нет</div>
