@@ -115,8 +115,8 @@
   </div>
 </form>
 <form class="formx" ng-submit="Refresh(null)"/>
-  <input class="btnx" type="submit" value="Фильтр" />
+  <input class="btnx" type="submit" value="Применить фильтр" />
 </form>
-<a class="formx" ui-sref="orders-new">
-  <input class="btnx" type="submit" value="Создать новый вызов" />
+<a class="formx" ui-sref="orders-new" ng-show="user.role==1">
+  <input class="btnx" type="submit" value="Новый вызов" />
 </a>
