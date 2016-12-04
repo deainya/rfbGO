@@ -144,7 +144,7 @@ apiRoutes.post("/user/atwork", (req, res) => {
   actions.insert(dataset, function(err, result){
     if(err) { res.sendStatus(400); console.log(err + " " + result); }
     else {
-      console.log( "Action added: " + JSON.stringify(action) );
+      console.log( "Action added: " + JSON.stringify(dataset) );
       res.status(201).send({ success: true, message: 'Tradepoint added' });
     }
   });
