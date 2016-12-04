@@ -54,15 +54,14 @@ angular
 .controller('profileCtrl', ['$rootScope', '$scope', '$state', 'auth', 'dataSource', 'Gravatar', profileCtrl])
 .controller('ordersCtrl' , ['$rootScope', '$scope', '$state', 'dataSource' , ordersCtrl])
 
-.run(function ($rootScope, auth, session) {
+.run(function ($rootScope, $state, auth, session) {
   $rootScope.auth = auth;
   $rootScope.session = session;
 
   var _from = new Date(); _from.setHours(0, 0, 0, 0);
   var _to = new Date(); _to.setHours(0, 0, 0, 0); _to.setDate(_to.getDate() + 1);
   $rootScope.filter = {from:_from, to:_to, status:''};
-})
-//.run(function ($rootScope, $state, auth) {
+
   // The first... Do we realy need it?
   // Listen for location changes this happens before route or state changes
   /*$rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl){
@@ -74,15 +73,15 @@ angular
     }
   });*/
   // Listen for state changes when using ui-router
-//  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
     // Here we simply check if logged in but you can implement more complex logic that inspects the state to see if access is allowed or not
-    /*if(!auth.isLoggedIn()){
-      if (toState.name !== 'login' && toState.name !== 'signup') {
+    if(!auth.isLoggedIn()){
+      if (toState.name !== 'login' && toState.name !== 'register') {
         // Redirect to login
         $state.go('login');
         // Prevent state change
         event.preventDefault();
       }
-    }*/
-//  });
-//})
+    }
+  });
+})
