@@ -37,14 +37,14 @@
     <table class="tablexxx">
       <tbody>
         <tr ng-show="user.role==0">
-          <td width="33%">Контакт: {{ order.partner.phone }}</td>
-          <td width="33%">Торговая точка: {{ order.partner.tradepoint }}</td>
-          <td width="34%">Адрес: {{ order.partner.address }}</td>
+          <td width="33%">Контакт: {{ order.partner.tradepoint.name }}</td>
+          <td width="33%">Торговая точка: {{ order.partner.tradepoint.address }}</td>
+          <td width="34%">Адрес: {{ order.partner.phone }}</td>
         </tr>
         <tr ng-show="user.role==1&&isAccept(order.status)">
           <td width="33%">Принят: {{ order.accepted | date:'dd.MM HH:mm'}}</td>
           <td width="33%">Время прибытия: {{ order.time2go }} мин.</td>
-          <td width="34%">Контакт: {{ order.consultant.email }}</td>
+          <td width="34%">Контакт: {{ order.consultant.phone }}</td>
         </tr>
         <tr>
           <td width="33%">Клиент: {{ order.client }}</td>
@@ -103,19 +103,19 @@
     <label class="form-label" for="to">Дата по:</label>
     <input class="formx-input" type="date" id="to" ng-model="filter.to"/>
   </div>
-  <div class="form-field">
+  <!--div class="form-field">
     <label class="form-label" for="status">Статус:</label>
     <select class="formx-input" id="status" required ng-model="filter.status">
-      <option value=""></option>
+      <option value="">*</option>
       <option value="Новый">Новый</option>
       <option value="Принят">Принят</option>
       <option value="Завершён">Завершён</option>
       <option value="Отменён">Отменён</option>
     </select>
-  </div>
+  </div-->
 </form>
 <form class="formx" ng-submit="Refresh(null)"/>
-  <input class="btnx" type="submit" value="Применить фильтр" />
+  <input class="btnx" type="submit" value="Обновить" />
 </form>
 <a class="formx" ui-sref="orders-new" ng-show="user.role==1">
   <input class="btnx" type="submit" value="Новый вызов" />

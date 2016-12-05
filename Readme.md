@@ -14,9 +14,8 @@ App is built using MEAN stack
 * `node server/app.js` to run app on server side
 
 ## Seeding MongoDB
-* ? `mongoimport -u user -p pass --db rfbgo-dev --collection consultants --type json --file server/seeds/c-seed.json --jsonArray --drop`
+* `mongoimport -u user -p pass --db rfbgo-dev --collection actions --type json --file server/seeds/a-seed.json --jsonArray --drop`
 * `mongoimport -u user -p pass --db rfbgo-dev --collection orders --type json --file server/seeds/o-seed.json --jsonArray --drop`
-* ? `mongoimport -u user -p pass --db rfbgo-dev --collection partners --type json --file server/seeds/p-seed.json --jsonArray --drop`
 * `mongoimport -u user -p pass --db rfbgo-dev --collection tradepoints --type json --file server/seeds/t-seed.json --jsonArray --drop`
 * `mongoimport -u user -p pass --db rfbgo-dev --collection users --type json --file server/seeds/u-seed.json --jsonArray --drop`
 

@@ -16,15 +16,6 @@ let User        = require('./user'); // get our mongoose model
 // Email test                 ==================================================
 // create reusable transporter object using the default SMTP transport
 let transporter = nodemailer.createTransport('smtps://deainru%40gmail.com:mail4deainru@smtp.gmail.com');
-// setup e-mail data with unicode symbols
-var mailOptions = {
-    from: '"Dummy" <dummy@deain.ru>', // sender address
-    to: 'deain@ya.ru, deainya@gmail.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world 🐴', // plaintext body
-    html: '<b>Hello world 🐴</b>' // html body
-};
-
 // Initialization            ==================================================
 Mongo.connect(Config.database); // connecting to MongoDB
 mongoose.connect(Config.database); // connect to MongoDB through Mongoose
@@ -161,6 +152,14 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
       res.status(201).send({ success: true, message: 'Tradepoint set' });
 
       // Email test
+      // setup e-mail data with unicode symbols
+      var mailOptions = {
+          from: '"rfbGO" <rfbGO@deain.ru>', // sender address
+          to: email, // list of receivers
+          subject: 'rfbGO notification ✔', // Subject line
+          text: 'Информация о торговой точке успешно сохранена', // plaintext body
+          html: '<b>' + point.tradepoint + '</b>' // html body
+      };
       transporter.sendMail(mailOptions, function(err, info){
         if(err){ return console.log(err); }
         console.log("Message sent: " + info.response);

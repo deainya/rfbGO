@@ -17,11 +17,20 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
     switch(state){
       case "Создать":
         url = '/api/orders/create';
-        angular.extend(obj, {"status":"Новый", partner: {name: $rootScope.user.name, email: $rootScope.user.email}, created:new Date()});
+        angular.extend(obj,
+          { "status":"Новый", partner:
+            { name:$rootScope.user.name, email:$rootScope.user.email, phone:$rootScope.user.phone, tradepoint:
+              { city:$rootScope.user.tradepoint.city, address:$rootScope.user.tradepoint.address,
+                tradepoint:$rootScope.user.tradepoint.tradepoint, wp:$rootScope.user.tradepoint.wp,
+                name:$rootScope.user.tradepoint.name, tp:$rootScope.user.tradepoint.tp }
+            }, created:new Date() });
         break;
       case "Принять":
         url = '/api/orders/accept';
-        angular.extend(obj, {_id:orderid, "status":"Принят", consultant: {name: $rootScope.user.name, email: $rootScope.user.email}, accepted:new Date()});
+        angular.extend(obj,
+          { _id:orderid, "status":"Принят", consultant:
+            { name: $rootScope.user.name, email: $rootScope.user.email, phone:$rootScope.user.phone
+            }, accepted:new Date()});
         break;
       case "Завершить":
         url = '/api/orders/resolve';
