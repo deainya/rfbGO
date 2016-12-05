@@ -220,8 +220,8 @@ apiRoutes.post("/orders/accept", jsonParser, (req, res) => {
           from: '"rfbGO" <rfbGO@deain.ru>', // sender address
           to: email, // list of receivers
           subject: 'rfbGO notification ✔', // subject line
-          text: 'Информация о торговой точке успешно сохранена', // plaintext body
-          html: 'Информация о торговой точке успешно сохранена: <b>' + point.tradepoint + '</b>' // html body
+          text: 'Вызов принят', // plaintext body
+          html: 'Вызов принят' // html body
       };
       transporter.sendMail(mailOptions, function(err, info){
         if(err){ return console.log(err); }

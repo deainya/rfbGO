@@ -206,22 +206,27 @@ apiRoutes.post("/orders/accept", jsonParser, (req, res) => {
   delete dataset._id;
   let orders = Mongo.orders();
 
-  orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: dataset}, function(err, result){
-    if(err) { res.sendStatus(400); }
-    console.log( "Order accepted: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
-    res.sendStatus(201);
+  orders.findOne({_id: new Mongo.ObjID(orderid)}, (err, docs) => {
+    if(err) { console.log(err); }
+    let email = docs.partner.email;
 
-    // Email notification test 2
-    var mailOptions = {
-        from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-        to: dataset.partner.email, // list of receivers
-        subject: 'rfbGO notification ✔', // subject line
-        text: 'Информация о торговой точке успешно сохранена', // plaintext body
-        html: 'Информация о торговой точке успешно сохранена: <b>' + point.tradepoint + '</b>' // html body
-    };
-    transporter.sendMail(mailOptions, function(err, info){
-      if(err){ return console.log(err); }
-      console.log("Message sent: " + info.response);
+    orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: dataset}, function(err, result){
+      if(err) { res.sendStatus(400); }
+      console.log( "Order accepted: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
+      res.sendStatus(201);
+
+      // Email notification test 2
+      var mailOptions = {
+          from: '"rfbGO" <rfbGO@deain.ru>', // sender address
+          to: email, // list of receivers
+          subject: 'rfbGO notification ✔', // subject line
+          text: 'Вызов принят', // plaintext body
+          html: 'Вызов принят' // html body
+      };
+      transporter.sendMail(mailOptions, function(err, info){
+        if(err){ return console.log(err); }
+        console.log("Message sent: " + info.response);
+      });
     });
   });
 });
