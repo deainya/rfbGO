@@ -151,14 +151,13 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
       console.log( "Tradepoint set: " + JSON.stringify(email) + " " + JSON.stringify(point) );
       res.status(201).send({ success: true, message: 'Tradepoint set' });
 
-      // Email test
-      // setup e-mail data with unicode symbols
+      // Email notification test 1
       var mailOptions = {
           from: '"rfbGO" <rfbGO@deain.ru>', // sender address
           to: email, // list of receivers
-          subject: 'rfbGO notification ✔', // Subject line
+          subject: 'rfbGO notification ✔', // subject line
           text: 'Информация о торговой точке успешно сохранена', // plaintext body
-          html: '<b>' + point.tradepoint + '</b>' // html body
+          html: 'Информация о торговой точке успешно сохранена: <b>' + point.tradepoint + '</b>' // html body
       };
       transporter.sendMail(mailOptions, function(err, info){
         if(err){ return console.log(err); }
@@ -211,6 +210,18 @@ apiRoutes.post("/orders/accept", jsonParser, (req, res) => {
     if(err) { res.sendStatus(400); }
     console.log( "Order accepted: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
     res.sendStatus(201);
+
+    // Email notification test 2
+    var mailOptions = {
+        from: '"rfbGO" <rfbGO@deain.ru>', // sender address
+        to: dataset.partner.email, // list of receivers
+        subject: 'rfbGO notification ✔', // subject line
+        text: 'Информация о торговой точке успешно сохранена', // plaintext body
+        html: 'Информация о торговой точке успешно сохранена: <b>' + point.tradepoint + '</b>' // html body
+    };
+    transporter.sendMail(mailOptions, function(err, info){
+      if(err){ return console.log(err); }
+      console.log("Message sent: " + info.response);
   });
 });
 
