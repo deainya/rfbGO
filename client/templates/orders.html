@@ -37,9 +37,9 @@
     <table class="tablexxx">
       <tbody>
         <tr ng-show="user.role==0">
-          <td width="33%">Контакт: {{ order.partner.tradepoint.name }}</td>
-          <td width="33%">Торговая точка: {{ order.partner.tradepoint.address }}</td>
-          <td width="34%">Адрес: {{ order.partner.phone }}</td>
+          <td width="33%">Партнёр: {{ order.partner.tradepoint.name }}</td>
+          <td width="33%">Адрес: {{ order.partner.tradepoint.address }}</td>
+          <td width="34%">Контакт: {{ order.partner.phone }}</td>
         </tr>
         <tr ng-show="user.role==1&&isAccept(order.status)">
           <td width="33%">Принят: {{ order.accepted | date:'dd.MM HH:mm'}}</td>
