@@ -7,25 +7,15 @@ let bodyParser  = require('body-parser'); // will let us get parameters from our
 let mongoose    = require('mongoose');
 let morgan      = require('morgan'); // will log requests to the console so we can see what is happening
 let jwt         = require('jsonwebtoken'); // used to create, sign, and verify tokens
-
-let nodemailer  = require('nodemailer'); //
-
-// create reusable transporter object using the default SMTP transport
-let transporter = nodemailer.createTransport('smtps://deainru%40gmail.com:mail4deainru@smtp.gmail.com');
-
-// setup e-mail data with unicode symbols
-var mailOptions = {
-    from: '"Dummy" <dummy@deain.ru>', // sender address
-    to: 'deain@ya.ru, deainya@gmail.com', // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: '+Hello world 🐴', // plaintext body
-    html: '<b>+Hello world 🐴</b>' // html body
-};
+let nodemailer  = require('nodemailer'); // send emails
 
 let Config      = require('./config'); // get our config file
 let Mongo       = require('./mongo'); // get our mongo utils
 let User        = require('./user'); // get our mongoose model
 
+// Email test                 ==================================================
+// create reusable transporter object using the default SMTP transport
+let transporter = nodemailer.createTransport('smtps://deainru%40gmail.com:mail4deainru@smtp.gmail.com');
 // Initialization            ==================================================
 Mongo.connect(Config.database); // connecting to MongoDB
 mongoose.connect(Config.database); // connect to MongoDB through Mongoose
@@ -38,175 +28,38 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan('dev')); // use morgan to log requests to the console
 app.use( express.static(__dirname + "/../client") ); // default route
 
-// Routing                    ==================================================
-/*app.get("/consultants", (req, res) => {
-  let consultants = Mongo.users();//consultants();
-
-  consultants.find({"role":"0"}, {"_id":false}).limit(1).next((err,doc) => { // query
-    if (err) { res.sendStatus(400); }
-    console.log( JSON.stringify(doc) );
-    res.json( doc ); // 1st consultant from collection
-  });
-});
-
-app.get("/partners", (req, res) => {
-  let partners = Mongo.users();//partners();
-
-  partners.find({"role":"1"}, {"_id":false}).limit(1).next((err,doc) => { // query + projection
-    if(err) { res.sendStatus(400); }
-    console.log( JSON.stringify(doc) );
-    res.json( doc ); // 1st partner from collection
-  });
-});*/
-
-// Profile routing?           ==================================================
-app.post("/action/atwork", (req, res) => {
-  let action = req.body.dataset || {};
-  let actions = Mongo.actions();
-
-  actions.insert(action, function(err, result){
-    if(err) { res.sendStatus(400); }
-    console.log( "Action created: " + JSON.stringify( action ) );
-    console.log( JSON.stringify(result) );
-    res.sendStatus(201);
-  });
-});
-
-app.post("/profile/tradepoint", (req, res) => {
-  let email = req.body.dataset.email || {};
-  let tp = req.body.dataset.tradepoint || {};
-  let users = Mongo.users();
-
-  users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": tp}}, {}, function(err, result){
-    if(err) { res.sendStatus(400); }
-    else {
-      res.status(201).send({ success: true, message: 'Tradepoint updated' });
-    }
-    console.log( "Tradepoint saved: " + JSON.stringify(email) + " " + JSON.stringify(tp) );
-    console.log( JSON.stringify(result) );
-
-    // send mail with defined transport object
-    transporter.sendMail(mailOptions, function(error, info){
-      if(error){ return console.log(error); }
-      console.log('Message sent: ' + info.response);
-    });
-
-  });
-
-  /*User.findOne({ "email": email }, {"__v":false}, function(err, existingUser) {
-    if (existingUser) {
-      existingUser.tradepoint = tp; //"fuck that";//tp;
-      console.log( JSON.stringify(existingUser) );
-      console.log( tp );
-
-      existingUser.save(function(err, result) {
-        if (err) { console.log(err.message); return res.status(400).send({ success: false, message: err.message }); }
-        console.log( JSON.stringify(result) );
-        res.status(201).send({ success: true, message: 'Tradepoint updated' });
-      });
-    }
-    else {
-      return res.status(400).send({ success: false, message: 'User not found' });
-    }
-  });*/
-});
-
-app.get("/tradepoints", (req, res) => {
-  let city = req.query.city || {};
-  let tradepoints = Mongo.tradepoints();
-
-  tradepoints.find({"city":city}, {"_id":false}).toArray((err,docs) => {
-    if(err) { res.sendStatus(400); }
-    console.log( JSON.stringify(docs) );
-    res.json( docs );
-
-    //let pointsNames = docs.map((tradepoints) => tradepoints.name.concat(". ", tradepoints.address));
-    //res.json( pointsNames ); // the list of tradepoints names + addresses
-  });
-});
-
-// Orders routing             ==================================================
-app.get("/orders", (req, res) => {
-  let _from = req.query.from || {};
-  let _to = req.query.to || {};
-  let _status = req.query.status || {};
-  let orders = Mongo.orders();
-
-  //console.log(req.query);
-  //console.log(req.params);
-  console.log({ created: { $gte: _from, $lt: _to }, status: _status });
-
-  if (!req.query) {
-    orders.find().toArray((err,docs) => {
-      if (err) { res.sendStatus(400); }
-      console.log( JSON.stringify(docs) );
-      res.json( docs ); // orders
-    });
-  } else {
-    orders.find({ created: { $gte: _from, $lt: _to } }, {}).toArray((err,docs) => {
-      if (err) { res.sendStatus(400); }
-      console.log( JSON.stringify(docs) );
-      res.json( docs ); // orders
-    });
-  }
-});
-
-app.post("/orders/create", jsonParser, (req, res) => {
-  let neworder = req.body.dataset || {};
-  let orders = Mongo.orders();
-
-  orders.insert(neworder, function(err, result){
-    if(err) { res.sendStatus(400); }
-    console.log( "Order created: " + JSON.stringify( neworder ) );
-    res.sendStatus(201);
-  });
-});
-
-app.post("/orders/cancel", jsonParser, (req, res) => {
-  let orderid = req.body.dataset || {};
-  let orders = Mongo.orders();
-
-  orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: {status: "Отменён"}, $currentDate: {"cancelled": {$type: "date"}}}, function(err, result){
-    if(err) { res.sendStatus(400); }
-    console.log( "Order cancelled: " + JSON.stringify(orderid) );
-    res.sendStatus(201);
-  });
-});
-
-app.post("/orders/accept", jsonParser, (req, res) => {
-  let setorder = req.body.dataset || {};
-  let orderid = setorder._id;
-  delete setorder._id;
-  let orders = Mongo.orders();
-
-  orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: setorder}, function(err, result){
-    if(err) { res.sendStatus(400); }
-    console.log( "Order accepted: " + JSON.stringify(orderid) + " - " + JSON.stringify(setorder) );
-    res.sendStatus(201);
-  });
-});
-
-app.post("/orders/resolve", jsonParser, (req, res) => {
-  let setorder = req.body.dataset || {};
-  let orderid = setorder._id;
-  delete setorder._id;
-  let orders = Mongo.orders();
-
-  orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: setorder}, function(err, result){
-    if(err) { res.sendStatus(400); }
-    console.log( "Order resolved: " + JSON.stringify(orderid) + " - " + JSON.stringify(setorder) );
-    res.sendStatus(201);
-  });
-});
-
 // API routes                 ==================================================
 let apiRoutes = express.Router(); // get an instance of the router for api routes
 
-apiRoutes.post('/register', function(req, res) {
-  console.log(req.body);
+apiRoutes.post('/login', (req, res) => {
+  User.findOne({ email: req.body.email }, (err, user) => {
+    if (err) throw err;
+    if (!user) {
+      //res.json({ success: false, message: 'Authentication failed. Wrong creditenials' });
+      return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials' }); // User not found
+    }
+    user.comparePassword(req.body.password, (err, isMatch) => {
+      if (!isMatch) {
+        //res.json({ success: false, message: 'Authentication failed. Wrong creditenials' });
+        return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials' }); // Wrong password
+      }
+      // if user is found and password is right then create a token
+      console.log(user);
+      var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
+      //res.send({ token: token });
+      res.json({ success: true, message: 'Token created',
+                 user: {email: user.email, name: user.name, phone: user.phone,
+                        city: user.city, tradepoint: user.tradepoint,
+                        atWork: user.atWork, role: user.role},
+                 token: token });
+    });
+  });
+});
+
+apiRoutes.post('/register', (req, res) => {
   User.findOne({ email: req.body.email }, function(err, existingUser) {
     if (existingUser) {
-      return res.status(409).send({ success: false, message: 'E-mail is already taken' });
+      return res.status(409).send({ success: false, message: 'Email is already taken' });
     }
     if (!req.body.email || !req.body.password) {
       return res.status(400).send({ success: false, message: 'Bad credentials' });
@@ -217,76 +70,189 @@ apiRoutes.post('/register', function(req, res) {
       name: req.body.name,
       phone: req.body.phone,
       city: req.body.city,
-      tradepoint: req.body.tradepoint,
-      address: req.body.address,
+      tradepoint: {},
       role: req.body.role,
       atWork: false
     });
     user.save(function(err, result) {
       if (err) { res.status(500).send({ success: false, message: err.message }); }
-      var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
-      res.json({ success: true, message: 'User & token created',
-                 'user': {email: user.email, name: user.name, phone: user.phone, city: user.city, atWork: user.atWork, role: user.role},
-                 //tradepoint: user.tradepoint,  address: user.address,
-                 token: token });
-      //res.send({ token: token });
-    });
-  });
-});
-
-apiRoutes.post('/login', function(req, res) {
-  User.findOne({ email: req.body.email }, function(err, user) {
-    if (err) throw err;
-    if (!user) {
-      //res.json({ success: false, message: 'Authentication failed. Wrong creditenials.' });
-      return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials 1' }); // User not found
-    }
-    user.comparePassword(req.body.password, function(err, isMatch) {
-      if (!isMatch) {
-        //res.json({ success: false, message: 'Authentication failed. Wrong creditenials.' });
-        return res.status(401).send({ success: false, message: 'Authentication failed. Wrong credentials 2' }); // Wrong password
+      else {
+        var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
+        res.json({ success: true, message: 'User & token created',
+                   user: {email: user.email, name: user.name, phone: user.phone,
+                          city: user.city, tradepoint: user.tradepoint,
+                          atWork: user.atWork, role: user.role},
+                   token: token });
       }
-      // if user is found and password is right then create a token
-      console.log(user);
-      console.log(user.tradepoint.tp);
-      console.log(user.tradepoint.wp);
-      var token = jwt.sign(user, Config.secret, { expiresIn: 1440 }); // expires in 24 hours
-      res.json({ success: true, message: 'Token created',
-                 user: {email: user.email, name: user.name, phone: user.phone, city: user.city, role: user.role, atWork: user.atWork},
-                 tradepoint: user.tradepoint, // address: user.address,
-                 token: token });
-      //res.send({ token: token });
     });
   });
 });
 
 // route middleware to verify a token
 apiRoutes.use(function(req, res, next) {
-  var token = req.body.token || req.query.token || req.headers['x-access-token']; // check header or url parameters or post parameters for token
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
   if (token) {
-    jwt.verify(token, Config.secret, function(err, decoded) { // verifies secret and checks exp
+    // verifies secret and checks expiration
+    jwt.verify(token, Config.secret, function(err, decoded){
       if (err) {
-        return res.json({ success: false, message: 'Failed to authenticate token' });
+        return res.status(401).send({ success: false, message: 'Failed to authenticate token' });
       } else {
-        req.decoded = decoded; // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
         next();
       }
     });
   } else {
-    return res.status(401).send({ success: false, message: 'No token provided' }); // if there is no token return an error
+    // if there is no token return an error
+    return res.status(401).send({ success: false, message: 'No token provided' });
   }
 });
 
 // route to show welcome message
-apiRoutes.get('/', function(req, res) {
-  res.json({ message: 'Authentication API' });
+apiRoutes.get('/', (req, res) => {
+  res.json({ message: 'rfbGO API' });
 });
 // route to return all users
-apiRoutes.get('/users', function(req, res) {
-  User.find({}, function(err, users) { res.json(users); });
+apiRoutes.get('/users', (req, res) => {
+  User.find({}, (err, docs) => {
+    if(err) { res.sendStatus(400); }
+    res.json(docs);
+  });
 });
-// apply the api routes
-app.use('/auth', apiRoutes);
+
+// Profile API routes         ==================================================
+apiRoutes.get("/tradepoints", (req, res) => {
+  let city = req.query.city || {};
+  let tradepoints = Mongo.tradepoints();
+  tradepoints.find({"city":city}, {"_id":false}).toArray((err, docs) => {
+    if(err) { res.sendStatus(400); }
+    res.json( docs );
+  });
+});
+apiRoutes.post("/user/atwork", (req, res) => {
+  let dataset = req.body.dataset || {};
+  let actions = Mongo.actions();
+  actions.insert(dataset, function(err, result){
+    if(err) { res.sendStatus(400); console.log(err + " " + result); }
+    else {
+      console.log( "Action added: " + JSON.stringify(dataset) );
+      res.status(201).send({ success: true, message: 'Tradepoint added' });
+    }
+  });
+});
+apiRoutes.post("/user/tradepoint", (req, res) => {
+  let dataset = req.body.dataset || {};
+  let email = dataset.email;
+  let point = dataset.tradepoint;
+  let users = Mongo.users();
+  users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": point}}, {}, function(err, result){
+    if(err) { res.sendStatus(400); console.log(err + " " + result); }
+    else {
+      console.log( "Tradepoint set: " + JSON.stringify(email) + " " + JSON.stringify(point) );
+      res.status(201).send({ success: true, message: 'Tradepoint set' });
+
+      // Email notification test 1
+      var mailOptions = {
+          from: '"rfbGO" <rfbGO@deain.ru>', // sender address
+          to: email, // list of receivers
+          subject: 'rfbGO notification ✔', // subject line
+          text: 'Информация о торговой точке успешно сохранена', // plaintext body
+          html: 'Информация о торговой точке успешно сохранена: <b>' + point.tradepoint + '</b>' // html body
+      };
+      transporter.sendMail(mailOptions, function(err, info){
+        if(err){ return console.log(err); }
+        console.log("Message sent: " + info.response);
+      });
+    }
+  });
+});
+
+// Orders routing             ==================================================
+apiRoutes.get("/orders", jsonParser, (req, res) => {
+  let _from = req.query.from || {};
+  let _to = req.query.to || {};
+  let _status = req.query.status || {};
+  let orders = Mongo.orders();
+  console.log({ created: { $gte: _from, $lt: _to }, status: _status });
+  if (!req.query) {
+    orders.find().toArray((err, docs) => {
+      if (err) { res.sendStatus(400); }
+      console.log( JSON.stringify(docs) );
+      res.json( docs ); // orders
+    });
+  } else {
+    orders.find({ created: { $gte: _from, $lt: _to } }, {}).toArray((err, docs) => {
+      if (err) { res.sendStatus(400); }
+      console.log( JSON.stringify(docs) );
+      res.json( docs ); // orders
+    });
+  }
+});
+
+apiRoutes.post("/orders/create", jsonParser, (req, res) => {
+  let dataset = req.body.dataset || {};
+  let orders = Mongo.orders();
+
+  orders.insert(dataset, function(err, result){
+    if(err) { res.sendStatus(400); }
+    console.log( "Order created: " + JSON.stringify( dataset ) );
+    res.sendStatus(201);
+  });
+});
+
+apiRoutes.post("/orders/accept", jsonParser, (req, res) => {
+  let dataset = req.body.dataset || {};
+  let orderid = dataset._id;
+  delete dataset._id;
+  let orders = Mongo.orders();
+
+  orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: dataset}, function(err, result){
+    if(err) { res.sendStatus(400); }
+    console.log( "Order accepted: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
+    res.sendStatus(201);
+
+    // Email notification test 2
+    var mailOptions = {
+        from: '"rfbGO" <rfbGO@deain.ru>', // sender address
+        to: dataset.partner.email, // list of receivers
+        subject: 'rfbGO notification ✔', // subject line
+        text: 'Информация о торговой точке успешно сохранена', // plaintext body
+        html: 'Информация о торговой точке успешно сохранена: <b>' + point.tradepoint + '</b>' // html body
+    };
+    transporter.sendMail(mailOptions, function(err, info){
+      if(err){ return console.log(err); }
+      console.log("Message sent: " + info.response);
+    });
+  });
+});
+
+apiRoutes.post("/orders/resolve", jsonParser, (req, res) => {
+  let dataset = req.body.dataset || {};
+  let orderid = dataset._id;
+  delete dataset._id;
+  let orders = Mongo.orders();
+
+  orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: dataset}, function(err, result){
+    if(err) { res.sendStatus(400); }
+    console.log( "Order resolved: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
+    res.sendStatus(201);
+  });
+});
+
+apiRoutes.post("/orders/cancel", jsonParser, (req, res) => {
+  let dataset = req.body.dataset || {};
+  let orderid = dataset._id;
+  let orders = Mongo.orders();
+
+  orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: {status: "Отменён"}, $currentDate: {"cancelled": {$type: "date"}}}, function(err, result){
+    if(err) { res.sendStatus(400); }
+    console.log( "Order cancelled: " + JSON.stringify(orderid) );
+    res.sendStatus(201);
+  });
+});
+
+// Apply the API routes       ==================================================
+app.use('/api', apiRoutes);
 
 // Start the server           ==================================================
-app.listen(Config.port, () => console.log( "App is listening on port " + Config.port ) );
+app.listen(Config.port, () => console.log( "Started on port: " + Config.port ) );

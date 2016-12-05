@@ -222,6 +222,7 @@ apiRoutes.post("/orders/accept", jsonParser, (req, res) => {
     transporter.sendMail(mailOptions, function(err, info){
       if(err){ return console.log(err); }
       console.log("Message sent: " + info.response);
+    });
   });
 });
 
