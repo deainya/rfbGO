@@ -184,7 +184,7 @@ apiRoutes.get("/orders", jsonParser, (req, res) => {
       res.json( docs ); // orders
     });
   } else {
-    orders.find({ created: { $gte: _from, $lt: _to } }, {}).toArray((err, docs) => {
+    orders.find({ created: { $gte: _from, $lt: _to }, "tradepoint.tp": _tp, "tradepoint.wp": _wp }, {}).toArray((err, docs) => {
       if (err) { res.sendStatus(400); }
       //console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
