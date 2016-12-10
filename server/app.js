@@ -195,6 +195,7 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
 
   orders.insert(dataset, function(err, result){
     if(err) { res.sendStatus(400); }
+    console.log(result);
     console.log( "Order created: " + JSON.stringify( dataset ) );
     res.sendStatus(201);
   });
@@ -239,6 +240,7 @@ apiRoutes.post("/orders/resolve", jsonParser, (req, res) => {
 
   orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: dataset}, function(err, result){
     if(err) { res.sendStatus(400); }
+    console.log(result);
     console.log( "Order resolved: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
     res.sendStatus(201);
   });
