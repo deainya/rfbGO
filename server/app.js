@@ -202,11 +202,6 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
 
     //dataset.partner.tradepoint.wp
 
-    tradepoints.find({"city":city}, {"_id":false}).toArray((err, docs) => {
-      if(err) { res.sendStatus(400); }
-      res.json( docs );
-    });
-
     users.find({ "tradepoint.wp":dataset.partner.tradepoint.wp }, {"email":true}).toArray((err, docs) => {
       console.log(docs);
       if (docs) {
