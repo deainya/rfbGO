@@ -4,7 +4,11 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
   // $rootScope have to be replaced!!!
   var filter = $rootScope.filter;
   if ($rootScope.user.role === 0){
-    angular.extend(filter, {wp:$rootScope.user.tradepoint.wp});
+    if (filter.city){
+      angular.extend(filter, {city:$rootScope.user.tradepoint.city});
+    } else {
+      angular.extend(filter, {wp:$rootScope.user.tradepoint.wp});
+    }
   } else {
     angular.extend(filter, {tp:$rootScope.user.tradepoint.tp});
   }

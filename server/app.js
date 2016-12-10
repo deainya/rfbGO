@@ -174,6 +174,7 @@ apiRoutes.get("/orders", jsonParser, (req, res) => {
   let _sts = req.query.sts || '';
   let _tp = req.query.tp || '';
   let _wp = req.query.wp || '';
+  let _city = req.query.city || '';
   let orders = Mongo.orders();
 
   console.log({ created: { $gte: _from, $lt: _to }, status: _sts, "tp": _tp, "wp": _wp });
@@ -184,7 +185,7 @@ apiRoutes.get("/orders", jsonParser, (req, res) => {
       res.json( docs ); // orders
     });
   } else {
-    orders.find({ created: { $gte: _from, $lt: _to }, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}] }, {}).toArray((err, docs) => {
+    orders.find({ created: { $gte: _from, $lt: _to }, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
       if (err) { res.sendStatus(400); }
       //console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
