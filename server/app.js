@@ -173,6 +173,7 @@ apiRoutes.get("/orders", jsonParser, (req, res) => {
   let _to = req.query.to || {};
   let _status = req.query.status || {};
   let orders = Mongo.orders();
+
   console.log({ created: { $gte: _from, $lt: _to }, status: _status });
   if (!req.query) {
     orders.find().toArray((err, docs) => {
@@ -192,6 +193,7 @@ apiRoutes.get("/orders", jsonParser, (req, res) => {
 apiRoutes.post("/orders/create", jsonParser, (req, res) => {
   let dataset = req.body.dataset || {};
   let orders = Mongo.orders();
+  let users = Mongo.users();
 
   orders.insert(dataset, function(err, result){
     if(err) { res.sendStatus(400); }
@@ -199,7 +201,13 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
     res.sendStatus(201);
 
     //dataset.partner.tradepoint.wp
-    User.find({ tradepoint.wp: dataset.partner.tradepoint.wp }, {email:true}).toArray((err, docs) => {
+
+    tradepoints.find({"city":city}, {"_id":false}).toArray((err, docs) => {
+      if(err) { res.sendStatus(400); }
+      res.json( docs );
+    });
+
+    users.find({ "tradepoint.wp":dataset.partner.tradepoint.wp }, {"email":true}).toArray((err, docs) => {
       console.log(docs);
       if (docs) {
         var emails = '';
