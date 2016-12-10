@@ -60,7 +60,7 @@ angular
 
   var _from = new Date(); _from.setHours(0, 0, 0, 0);
   var _to = new Date(); _to.setHours(0, 0, 0, 0); _to.setDate(_to.getDate() + 1);
-  $rootScope.filter = {from:_from, to:_to};
+  $rootScope.filter = {from:_from, to:_to, city:false};
 
   // The first... Do we realy need it?
   // Listen for location changes this happens before route or state changes
