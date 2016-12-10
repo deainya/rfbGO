@@ -202,7 +202,7 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
 
     //dataset.partner.tradepoint.wp
 
-    users.find({ "tradepoint.wp":dataset.partner.tradepoint.wp, "role":"0" }, {"email":true}).toArray((err, docs) => {
+    users.find({ "tradepoint.wp":dataset.partner.tradepoint.wp, "role":0 }, {"email":true}).toArray((err, docs) => {
       console.log(docs);
       if (docs) {
         var emails = '';
@@ -211,6 +211,8 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
           console.log(i);
         }
         console.log(emails);
+      } else {
+        console.log('ups...');
       }
     });
 
