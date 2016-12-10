@@ -195,9 +195,22 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
 
   orders.insert(dataset, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log(result);
     console.log( "Order created: " + JSON.stringify( dataset ) );
     res.sendStatus(201);
+
+    //dataset.partner.tradepoint.wp
+    User.find({ tradepoint.wp: dataset.partner.tradepoint.wp }, {email:true}).toArray((err, docs) => {
+      console.log(docs);
+      if (docs) {
+        var emails = '';
+        for (var i = 0; i < docs.length-1; i++){
+          emails = emails + docs[i].email + ', ';
+        }
+        emails = emails + docs[docs.length-1];
+        console.log(emails);
+      }
+    });
+
   });
 });
 
