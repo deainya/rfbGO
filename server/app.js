@@ -203,10 +203,9 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
     //dataset.partner.tradepoint.wp
 
     users.find({ "tradepoint.wp":dataset.partner.tradepoint.wp, "role":0 }, {"email":true}).toArray((err, docs) => {
-      console.log(docs);
       if (docs) {
         var emails = '';
-        for (var i = 0; i < docs.length; i++){
+        for (var i = 0; i < docs.length-1; i++){
           emails = emails + docs[i].email + ', ';
         }
         emails = emails + docs[docs.length-1].email;
