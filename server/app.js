@@ -208,8 +208,8 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
         var emails = '';
         for (var i = 0; i < docs.length; i++){
           emails = emails + docs[i].email + ', ';
-          console.log(i);
         }
+        emails = emails + docs[docs.length-1].email;
         console.log(emails);
       } else {
         console.log('ups...');
