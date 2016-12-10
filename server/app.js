@@ -171,10 +171,12 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
 apiRoutes.get("/orders", jsonParser, (req, res) => {
   let _from = req.query.from || {};
   let _to = req.query.to || {};
-  let _status = req.query.status || {};
+  let _sts = req.query.sts || {};
+  let _tp = req.query.tp || {};
+  let _wp = req.query.wp || {};
   let orders = Mongo.orders();
 
-  console.log({ created: { $gte: _from, $lt: _to }, status: _status });
+  console.log({ created: { $gte: _from, $lt: _to }, status: _sts, "tradepoint.tp": _tp, "tradepoint.wp": _wp });
   if (!req.query) {
     orders.find().toArray((err, docs) => {
       if (err) { res.sendStatus(400); }
