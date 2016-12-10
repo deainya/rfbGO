@@ -202,14 +202,14 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
 
     //dataset.partner.tradepoint.wp
 
-    users.find({ "tradepoint.wp":dataset.partner.tradepoint.wp }, {"email":true}).toArray((err, docs) => {
+    users.find({ "tradepoint.wp":dataset.partner.tradepoint.wp, "role":"0" }, {"email":true}).toArray((err, docs) => {
       console.log(docs);
       if (docs) {
         var emails = '';
-        for (var i = 0; i < docs.length-1; i++){
+        for (var i = 0; i < docs.length; i++){
           emails = emails + docs[i].email + ', ';
+          console.log(i);
         }
-        emails = emails + docs[docs.length-1];
         console.log(emails);
       }
     });
