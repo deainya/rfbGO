@@ -3,10 +3,9 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
   // Get data when controller executes
   // $rootScope have to be replaced!!!
   var filter = $rootScope.filter;
-  if ($rootScope.user.role == 0){
+  if ($rootScope.user.role === 0){
     angular.extend(filter, {wp:$rootScope.user.tradepoint.wp});
-  }
-  if ($rootScope.user.role == 1){
+  } else {
     angular.extend(filter, {tp:$rootScope.user.tradepoint.tp});
   }
   dataSource.get('/api/orders', filter).then(function(res) {
