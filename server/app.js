@@ -178,13 +178,13 @@ apiRoutes.get("/orders", jsonParser, (req, res) => {
   if (!req.query) {
     orders.find().toArray((err, docs) => {
       if (err) { res.sendStatus(400); }
-      console.log( JSON.stringify(docs) );
+      //console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
     });
   } else {
     orders.find({ created: { $gte: _from, $lt: _to } }, {}).toArray((err, docs) => {
       if (err) { res.sendStatus(400); }
-      console.log( JSON.stringify(docs) );
+      //console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
     });
   }
@@ -200,8 +200,6 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
     console.log( "Order created: " + JSON.stringify( dataset ) );
     res.sendStatus(201);
 
-    //dataset.partner.tradepoint.wp
-
     users.find({ "tradepoint.wp":dataset.partner.tradepoint.wp, "role":0 }, {"email":true}).toArray((err, docs) => {
       if (docs) {
         var emails = '';
@@ -210,8 +208,21 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
         }
         emails = emails + docs[docs.length-1].email;
         console.log(emails);
+
+        // Email notification test 3
+        var mailOptions = {
+            from: '"rfbGO" <rfbGO@deain.ru>', // sender address
+            to: emails, // list of receivers
+            subject: 'rfbGO notification ✔', // subject line
+            text: 'Поступил новый вызов!', // plaintext body
+            html: 'Поступил новый вызов!' // html body
+        };
+        transporter.sendMail(mailOptions, function(err, info){
+          if(err){ return console.log(err); }
+          console.log("Message sent: " + info.response);
+        });
       } else {
-        console.log('ups...');
+        console.log('Epic fail :)');
       }
     });
 
@@ -257,9 +268,24 @@ apiRoutes.post("/orders/resolve", jsonParser, (req, res) => {
 
   orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: dataset}, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log(result);
     console.log( "Order resolved: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
     res.sendStatus(201);
+
+    //console.log(result);
+    if (result.value.consultant.email) {
+      // Email notification test 4
+      var mailOptions = {
+          from: '"rfbGO" <rfbGO@deain.ru>', // sender address
+          to: result.value.consultant.email, // list of receivers
+          subject: 'rfbGO notification ✔', // subject line
+          text: 'Вызов завершён', // plaintext body
+          html: 'Вызов завершён' // html body
+      };
+      transporter.sendMail(mailOptions, function(err, info){
+        if(err){ return console.log(err); }
+        console.log("Message sent: " + info.response);
+      });
+    }
   });
 });
 
