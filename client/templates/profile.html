@@ -1,7 +1,7 @@
 <h2>Профиль пользователя</h2><br>
 
 <div class="cell">
-    <ul class="grid list list--unstyled mbl" ng-cloak>
+    <ul class="hzshka list list--unstyled mbl" ng-cloak>
       <li><div class="card act">
         <a class="card-link" ui-sref="orders">Список вызовов</a>
       </div></li>
@@ -12,7 +12,7 @@
     </ul>
 </div>
 
-<table class="tablex">
+<table class="box">
   <tbody>
     <tr>
       <td><img ng-src="{{gravatarUrl}}"/></td>
@@ -30,25 +30,28 @@
       <td>Город:</td>
       <td>{{ user.city }}</td>
     </tr>
-    <tr ng-show="user.role==0">
-      <td> </td>
-      <td>
-        <div ng-show="user.atWork==false">Нет</div>
-        <form class="formx" name="ActionForm" ng-submit="atWork()"/>
-          <input class="btnx" type="submit" value="На работе" />
-        </form>
-        <div ng-show="user.atWork==true">Да</div>
-      </td>
-    </tr>
     <tr>
       <td> Место работы: </td>
       <td> {{ user.tradepoint }} </td>
+    </tr>
+    <tr ng-show="user.role==0">
+      <td> </td>
+      <td>
+        <div class="cell">
+          <form class="switch" name="ActionForm" ng-submit="atWork()"/>
+            <label class="switch-left"><span ng-show="user.atWork==false">Нет</span>&nbsp;</label>
+            <input class="switch-input no" type="submit" value="На работе" ng-show="user.atWork==false"/>
+            <input class="switch-input ye" type="submit" value="На работе" ng-show="user.atWork==false"/>
+            <label class="switch-right"><span ng-show="user.atWork==true">Да</span>&nbsp;</label>
+          </form>
+        </div>
+      </td>
     </tr>
   </tbody>
 </table>
 
 <div class="cell" ng-show="_tradepoints==true">
-  <table class="tablexx">
+  <table class="grid">
     <thead>
       <tr>
         <th width="20%">Юр. лицо</th>
@@ -60,7 +63,7 @@
   </table>
   <div class="cell" ng-repeat="point in points">
     <div class="act" ng-click="setTradepoint(point)">
-      <table class="tablexx">
+      <table class="grid">
         <tbody>
           <tr>
             <td width="20%">{{ point.name }}</td>

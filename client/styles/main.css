@@ -52,6 +52,35 @@ table {
 }
 
 /*-----------------------------------------------
+*   Logo
+-----------------------------------------------*/
+
+.logo {
+  color: #000;
+  margin-bottom: 0;
+}
+
+/*-----------------------------------------------
+*   Header
+-----------------------------------------------*/
+
+.header {
+  background-color: #ffe3dc;
+  margin-bottom: 40px;
+  padding: 40px;
+  padding-top: 40px;
+}
+
+/*-----------------------------------------------
+*   Cell
+-----------------------------------------------*/
+
+.cell {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+/*-----------------------------------------------
 *   Button
 -----------------------------------------------*/
 
@@ -73,7 +102,7 @@ table {
 }
 
 /*-----------------------------------------------
-*   ButtonX
+*   Button Inline
 -----------------------------------------------*/
 
 .btnx {
@@ -94,6 +123,278 @@ table {
 }
 
 /*-----------------------------------------------
+*   Switch Button Form
+-----------------------------------------------*/
+
+.switch {
+  background-color: #f0f0f0;
+  border: 1px solid #bfc0c0;
+  border-radius: 8px;
+  display: inline-block;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+/* Input */
+
+.switch input {
+  background-color: #cfcfcf;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  display: inline-block;
+  line-height: 2.5;
+  padding: 0 20px;
+  transition: 0.2s ease-in-out;
+}
+
+/* Label */
+
+.switch-left {
+  flex-basis: 15%;
+  margin: 0 10px 0 20px;
+}
+
+.switch-right {
+  flex-basis: 15%;
+  margin: 0 20px 0 10px;
+}
+
+.no:hover {
+  background-color: #83ff70;
+  transform: translateX(10px);
+  cursor: pointer;
+}
+
+.ye:hover {
+  background-color: #ff9380;
+  transform: translateX(-10px);
+  cursor: pointer;
+}
+
+/*-----------------------------------------------
+*   Form
+-----------------------------------------------*/
+
+/* Field */
+
+.form-field {
+  align-items: center;
+  display: flex;
+  margin-bottom: 20px;
+}
+
+/* Input */
+
+.form-input {
+  border: 1px solid #bfc0c0;
+  border-radius: 8px;
+  box-sizing: border-box;
+  flex-basis: 50%;
+  padding: 10px;
+  width: 100%;
+}
+
+.form-input:focus {
+  border-color: #ef8354;
+  outline: none;
+}
+
+/* Label */
+
+.form-label {
+  flex-basis: 15%;
+}
+
+/*-----------------------------------------------
+*   Form Inline
+-----------------------------------------------*/
+
+.formx {
+  display: inline;
+}
+
+/* Input */
+
+.formx-input {
+  border: 1px solid #bfc0c0;
+  border-radius: 8px;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+/*-----------------------------------------------
+*   List
+-----------------------------------------------*/
+
+.list {
+  margin-bottom: 20px;
+}
+
+.list--unstyled {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+/*-----------------------------------------------
+*   Table
+-----------------------------------------------*/
+
+.table {
+  border: 1px solid #bfc0c0;
+  border-collapse: inherit;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.table thead,
+.table td {
+  border-right: 1px solid #bfc0c0;
+  border-top: 1px solid #bfc0c0;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 10px 20px;
+  vertical-align: center;
+}
+
+.table thead:last-child,
+.table td:last-child {
+  border-right: 0;
+}
+
+.table thead {
+  border-top: 0;
+  text-align: left;
+}
+
+.table th {
+  border-right: 1px solid #bfc0c0;
+  padding: 10px 20px;
+  text-align: left;
+}
+
+.table th:last-child {
+  border-right: 0;
+}
+
+/*-----------------------------------------------
+*   Box
+-----------------------------------------------*/
+
+.box {
+  border: 1px solid #bfc0c0;
+  border-collapse: inherit;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.box thead,
+.box td {
+  font-size: 24px;
+  line-height: 1.5;
+  padding: 10px 20px;
+  vertical-align: center;
+}
+
+.box thead:last-child,
+.box td:last-child {
+  border-right: 0;
+  width: 67%;
+}
+
+.box thead {
+  border-top: 0;
+  text-align: left;
+}
+
+.box th {
+  padding: 10px 20px;
+  text-align: left;
+}
+
+.box th:last-child {
+  border-right: 0;
+}
+
+/*-----------------------------------------------
+*   Grid
+-----------------------------------------------*/
+
+.grid {
+  border-collapse: inherit;
+  width: 100%;
+  /*display: flex;
+  flex-basis: 100%;*/
+}
+
+.grid thead {
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 10px 20px;
+  vertical-align: center;
+  text-align: left;
+}
+
+.grid th {
+  border-bottom: 1px solid #bfc0c0;
+  padding: 10px 20px;
+  text-align: left;
+}
+
+.grid td {
+  border-bottom: 1px dashed #bfc0c0;
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 10px 20px;
+  vertical-align: center;
+}
+
+/*-----------------------------------------------
+*   Grid Sub
+-----------------------------------------------*/
+
+.grid-sub {
+  border: 0px;
+  border-collapse: inherit;
+  border-radius: 8px;
+  width: 100%;
+}
+
+.grid-sub thead,
+.grid-sub td {
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 10px 20px;
+  vertical-align: center;
+}
+
+/*-----------------------------------------------
+*   Tools
+-----------------------------------------------*/
+
+.act:hover {
+  background-color: #ffe3dc;
+  cursor: pointer;
+}
+
+.mbm {
+  margin-bottom: 20px;
+}
+
+.mbl {
+  margin-bottom: 40px;
+}
+
+.opt {
+  background-color: #f0f0f0;
+  border-bottom: 1px dashed #bfc0c0;
+}
+
+/*-----------------------------------------------
 *   Card
 -----------------------------------------------*/
 
@@ -109,10 +410,7 @@ table {
 .card:focus,
 .card:hover {
   border-color: #808080;
-  /*background-color: #ffe3dc;*/
 }
-
-/* ----- States ----- */
 
 /* Active */
 
@@ -124,8 +422,6 @@ table {
 .card.is-active .card-link {
   color: #ef8354;
 }
-
-/* ----- Submodules ----- */
 
 /* Link */
 
@@ -164,286 +460,18 @@ table {
 }
 
 /*-----------------------------------------------
-*   Cell
+*   Hzshka (ex Grid)
 -----------------------------------------------*/
 
-.cell {
-  margin: 0 auto;
-  max-width: 900px;
-}
-
-/*-----------------------------------------------
-*   FormX
------------------------------------------------*/
-
-.formx {
-  display: inline;
-}
-
-/* Input */
-
-.formx-input {
-  border: 1px solid #bfc0c0;
-  border-radius: 8px;
-  display: inline-block;
-  box-sizing: border-box;
-  padding: 8px;
-}
-
-/*-----------------------------------------------
-*   Form
------------------------------------------------*/
-
-/* .form {} */
-
-/* ----- Submodules ----- */
-
-/* Field */
-
-.form-field {
-  align-items: center;
-  display: flex;
-  margin-bottom: 20px;
-}
-
-/* Input */
-
-.form-input {
-  border: 1px solid #bfc0c0;
-  border-radius: 8px;
-  box-sizing: border-box;
-  flex-basis: 50%;
-  padding: 10px;
-  width: 100%;
-}
-
-.form-input:focus {
-  border-color: #ef8354;
-  outline: none;
-}
-
-/* Label */
-
-.form-label {
-  flex-basis: 15%;
-}
-
-/*-----------------------------------------------
-*   Grid
------------------------------------------------*/
-
-.grid {
+.hzshka {
   display: flex;
 }
 
-/* ----- Submodules ----- */
-
-/* Box */
-
-/* .grid-box {} */
-
-/* Modifiers */
-
-.grid-box--6of12 {
+.hzshka-box--1of2 {
   flex-basis: 50%;
   margin-right: 20px;
 }
 
-.grid-box--6of12:last-child {
+.hzshka-box--1of2:last-child {
   margin-right: 0;
-}
-
-/*-----------------------------------------------
-*   Header
------------------------------------------------*/
-
-.header {
-  background-color: #ffe3dc;
-  margin-bottom: 40px;
-  padding: 40px;
-  padding-top: 40px;
-}
-
-/*-----------------------------------------------
-*   List
------------------------------------------------*/
-
-.list {
-  margin-bottom: 20px;
-}
-
-.list--unstyled {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-/*-----------------------------------------------
-*   Logo
------------------------------------------------*/
-
-.logo {
-  color: #000;
-  margin-bottom: 0;
-}
-
-/*-----------------------------------------------
-*   Table
------------------------------------------------*/
-
-.table {
-  border: 1px solid #bfc0c0;
-  border-collapse: inherit;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.table thead,
-.table td {
-  border-right: 1px solid #bfc0c0;
-  border-top: 1px solid #bfc0c0;
-  font-size: 14px;
-  line-height: 1.5;
-  padding: 10px 20px;
-  vertical-align: center;
-}
-
-
-.table thead:last-child,
-.table td:last-child {
-  border-right: 0;
-}
-
-.table thead {
-  border-top: 0;
-  text-align: left;
-}
-
-.table th {
-  border-right: 1px solid #bfc0c0;
-  padding: 10px 20px;
-  text-align: left;
-}
-
-.table th:last-child {
-  border-right: 0;
-}
-
-.act:hover {
-  background-color: #ffe3dc;
-}
-
-/*-----------------------------------------------
-*   TableX
------------------------------------------------*/
-
-.tablex {
-  border: 1px solid #bfc0c0;
-  border-collapse: inherit;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.tablex thead,
-.tablex td {
-  /*border-right: 1px solid #bfc0c0;
-  border-top: 1px solid #bfc0c0;*/
-  font-size: 24px;
-  line-height: 1.5;
-  padding: 10px 20px;
-  vertical-align: center;
-}
-
-
-.tablex thead:last-child,
-.tablex td:last-child {
-  border-right: 0;
-  width: 67%;
-}
-
-.tablex thead {
-  border-top: 0;
-  text-align: left;
-}
-
-.tablex th {
-  /*border-right: 1px solid #bfc0c0;*/
-  padding: 10px 20px;
-  text-align: left;
-}
-
-.tablex th:last-child {
-  border-right: 0;
-}
-
-/*-----------------------------------------------
-*   TableXX
------------------------------------------------*/
-
-.tablexx {
-  border-collapse: inherit;
-  /*border-radius: 8px;*/
-  /*margin-bottom: 20px;*/
-  width: 100%;
-}
-
-.tablexx thead {
-  font-size: 18px;
-  line-height: 1.5;
-  padding: 10px 20px;
-  vertical-align: center;
-  text-align: left;
-}
-
-.tablexx th {
-  border-bottom: 1px solid #bfc0c0;
-  padding: 10px 20px;
-  text-align: left;
-}
-
-.tablexx td {
-  border-bottom: 1px dashed #bfc0c0;
-  font-size: 18px;
-  line-height: 1.5;
-  padding: 10px 20px;
-  vertical-align: center;
-}
-
-/*-----------------------------------------------
-*   TableXXX
------------------------------------------------*/
-
-.tablexxx {
-  border: 0px;
-  border-collapse: inherit;
-  border-radius: 8px;
-  /*margin-bottom: 20px;*/
-  width: 100%;
-}
-
-.tablexxx thead,
-.tablexxx td {
-  font-size: 14px;
-  line-height: 1.5;
-  padding: 10px 20px;
-  vertical-align: center;
-}
-
-/*-----------------------------------------------
-*   Tools
------------------------------------------------*/
-
-.mbm {
-  margin-bottom: 20px;
-}
-
-.mbl {
-  margin-bottom: 40px;
-}
-
-.opt {
-  background-color: #f0f0f0;
-  border-bottom: 1px dashed #bfc0c0;
 }
