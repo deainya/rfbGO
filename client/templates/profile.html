@@ -32,7 +32,12 @@
     </tr>
     <tr>
       <td> Место работы: </td>
-      <td> {{ user.tradepoint }} </td>
+      <td ng-show="user.role==1"> {{ user.tradepoint.name }} :: {{ user.tradepoint.tradepoint }} </td>
+      <td ng-show="user.role==0"> {{ user.tradepoint.wp }} :: {{ user.tradepoint.tradepoint }} </td>
+    </tr>
+    <tr>
+      <td> Адрес: </td>
+      <td> {{ user.tradepoint.address }} </td>
     </tr>
     <tr ng-show="user.role==0">
       <td colspan="2">
