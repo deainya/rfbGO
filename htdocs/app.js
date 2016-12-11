@@ -169,21 +169,25 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
 
 // Orders routing             ==================================================
 apiRoutes.get("/orders", jsonParser, (req, res) => {
-  let _from = req.query.from || {};
-  let _to = req.query.to || {};
-  let _status = req.query.status || {};
+  let _from = req.query.from || '';
+  let _to = req.query.to || '';
+  let _sts = req.query.sts || '';
+  let _tp = req.query.tp || '';
+  let _wp = req.query.wp || '';
+  let _city = req.query.city || '';
   let orders = Mongo.orders();
-  console.log({ created: { $gte: _from, $lt: _to }, status: _status });
+
+  console.log({ created: { $gte: _from, $lt: _to }, status: _sts, "tp": _tp, "wp": _wp });
   if (!req.query) {
     orders.find().toArray((err, docs) => {
       if (err) { res.sendStatus(400); }
-      console.log( JSON.stringify(docs) );
+      //console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
     });
   } else {
-    orders.find({ created: { $gte: _from, $lt: _to } }, {}).toArray((err, docs) => {
+    orders.find({ created: { $gte: _from, $lt: _to }, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
       if (err) { res.sendStatus(400); }
-      console.log( JSON.stringify(docs) );
+      //console.log( JSON.stringify(docs) );
       res.json( docs ); // orders
     });
   }
@@ -192,11 +196,39 @@ apiRoutes.get("/orders", jsonParser, (req, res) => {
 apiRoutes.post("/orders/create", jsonParser, (req, res) => {
   let dataset = req.body.dataset || {};
   let orders = Mongo.orders();
+  let users = Mongo.users();
 
   orders.insert(dataset, function(err, result){
     if(err) { res.sendStatus(400); }
     console.log( "Order created: " + JSON.stringify( dataset ) );
     res.sendStatus(201);
+
+    users.find({ "tradepoint.wp":dataset.partner.tradepoint.wp, "role":0 }, {"email":true}).toArray((err, docs) => {
+      if (docs) {
+        var emails = '';
+        for (var i = 0; i < docs.length-1; i++){
+          emails = emails + docs[i].email + ', ';
+        }
+        emails = emails + docs[docs.length-1].email;
+        console.log(emails);
+
+        // Email notification test 3
+        var mailOptions = {
+            from: '"rfbGO" <rfbGO@deain.ru>', // sender address
+            to: emails, // list of receivers
+            subject: 'rfbGO notification ✔', // subject line
+            text: 'Поступил новый вызов!', // plaintext body
+            html: 'Поступил новый вызов!' // html body
+        };
+        transporter.sendMail(mailOptions, function(err, info){
+          if(err){ return console.log(err); }
+          console.log("Message sent: " + info.response);
+        });
+      } else {
+        console.log('Epic fail :)');
+      }
+    });
+
   });
 });
 
@@ -241,6 +273,22 @@ apiRoutes.post("/orders/resolve", jsonParser, (req, res) => {
     if(err) { res.sendStatus(400); }
     console.log( "Order resolved: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
     res.sendStatus(201);
+
+    //console.log(result);
+    if (result.value.consultant.email) {
+      // Email notification test 4
+      var mailOptions = {
+          from: '"rfbGO" <rfbGO@deain.ru>', // sender address
+          to: result.value.consultant.email, // list of receivers
+          subject: 'rfbGO notification ✔', // subject line
+          text: 'Вызов завершён', // plaintext body
+          html: 'Вызов завершён' // html body
+      };
+      transporter.sendMail(mailOptions, function(err, info){
+        if(err){ return console.log(err); }
+        console.log("Message sent: " + info.response);
+      });
+    }
   });
 });
 
