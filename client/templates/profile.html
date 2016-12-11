@@ -78,10 +78,10 @@
   </div>
   <br>
 </div>
-<form class="formx" name="TradepointForm" ng-submit="getTradepoints()"/>
+<form class="formx" name="TradepointForm" ng-hide="_tradepoints==true" ng-submit="getTradepoints()"/>
   <input class="btnx" type="submit" value="Указать место работы" />
 </form>
-<form class="formx" ng-submit="_tradepoints=false"/>
+<form class="formx" ng-show="_tradepoints==true" ng-submit="_tradepoints=false"/>
   <input class="btnx" type="submit" value="Отмена" />
 </form>
 <br>
