@@ -153,11 +153,23 @@ table {
 .switch-left {
   flex-basis: 15%;
   margin: 0 10px 0 20px;
+  color: #660000;
+}
+.switch-left-inactive {
+  flex-basis: 15%;
+  margin: 0 10px 0 20px;
+  color: #cfcfcf;
 }
 
 .switch-right {
   flex-basis: 15%;
   margin: 0 20px 0 10px;
+  color: #006600;
+}
+.switch-right-inactive {
+  flex-basis: 15%;
+  margin: 0 20px 0 10px;
+  color: #cfcfcf;
 }
 
 .no:hover {

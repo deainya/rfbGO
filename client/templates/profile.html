@@ -38,10 +38,12 @@
       <td colspan="2">
         <div class="cell">
           <form class="switch" name="ActionForm" ng-submit="atWork()"/>
-            <label class="switch-left"><span ng-show="user.atWork==false" color="red">Нет</span>&nbsp;</label>
+            <label class="switch-left" ng-show="user.atWork==true">Нет</label>
+            <label class="switch-left-inactive" ng-show="user.atWork==false">Нет</label>
             <input class="switch-input no" type="submit" value="На работе" ng-show="user.atWork==false"/>
             <input class="switch-input ye" type="submit" value="На работе" ng-show="user.atWork==true"/>
-            <label class="switch-right"><span ng-show="user.atWork==true">Да</span>&nbsp;</label>
+            <label class="switch-right"ng-show="user.atWork==false">Да</label>
+            <label class="switch-right-inactive"ng-show="user.atWork==true">Да</label>
           </form>
         </div>
       </td>
