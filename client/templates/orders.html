@@ -97,14 +97,10 @@
 <form class="formx" name="FilterForm"/>
   <label class="form-label" for="from">Фильтр:</label>
   <div class="form-field">
-    <!--label class="form-label" for="from">Дата с:</label-->
     <input class="formx-input" type="date" id="from" ng-model="filter.from"/>
-  <!--/div>
-  <div class="form-field">
-    <label class="form-label" for="to">Дата по:</label-->
     <input class="formx-input" type="date" id="to" ng-model="filter.to"/>
-    &nbsp;&nbsp;<label>Город:</label>
-    &nbsp;<input class="formx-input" type="checkbox" id="city" ng-model="filter.city"/>
+    &nbsp;&nbsp;&nbsp;<label ng-show="user.role==0">Город:</label>&nbsp;
+    <input class="formx-input" type="checkbox" id="city" ng-show="user.role==0" ng-model="filter.city"/>
   </div>
   <!--div class="form-field">
     <label class="form-label" for="status">Статус:</label>
