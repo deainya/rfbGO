@@ -7,7 +7,7 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
     var myEndDateTime = new Date();
     var myStartDateTime = new Date($scope.myEndDateTime - 3 * 60000);
 
-    if (myStartDateTime > date) { return true; } else { return false; }
+    if (myStartDateTime > Date.parse(date)) { return true; } else { return false; }
   };
 
   var filter = {from: $rootScope.filter.from, to: $rootScope.filter.to};
