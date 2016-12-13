@@ -108,7 +108,14 @@
   <div class="form-field">
     <input class="formx-input" type="date" id="from" ng-model="filter.from"/>
     <input class="formx-input" type="date" id="to" ng-model="filter.to"/>
-    &nbsp;&nbsp;&nbsp;<label ng-show="user.role==0">Город:</label>&nbsp;
+    <select class="formx-input" id="status" ng-model="filter.status">
+      <option value="Любой">Екатеринбург</option>
+      <option value="Новый">Новый</option>
+      <option value="Принят">Принят</option>
+      <option value="Завершён">Завершён</option>
+      <option value="Отменён">Отменён</option>
+    </select>
+    &nbsp;&nbsp;&nbsp;<label ng-show="user.role==0">Список вызовов по городу:</label>&nbsp;
     <input class="formx-input" type="checkbox" id="city" ng-show="user.role==0" ng-model="filter.city"/>
   </div>
   <!--div class="form-field">
