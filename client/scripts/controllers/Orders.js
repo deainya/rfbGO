@@ -6,7 +6,7 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
   $scope.isDeadline = function(city, status, date){
     var myEndDateTime = new Date();
     var myStartDateTime = new Date(myEndDateTime - 3 * 60000);
-    if (city && (status == 'Новый') && (myStartDateTime > Date.parse(date))) { return true; } else { return false; }
+    if ((status == 'Новый') && (myStartDateTime > Date.parse(date))) { return true; } else { return false; }
   };
 
   var filter = {from: $rootScope.filter.from, to: $rootScope.filter.to};
