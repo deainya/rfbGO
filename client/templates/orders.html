@@ -108,26 +108,19 @@
   <div class="form-field">
     <input class="formx-input" type="date" id="from" ng-model="filter.from"/>
     <input class="formx-input" type="date" id="to" ng-model="filter.to"/>
+    &nbsp;&nbsp;&nbsp;
     <select class="formx-input" id="status" ng-model="filter.status">
-      <option value="Любой">Екатеринбург</option>
+      <option value="Любой">Любой</option>
       <option value="Новый">Новый</option>
       <option value="Принят">Принят</option>
       <option value="Завершён">Завершён</option>
       <option value="Отменён">Отменён</option>
     </select>
-    &nbsp;&nbsp;&nbsp;<label ng-show="user.role==0">Список вызовов по городу:</label>&nbsp;
+    &nbsp;&nbsp;&nbsp;
+    <label ng-show="user.role==0">Список вызовов по городу:</label>
+    &nbsp;
     <input class="formx-input" type="checkbox" id="city" ng-show="user.role==0" ng-model="filter.city"/>
   </div>
-  <!--div class="form-field">
-    <label class="form-label" for="status">Статус:</label>
-    <select class="formx-input" id="status" required ng-model="filter.sts">
-      <option value="">Любой</option>
-      <option value="Новый">Новый</option>
-      <option value="Принят">Принят</option>
-      <option value="Завершён">Завершён</option>
-      <option value="Отменён">Отменён</option>
-    </select>
-  </div-->
 </form>
 <form class="formx" ng-submit="Refresh(null)"/>
   <input class="btnx" type="submit" value="Обновить" />
