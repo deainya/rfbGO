@@ -5,7 +5,7 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
 
   $scope.isDeadline = function(date){
     var myEndDateTime = new Date();
-    var myStartDateTime = new Date($scope.myEndDateTime - 3 * 60000);
+    var myStartDateTime = new Date(myEndDateTime - 3 * 60000);
 
     console.log(myStartDateTime);
     console.log(date);
