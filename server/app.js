@@ -177,21 +177,31 @@ apiRoutes.get("/orders", jsonParser, (req, res) => {
   let _city = req.query.city || '';
   let orders = Mongo.orders();
 
-  if (_sts == 'Любой') { _sts = ''; }
-
-  console.log({ created: { $gte: _from, $lt: _to }, "status": _sts, "tp": _tp, "wp": _wp });
-  if (!req.query) {
-    orders.find().toArray((err, docs) => {
-      if (err) { res.sendStatus(400); }
-      //console.log( JSON.stringify(docs) );
-      res.json( docs ); // orders
-    });
+  console.log({ created: { $gte: _from, $lt: _to }, "tp": _tp, "wp": _wp });
+  if ( _sts == 'Любой' || _sts == '' ){
+    if (!req.query) {
+      orders.find().toArray((err, docs) => {
+        if (err) { res.sendStatus(400); }
+        res.json( docs ); // orders
+      });
+    } else {
+      orders.find({ created: { $gte: _from, $lt: _to }, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
+        if (err) { res.sendStatus(400); }
+        res.json( docs ); // orders
+      });
+    }
   } else {
-    orders.find({ created: { $gte: _from, $lt: _to }, "status": _sts, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
-      if (err) { res.sendStatus(400); }
-      //console.log( JSON.stringify(docs) );
-      res.json( docs ); // orders
-    });
+    if (!req.query) {
+      orders.find().toArray((err, docs) => {
+        if (err) { res.sendStatus(400); }
+        res.json( docs ); // orders
+      });
+    } else {
+      orders.find({ created: { $gte: _from, $lt: _to }, "status": _sts, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
+        if (err) { res.sendStatus(400); }
+        res.json( docs ); // orders
+      });
+    }
   }
 });
 
