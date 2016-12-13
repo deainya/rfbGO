@@ -13,11 +13,15 @@
     <input class="form-input" type="tel" id="phone" placeholder="Телефон" required ng-model="user.phone"/>
   </div>
   <div class="form-field">
-    <input class="form-input" id="city" placeholder="Город" required ng-model="user.city"/>
+    <select class="form-input" id="city" required ng-model="user.city" ng-init="user.city = 'Екатеринбург'">
+      <option value="Екатеринбург">Екатеринбург</option>
+      <option value="1">Нижний Тагил</option>
+      <option value="1">Самара</option>
+    </select>
   </div>
   <div class="form-field">
-    <select class="form-input" id="place2go" required ng-model="user.role" ng-init="user.role = '1'">
-      <option value="0">Консультант</option>
+    <select class="form-input" id="role" required ng-model="user.role" ng-init="user.role = '1'">
+      <option value="0">Консультант банка</option>
       <option value="1">Партнёр-продавец</option>
     </select>
   </div>
