@@ -19,19 +19,23 @@
       <tbody>
         <tr>
           <td width="25%">
-            <span ng-show="user.role==0">{{ order.partner.name }}</span>
-            <span ng-show="user.role==1">{{ order.consultant.name }}</span>&nbsp;
+            <span style="color:red" ng-show="isDeadline(filter.city, order.status, order.created)"><span ng-show="user.role==0">{{ order.partner.name }}</span><span ng-show="user.role==1">{{ order.consultant.name }}</span></span>
+            <span ng-show="!isDeadline(filter.city, order.status, order.created)"><span ng-show="user.role==0">{{ order.partner.name }}</span><span ng-show="user.role==1">{{ order.consultant.name }}</span></span>
+            &nbsp;
           </td>
           <td width="25%">
-            <span ng-show="order.place2go==0">Кредитная зона</span>
-            <span ng-show="order.place2go==1">Торговая точка</span>&nbsp;
+            <span style="color:red" ng-show="isDeadline(filter.city, order.status, order.created)"><span ng-show="order.place2go==0">Кредитная зона</span><span ng-show="order.place2go==1">Торговая точка</span></span>
+            <span ng-show="!isDeadline(filter.city, order.status, order.created)"><span ng-show="order.place2go==0">Кредитная зона</span><span ng-show="order.place2go==1">Торговая точка</span></span>
+            &nbsp;
           </td>
           <td width="25%">
-            <span style="color:red" ng-show="filter.city && (order.status == 'Новый') && isDeadline(order.created)">{{ order.created | date:'dd.MM HH:mm'}}</span>
-            <span ng-show="!(filter.city && (order.status == 'Новый') && isDeadline(order.created))">{{ order.created | date:'dd.MM HH:mm'}}</span>&nbsp;
+            <span style="color:red" ng-show="isDeadline(filter.city, order.status, order.created)">{{ order.created | date:'dd.MM HH:mm'}}</span>
+            <span ng-show="!isDeadline(filter.city, order.status, order.created)">{{ order.created | date:'dd.MM HH:mm'}}</span>
+            &nbsp;
           </td>
           <td width="25%">
-            {{ order.status }}
+            <span style="color:red" ng-show="isDeadline(filter.city, order.status, order.created)">{{ order.status }}</span>
+            <span ng-show="!isDeadline(filter.city, order.status, order.created)">{{ order.status }}</span>
           </td>
         </tr>
       </tbody>
