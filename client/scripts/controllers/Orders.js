@@ -3,8 +3,12 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
   // Get data when controller executes
   // $rootScope have to be replaced!!!
 
-  $scope.myEndDateTime = new Date();
-  $scope.myStartDateTime = new Date($scope.myEndDateTime - 3 * 60000);
+  $scope.isDeadline = function(date){
+    var myEndDateTime = new Date();
+    var myStartDateTime = new Date($scope.myEndDateTime - 3 * 60000);
+
+    if (myStartDateTime > date) { return true; } else { return false; }
+  };
 
   var filter = {from: $rootScope.filter.from, to: $rootScope.filter.to};
   if ($rootScope.user.role === 1){

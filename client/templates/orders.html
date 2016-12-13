@@ -27,8 +27,8 @@
             <span ng-show="order.place2go==1">Торговая точка</span>&nbsp;
           </td>
           <td width="25%">
-            <span style="color:red" ng-show="filter.city && (order.status == 'Новый') && (myStartDateTime > order.created)">{{ order.created | date:'dd.MM HH:mm'}}</span>
-            <span ng-show="!(filter.city && (order.status == 'Новый') && (myStartDateTime > order.created))">{{ order.created | date:'dd.MM HH:mm'}}</span>&nbsp;
+            <span style="color:red" ng-show="filter.city && (order.status == 'Новый') && isDeadline(order.created)">{{ order.created | date:'dd.MM HH:mm'}}</span>
+            <span ng-show="!(filter.city && (order.status == 'Новый') && isDeadline(order.created))">{{ order.created | date:'dd.MM HH:mm'}}</span>&nbsp;
           </td>
           <td width="25%">
             {{ order.status }}
