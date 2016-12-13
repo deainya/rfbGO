@@ -3,7 +3,7 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
   // Get data when controller executes
   // $rootScope have to be replaced!!!
 
-  $scope.isDeadline = function(city, status, date){
+  $scope.isDeadline = function(status, date){
     var myEndDateTime = new Date();
     var myStartDateTime = new Date(myEndDateTime - 3 * 60000);
     if ((status == 'Новый') && (myStartDateTime > Date.parse(date))) { return true; } else { return false; }
