@@ -46,17 +46,3 @@ module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravata
     };
   }
 };
-
-// OLD CODE
-
-//$scope.points = get.data; //get
-
-/*$scope.tps = new Array();
-var j = 0;
-for (var i=0; i<points.length; i++){
-  if (points[i]._active) {
-    $scope.tps[j] = points[i];
-    delete $scope.tps[j]._active;
-    j++;
-  }
-}*/

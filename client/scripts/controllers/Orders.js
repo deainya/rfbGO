@@ -64,23 +64,3 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
   $scope.isResolve = function(status){ return status === "Завершён" };
   $scope.isCancel = function(status){ return status === "Отменён" };
 };
-
-// OLD CODE
-
-// Log getObject when controller executes //console.log(get);
-// Assign getObject to $scope //$scope.orders = get.data;
-
-/*$scope.Accept = function(orderid, setorder){
-  angular.extend(setorder, {_id:orderid, "status":"Принят", consultant: {name: $rootScope.user.name, email: $rootScope.user.email}, accepted:new Date()});
-  console.log(setorder);
-  dataSource.set('/orders/accept', setorder).then(function(){
-    $state.reload();
-  });
-};
-$scope.Resolve = function(orderid, setorder){
-  angular.extend(setorder, {_id:orderid, "status":"Завершён", resolved:new Date()});
-  console.log(setorder);
-  dataSource.set('/orders/resolve', setorder).then(function(){
-    $state.reload();
-  });
-};*/

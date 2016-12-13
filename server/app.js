@@ -218,7 +218,7 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
             to: emails, // list of receivers
             subject: 'rfbGO notification ✔', // subject line
             text: 'Поступил новый вызов!', // plaintext body
-            html: 'Поступил новый вызов! <b>' + dataset.partner.tradepoint.tradepoint + ': от ' + dataset.partner.tradepoint.name + '</b>' // html body
+            html: 'Поступил новый вызов! От <b>' + dataset.partner.tradepoint.name + '</b> в ' + dataset.partner.tradepoint.tradepoint + '.' // html body
         };
         transporter.sendMail(mailOptions, function(err, info){
           if(err){ return console.log(err); }
