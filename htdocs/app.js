@@ -171,25 +171,37 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
 apiRoutes.get("/orders", jsonParser, (req, res) => {
   let _from = req.query.from || '';
   let _to = req.query.to || '';
-  let _sts = req.query.sts || '';
+  let _sts = req.query.status || '';
   let _tp = req.query.tp || '';
   let _wp = req.query.wp || '';
   let _city = req.query.city || '';
   let orders = Mongo.orders();
 
-  console.log({ created: { $gte: _from, $lt: _to }, status: _sts, "tp": _tp, "wp": _wp });
-  if (!req.query) {
-    orders.find().toArray((err, docs) => {
-      if (err) { res.sendStatus(400); }
-      //console.log( JSON.stringify(docs) );
-      res.json( docs ); // orders
-    });
+  console.log({ created: { $gte: _from, $lt: _to }, "tp": _tp, "wp": _wp });
+  if ( _sts == 'Любой' || _sts == '' ){
+    if (!req.query) {
+      orders.find().toArray((err, docs) => {
+        if (err) { res.sendStatus(400); }
+        res.json( docs ); // orders
+      });
+    } else {
+      orders.find({ created: { $gte: _from, $lt: _to }, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
+        if (err) { res.sendStatus(400); }
+        res.json( docs ); // orders
+      });
+    }
   } else {
-    orders.find({ created: { $gte: _from, $lt: _to }, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
-      if (err) { res.sendStatus(400); }
-      //console.log( JSON.stringify(docs) );
-      res.json( docs ); // orders
-    });
+    if (!req.query) {
+      orders.find().toArray((err, docs) => {
+        if (err) { res.sendStatus(400); }
+        res.json( docs ); // orders
+      });
+    } else {
+      orders.find({ created: { $gte: _from, $lt: _to }, "status": _sts, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
+        if (err) { res.sendStatus(400); }
+        res.json( docs ); // orders
+      });
+    }
   }
 });
 
@@ -218,7 +230,7 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
             to: emails, // list of receivers
             subject: 'rfbGO notification ✔', // subject line
             text: 'Поступил новый вызов!', // plaintext body
-            html: 'Поступил новый вызов!' // html body
+            html: 'Поступил новый вызов! От <b>' + dataset.partner.tradepoint.name + '</b> в ' + dataset.partner.tradepoint.tradepoint + '.' // html body
         };
         transporter.sendMail(mailOptions, function(err, info){
           if(err){ return console.log(err); }
