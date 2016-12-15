@@ -13,7 +13,7 @@
   </thead>
 </table>
 <div class="cell" ng-repeat="order in orders">
-  <div class="act" ng-click="order._active=!order._active" ng-hide="filter.city&&isDeadline(order.status, order.created)">
+  <div class="act" ng-click="order._active=!order._active" ng-show="filter.city&&isDeadline(order.status, order.created)">
 
     <table class="grid">
       <tbody>
@@ -42,7 +42,7 @@
     </table>
   </div>
 
-  <div class="opt" ng-hide="order._active==false||filter.city&&isDeadline(order.status, order.created)">
+  <div class="opt" ng-show="order._active==false">
     <table class="grid-sub">
       <tbody>
         <tr ng-show="user.role==0">
