@@ -9,6 +9,8 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
     if ((status == 'Новый') && (myStartDateTime > Date.parse(date))) { return true; } else { return false; }
   };
 
+  $scope.city = $rootScope.filter.city;
+
   var filter = {from: $rootScope.filter.from, to: $rootScope.filter.to, status: $rootScope.filter.status};
   if ($rootScope.user.role === 1){
     angular.extend(filter, {tp:$rootScope.user.tradepoint.tp});
