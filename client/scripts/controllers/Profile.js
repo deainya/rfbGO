@@ -40,7 +40,7 @@ module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravata
     };
     $scope.getTradepoints = function(){
       $scope._tradepoints = true;
-      dataSource.get('/api/tradepoints', {city: $rootScope.user.city}).then(function(res) {
+      dataSource.get('/api/tradepoints', {city: $rootScope.user.city, role: $rootScope.user.role}).then(function(res) {
         $scope.points = res.data;
       });
     };
