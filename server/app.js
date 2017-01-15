@@ -126,7 +126,7 @@ apiRoutes.get("/tradepoints", (req, res) => {
   let role = req.query.role || {};
   let tradepoints = Mongo.tradepoints();
   if (role == 0) {
-    tradepoints.aggregate([{$match : {"city":city}}, {$group : { _id : "$wp", wp:{$first:"$wp"}, tradepoint:{$first:"$tradepoint"}, address:{$first:"$address"},  city:{$first:"$city"}}}]).toArray((err, docs) => {
+    tradepoints.aggregate([{$match : {"city":city}}, {$group : { _id : "$wp", wp:{$first:"$wp"}, tradepoint:{$first:"$tradepoint"}, address:{$first:"$address"}, city:{$first:"$city"}}}]).toArray((err, docs) => {
       if(err) { res.sendStatus(400); }
 
       console.log( docs );
