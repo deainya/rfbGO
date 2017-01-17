@@ -113,7 +113,7 @@ apiRoutes.get('/', (req, res) => {
   res.json({ message: 'rfbGO API' });
 });
 // route to return all users
-apiRoutes.get('/users', (req, res) => {
+apiRoutes.get('/userslonglist', (req, res) => {
   User.find({}, (err, docs) => {
     if(err) { res.sendStatus(400); }
     res.json(docs);

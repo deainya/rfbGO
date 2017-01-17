@@ -10,6 +10,7 @@ var GravatarFactory = require('./services/Gravatar');
 var localStorageFactory = require('./services/localStorage');
 var profileCtrl = require('./controllers/Profile');
 var ordersCtrl = require('./controllers/Orders');
+var usersCtrl = require('./controllers/Users');
 
 angular
 .module('rfbgo', ["ui.router", "ngResource"])
@@ -44,6 +45,11 @@ angular
     templateUrl: 'templates/orders-new.html',
     controller: 'ordersCtrl'
   })
+  .state('users', {
+    url: '/userslonglist',
+    templateUrl: 'templates/users.html',
+    controller: 'usersCtrl'
+  })
 })
 
 .service('auth', ['$http', 'session', Auth])
@@ -53,6 +59,7 @@ angular
 .factory('localStorage', ['$window', localStorageFactory])
 .controller('profileCtrl', ['$rootScope', '$scope', '$state', 'auth', 'dataSource', 'Gravatar', profileCtrl])
 .controller('ordersCtrl' , ['$rootScope', '$scope', '$state', 'dataSource' , ordersCtrl])
+.controller('usersCtrl' , ['$rootScope', '$scope', 'dataSource' , usersCtrl])
 
 .run(function ($rootScope, $state, auth, session) {
   $rootScope.auth = auth;
