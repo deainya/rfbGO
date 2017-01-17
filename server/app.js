@@ -128,9 +128,6 @@ apiRoutes.get("/tradepoints", (req, res) => {
   if (role == 0) {
     tradepoints.aggregate([{$match : {"city":city}}, {$group : { _id : "$wp", wp:{$first:"$wp"}, tradepoint:{$first:"$tradepoint"}, address:{$first:"$address"}, city:{$first:"$city"}}}]).toArray((err, docs) => {
       if(err) { res.sendStatus(400); }
-
-      console.log( docs );
-
       res.json( docs );
     });
   } else{
@@ -297,7 +294,6 @@ apiRoutes.post("/orders/resolve", jsonParser, (req, res) => {
     console.log( "Order resolved: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
     res.sendStatus(201);
 
-    //console.log(result);
     if (result.value.consultant.email) {
       // Email notification test 4
       var mailOptions = {
