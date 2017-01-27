@@ -60,7 +60,8 @@
   <table class="grid">
     <thead>
       <tr>
-        <th width="25%">Юр. лицо</th>
+        <th width="25%" ng-show="user.role==1">Юр. лицо</th>
+        <th width="25%" ng-show="user.role==0">Код раб. места</th>
         <th width="25%">Торговая точка</th>
         <th width="25%">Город</th>
         <th width="25%">Адрес</th>
@@ -72,7 +73,8 @@
       <table class="grid">
         <tbody>
           <tr>
-            <td width="25%">{{ point.name }}</td>
+            <td width="25%" ng-show="user.role==1">{{ point.name }}</td>
+            <td width="25%" ng-show="user.role==0">{{ point.wp }}</td>
             <td width="25%">{{ point.tradepoint }}</td>
             <td width="25%">{{ point.city }}</td>
             <td width="25%">{{ point.address }}</td>

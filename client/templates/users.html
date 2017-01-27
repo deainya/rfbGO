@@ -26,13 +26,13 @@
     <table class="grid-sub">
       <tbody>
         <tr>
-          <td width="33%">phone: {{ u.phone }}</td>
-          <td width="33%">atwork: {{ u.atWork }}</td>
+          <td width="33%">Тел.: {{ u.phone }}</td>
+          <td width="33%"> </td>
           <td width="34%"> </td>
         </tr>
         <tr>
-          <td width="33%">tradepoint: {{ u.tradepoint.tradepoint }}</td>
-          <td width="33%">tradepoint: {{ u.tradepoint.address }}</td>
+          <td width="33%">ТЦ: {{ u.tradepoint.tradepoint }}</td>
+          <td width="33%">Адрес: {{ u.tradepoint.address }}</td>
           <td width="34%" ng-show="user.role==0">tp: {{ u.tradepoint.tp }} {{ u.tradepoint.name }}</td>
           <td width="34%" ng-show="user.role==1">wp: {{ u.tradepoint.wp }}</td>
         </tr>
