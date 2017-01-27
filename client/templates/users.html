@@ -27,14 +27,13 @@
       <tbody>
         <tr>
           <td width="33%">Тел.: {{ u.phone }}</td>
-          <td width="33%"> </td>
-          <td width="34%"> </td>
+          <td width="33%">Партнёр: {{ u.tradepoint.name }} </td>
+          <td width="34%">Код ТТ: {{ u.tradepoint.tp }} </td>
         </tr>
         <tr>
-          <td width="33%">ТЦ: {{ u.tradepoint.tradepoint }}</td>
-          <td width="33%">Адрес: {{ u.tradepoint.address }}</td>
-          <td width="34%" ng-show="user.role==0">tp: {{ u.tradepoint.tp }} {{ u.tradepoint.name }}</td>
-          <td width="34%" ng-show="user.role==1">wp: {{ u.tradepoint.wp }}</td>
+          <td width="33%">ТЦ: {{ u.tradepoint.tradepoint }} </td>
+          <td width="33%">Адрес: {{ u.tradepoint.address }} </td>
+          <td width="34%">Раб. место: {{ u.tradepoint.wp }} </td>
         </tr>
       </tbody>
     </table>
