@@ -4,7 +4,7 @@
     <tr>
       <th width="25%">name</th>
       <th width="25%">email</th>
-      <th width="25%">city</th>
+      <th width="25%">code</th>
       <th width="25%">role</th>
     </tr>
   </thead>
@@ -16,8 +16,9 @@
         <tr>
           <td width="25%">{{ u.name }} &nbsp;</td>
           <td width="25%">{{ u.email }}&nbsp;</td>
-          <td width="25%">{{ u.city }} &nbsp;</td>
-          <td width="25%">{{ u.role }}       </td>
+          <td width="25%" ng-show="u.role==0">{{ u.tradepoint.tp }} &nbsp;</td>
+          <td width="25%" ng-show="u.role==1">{{ u.tradepoint.wp }} &nbsp;</td>
+          <td width="25%"> {{ u.role }} </td>
         </tr>
       </tbody>
     </table>
@@ -26,14 +27,12 @@
     <table class="grid-sub">
       <tbody>
         <tr>
-          <td width="33%">Тел.: {{ u.phone }}</td>
-          <td width="33%">Партнёр: {{ u.tradepoint.name }} </td>
-          <td width="34%">Код ТТ: {{ u.tradepoint.tp }} </td>
+          <td width="33%"> {{ u.phone }} </td>
+          <td width="33%"> {{ u.tradepoint.tradepoint }} </td>
+          <td width="34%"> {{ u.tradepoint.name }} </td>
         </tr>
         <tr>
-          <td width="33%">ТЦ: {{ u.tradepoint.tradepoint }} </td>
-          <td width="33%">Адрес: {{ u.tradepoint.address }} </td>
-          <td width="34%">Раб. место: {{ u.tradepoint.wp }} </td>
+          <td colspan=4 width="100%">Адрес: {{ u.tradepoint.address }} </td>
         </tr>
       </tbody>
     </table>
