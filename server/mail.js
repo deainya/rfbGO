@@ -7,8 +7,10 @@ let Config      = require('./config'); // get our config file
 let transporter = nodemailer.createTransport(Config.smtps);
 
 module.exports = {
-  sendMail(mailOptions) = transporter.sendMail(mailOptions, function(err, info){
-    if(err){ return console.log(err); }
-    console.log("Message sent: " + info.response);
-  });
+  sendMail(mailOptions){
+    return transporter.sendMail(mailOptions, function(err, info){
+      if(err){ return console.log(err); }
+      console.log("Message sent: " + info.response);
+    });
+  }
 }
