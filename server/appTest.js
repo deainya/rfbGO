@@ -15,8 +15,8 @@ Mongo.connect(Config.database); // connecting to MongoDB
 mongoose.connect(Config.database); // connect to MongoDB through Mongoose
 mongoose.Promise = global.Promise; //WTF???
 
-require('./configExpress'); // Load Express Configuration
-Express(app, express);
+let e           = require('./configExpress'); // Load Express Configuration
+e.Express(app, express);
 
 // API routes                 ==================================================
 let apiRoutes = express.Router(); // get an instance of the router for api routes
