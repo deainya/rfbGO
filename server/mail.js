@@ -25,7 +25,6 @@ module.exports = {
         html: htmlmessage // html body
       };
     }
-    console.log(mailOptions);
     return transporter.sendMail(mailOptions, function(err, info){
       if(err){ return console.log(err); } else { return console.log("The letter has been sent"); }
     });

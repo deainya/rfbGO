@@ -151,8 +151,13 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
       console.log( "Tradepoint set: " + JSON.stringify(email) + " " + JSON.stringify(point) );
       res.status(201).send({ success: true, message: 'Tradepoint set' });
 
-      Mail.sendMail(email, 'Информация о торговой точке успешно сохранена',
-                           'Информация о торговой точке успешно сохранена: <b>' + point.tradepoint + '</b>');
+      if (!point.tp) {
+        var info = point.name + '; ' + point.tradepoint + ' (' + point.address + ')';
+      } else {
+        var info = 'код ' point.wp + '; ' + point.tradepoint + ' (' + point.address + ')';
+      }
+      Mail.sendMail(email, 'Информация о месте работы сохранена:' + info,
+                           'Информация о месте работы сохранена: <b>' + info + '</b>');
     }
   });
 });
@@ -222,18 +227,8 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
         emails = emails + docs[docs.length-1].email;
         console.log(emails);
 
-        // Email notification test 3
-        var mailOptions = {
-            from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-            to: emails, // list of receivers
-            subject: 'rfbGO notification ✔', // subject line
-            text: 'Поступил новый вызов!', // plaintext body
-            html: 'Поступил новый вызов! От <b>' + dataset.partner.tradepoint.name + '</b> в ' + dataset.partner.tradepoint.tradepoint + '.' // html body
-        };
-        transporter.sendMail(mailOptions, function(err, info){
-          if(err){ return console.log(err); }
-          console.log("Message sent: " + info.response);
-        });
+        Mail.sendMail(emails, 'Поступил новый вызов! От ' + dataset.partner.tradepoint.name + ' в ' + dataset.partner.tradepoint.tradepoint + '.',
+                              'Поступил новый вызов! От <b>' + dataset.partner.tradepoint.name + '</b> в ' + dataset.partner.tradepoint.tradepoint + '.');
       } else {
         console.log('Epic fail :)');
       }
@@ -257,18 +252,8 @@ apiRoutes.post("/orders/accept", jsonParser, (req, res) => {
       console.log( "Order accepted: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
       res.sendStatus(201);
 
-      // Email notification test 2
-      var mailOptions = {
-          from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-          to: email, // list of receivers
-          subject: 'rfbGO notification ✔', // subject line
-          text: 'Вызов принят', // plaintext body
-          html: 'Вызов принят' // html body
-      };
-      transporter.sendMail(mailOptions, function(err, info){
-        if(err){ return console.log(err); }
-        console.log("Message sent: " + info.response);
-      });
+      Mail.sendMail(email, 'Вызов принят');
+      console.log(result.value);
     });
   });
 });
@@ -284,20 +269,7 @@ apiRoutes.post("/orders/resolve", jsonParser, (req, res) => {
     console.log( "Order resolved: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
     res.sendStatus(201);
 
-    if (result.value.consultant.email) {
-      // Email notification test 4
-      var mailOptions = {
-          from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-          to: result.value.consultant.email, // list of receivers
-          subject: 'rfbGO notification ✔', // subject line
-          text: 'Вызов завершён', // plaintext body
-          html: 'Вызов завершён' // html body
-      };
-      transporter.sendMail(mailOptions, function(err, info){
-        if(err){ return console.log(err); }
-        console.log("Message sent: " + info.response);
-      });
-    }
+    if (result.value.consultant.email) { Mail.sendMail(result.value.consultant.email, 'Вызов завершён'); }
   });
 });
 
