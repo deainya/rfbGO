@@ -17,6 +17,7 @@ mongoose.Promise = global.Promise; //WTF???
 
 let e           = require('./configExpress'); // Load Express Configuration
 e.Express(app, express);
+let jsonParser  = e.jsonParser();
 
 // API routes                 ==================================================
 let apiRoutes = express.Router(); // get an instance of the router for api routes
