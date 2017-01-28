@@ -151,18 +151,8 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
       console.log( "Tradepoint set: " + JSON.stringify(email) + " " + JSON.stringify(point) );
       res.status(201).send({ success: true, message: 'Tradepoint set' });
 
-      // Email notification test 1
-      var mailOptions = {
-          from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-          to: email, // list of receivers
-          subject: 'rfbGO notification ✔', // subject line
-          text: 'Информация о торговой точке успешно сохранена', // plaintext body
-          html: 'Информация о торговой точке успешно сохранена: <b>' + point.tradepoint + '</b>' // html body
-      };
-      transporter.sendMail(mailOptions, function(err, info){
-        if(err){ return console.log(err); }
-        console.log("Message sent: " + info.response);
-      });
+      Mail.sendMail(email, 'Информация о торговой точке успешно сохранена',
+                           'Информация о торговой точке успешно сохранена: <b>' + point.tradepoint + '</b>');
     }
   });
 });
