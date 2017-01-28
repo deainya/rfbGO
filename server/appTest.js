@@ -135,8 +135,9 @@ apiRoutes.post("/user/atwork", (req, res) => {
   actions.insert(dataset, function(err, result){
     if(err) { res.sendStatus(400); console.log(err + " " + result); }
     else {
-      console.log( "Action added: " + JSON.stringify(dataset) );
       res.status(201).send({ success: true, message: 'Tradepoint added' });
+
+      console.log( "Action added: " + JSON.stringify(dataset) );
     }
   });
 });
@@ -145,10 +146,10 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
   let email = dataset.email;
   let point = dataset.tradepoint;
   let users = Mongo.users();
+
   users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": point}}, {}, function(err, result){
     if(err) { res.sendStatus(400); console.log(err + " " + result); }
     else {
-      console.log( "Tradepoint set: " + JSON.stringify(email) + " " + JSON.stringify(point) );
       res.status(201).send({ success: true, message: 'Tradepoint set' });
 
       if (!point.tp) {
@@ -157,6 +158,8 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
         var message = 'Информация о месте работы сохранена:' + point.name + '; ' + point.tradepoint + ' (' + point.address + ')';
       }
       Mail.sendMail(email, message);
+
+      console.log( "Tradepoint set: " + JSON.stringify(email) + " " + JSON.stringify(point) );
     }
   });
 });
@@ -179,7 +182,7 @@ apiRoutes.get("/orders", jsonParser, (req, res) => {
   let _city = req.query.city || '';
   let orders = Mongo.orders();
 
-  console.log({ created: { $gte: _from, $lt: _to }, "tp": _tp, "wp": _wp });
+  //console.log({ created: { $gte: _from, $lt: _to }, "tp": _tp, "wp": _wp });
   if ( _sts == 'Любой' || _sts == '' ){
     if (!req.query) {
       orders.find().toArray((err, docs) => {
@@ -214,7 +217,6 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
 
   orders.insert(dataset, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( "Order created: " + JSON.stringify( dataset ) );
     res.sendStatus(201);
 
     users.find({ "tradepoint.wp":dataset.partner.tradepoint.wp, "role":0 }, {"email":true}).toArray((err, docs) => {
@@ -233,6 +235,7 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
       }
     });
 
+    console.log( "Order created: " + JSON.stringify( dataset ) );
   });
 });
 
@@ -248,12 +251,13 @@ apiRoutes.post("/orders/accept", jsonParser, (req, res) => {
 
     orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: dataset}, function(err, result){
       if(err) { res.sendStatus(400); }
-      console.log( "Order accepted: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
       res.sendStatus(201);
 
       var message = 'Вызов принят! Консультант: ' + dataset.consultant.name  + ', ' + dataset.consultant.phone + '. Время прибытия: ' + dataset.time2go + ' мин. Проверьте список вызовов.';
       Mail.sendMail(email, message);
     });
+
+    console.log( "Order accepted: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
   });
 });
 
@@ -265,7 +269,6 @@ apiRoutes.post("/orders/resolve", jsonParser, (req, res) => {
 
   orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: dataset}, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( "Order resolved: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
     res.sendStatus(201);
 
     if (result.value.consultant.email) {
@@ -273,6 +276,8 @@ apiRoutes.post("/orders/resolve", jsonParser, (req, res) => {
       var message = 'Вызов от ' + result.value.partner.name + ' (' + result.value.partner.tradepoint.name + ') в ' + result.value.partner.tradepoint.tradepoint + ' завершён. Проверьте список вызовов.';
       Mail.sendMail(email, message);
     }
+
+    console.log( "Order resolved: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
   });
 });
 
@@ -283,7 +288,6 @@ apiRoutes.post("/orders/cancel", jsonParser, (req, res) => {
 
   orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: {status: "Отменён"}, $currentDate: {"cancelled": {$type: "date"}}}, function(err, result){
     if(err) { res.sendStatus(400); }
-    console.log( "Order cancelled: " + JSON.stringify(orderid) );
     res.sendStatus(201);
 
     if (result.value.consultant.email) {
@@ -291,6 +295,8 @@ apiRoutes.post("/orders/cancel", jsonParser, (req, res) => {
       var message = 'Вызов от ' + result.value.partner.name + ' (' + result.value.partner.tradepoint.name + ') в ' + result.value.partner.tradepoint.tradepoint + ' отменён. Проверьте список вызовов.';
       Mail.sendMail(email, message);
     }
+
+    console.log( "Order cancelled: " + JSON.stringify(orderid) );
   });
 });
 
