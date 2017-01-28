@@ -20,6 +20,10 @@ let e           = require('./configExpress'); // Load Express Configuration
 e.Express(app, express);
 let jsonParser  = e.jsonParser();
 
+let nodemailer  = require('nodemailer'); // send emails
+// create reusable transporter object using the default SMTP transport
+let transporter = nodemailer.createTransport(config.smtps);
+
 // API routes                 ==================================================
 let apiRoutes = express.Router(); // get an instance of the router for api routes
 
