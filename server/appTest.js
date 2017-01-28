@@ -154,7 +154,7 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
       if (!point.tp) {
         var info = point.name + '; ' + point.tradepoint + ' (' + point.address + ')';
       } else {
-        var info = 'код ' point.wp + '; ' + point.tradepoint + ' (' + point.address + ')';
+        var info = 'код ' + point.wp + '; ' + point.tradepoint + ' (' + point.address + ')';
       }
       Mail.sendMail(email, 'Информация о месте работы сохранена:' + info,
                            'Информация о месте работы сохранена: <b>' + info + '</b>');
