@@ -7,6 +7,7 @@ let mongoose    = require('mongoose');
 let jwt         = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 let Config      = require('./config'); // get our config file
+let Mail        = require('./mail');
 let Mongo       = require('./mongo'); // get our mongo utils
 let User        = require('./user'); // get our mongoose model
 
@@ -172,16 +173,12 @@ apiRoutes.post('/user/letter', (req, res) => {
   let letter = dataset.letter;
 
   // Email notification Yo
-  var mailOptions = {
-      from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-      to: email, // list of receivers
-      subject: 'rfbGO notification ✔', // subject line
-      text: letter, // plaintext body
-      html: letter // html body
-  };
-  transporter.sendMail(mailOptions, function(err, info){
-    if(err){ return console.log(err); }
-    console.log("Message sent: " + info.response);
+  Mail.sendMail({
+    from: '"rfbGO" <rfbGO@deain.ru>', // sender address
+    to: email, // list of receivers
+    subject: 'rfbGO notification ✔', // subject line
+    text: letter, // plaintext body
+    html: letter // html body
   });
 });
 
