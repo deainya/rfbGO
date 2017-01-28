@@ -175,6 +175,25 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
   });
 });
 
+apiRoutes.post('/user/letter', (req, res) => {
+  let dataset = req.body.dataset || {};
+  let email = dataset.email;
+  let letter = dataset.letter;
+
+  // Email notification Yo
+  var mailOptions = {
+      from: '"rfbGO" <rfbGO@deain.ru>', // sender address
+      to: email, // list of receivers
+      subject: 'rfbGO notification ✔', // subject line
+      text: letter, // plaintext body
+      html: letter // html body
+  };
+  transporter.sendMail(mailOptions, function(err, info){
+    if(err){ return console.log(err); }
+    console.log("Message sent: " + info.response);
+  });
+});
+
 // Orders routing             ==================================================
 apiRoutes.get("/orders", jsonParser, (req, res) => {
   let _from = req.query.from || '';

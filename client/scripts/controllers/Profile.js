@@ -1,8 +1,9 @@
 // User profile controller
 module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravatar) {
   $scope.Login = function(credentials){
-    auth.logIn(credentials);
-    $state.go('profile');
+    auth.logIn(credentials, function(){
+      $state.go('profile');
+    });
   };
   $scope.Register = function(credentials){
     auth.Register(credentials);
