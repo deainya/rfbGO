@@ -20,10 +20,6 @@ let e           = require('./configExpress'); // Load Express Configuration
 e.Express(app, express);
 let jsonParser  = e.jsonParser();
 
-let nodemailer  = require('nodemailer'); // send emails
-// create reusable transporter object using the default SMTP transport
-let transporter = nodemailer.createTransport(Config.smtps);
-
 // API routes                 ==================================================
 let apiRoutes = express.Router(); // get an instance of the router for api routes
 
@@ -176,14 +172,7 @@ apiRoutes.post('/user/letter', (req, res) => {
   let email = dataset.email;
   let letter = dataset.letter;
 
-  // Email notification Yo
-  Mail.sendMail({
-    from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-    to: email, // list of receivers
-    subject: 'rfbGO notification ✔', // subject line
-    text: letter, // plaintext body
-    html: letter // html body
-  });
+  Mail.sendMail(email, letter);
 });
 
 // Orders routing             ==================================================

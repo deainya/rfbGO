@@ -7,10 +7,26 @@ let nodemailer  = require('nodemailer'); // send emails
 let transporter = nodemailer.createTransport(config.smtps);
 
 module.exports = {
-  sendMail(mailOptions){
+  sendMail(mail_to, message, htmlmessage){
+    if (!htmlmessage) {
+      var mailOptions = {
+        from: config.mail_addresser, // sender address
+        to: mail_to, // list of receivers
+        subject: config.mail_subject, // subject line
+        text: message, // plaintext body
+        html: message // html body
+      };
+    } else {
+      var mailOptions = {
+        from: config.mail_addresser, // sender address
+        to: mail_to, // list of receivers
+        subject: config.mail_subject, // subject line
+        text: message, // plaintext body
+        html: htmlmessage // html body
+      };
+    }
     return transporter.sendMail(mailOptions, function(err, info){
-      if(err){ return console.log(err); }
-      console.log("Message sent"); // + info.response
+      if(err){ return console.log(err); } else { return console.log("The letter has been sent"); }
     });
   }
 }
