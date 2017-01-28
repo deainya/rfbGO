@@ -11,6 +11,7 @@ module.exports = function ($rootScope, $scope, dataSource) {
         $scope.u.sent = true;
         //$state.reload();
       }
-    
+
+    });
   };
 };
