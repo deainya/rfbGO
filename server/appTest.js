@@ -22,7 +22,7 @@ let jsonParser  = e.jsonParser();
 
 let nodemailer  = require('nodemailer'); // send emails
 // create reusable transporter object using the default SMTP transport
-let transporter = nodemailer.createTransport(config.smtps);
+let transporter = nodemailer.createTransport(Config.smtps);
 
 // API routes                 ==================================================
 let apiRoutes = express.Router(); // get an instance of the router for api routes
