@@ -227,8 +227,8 @@ apiRoutes.post("/orders/create", jsonParser, (req, res) => {
         emails = emails + docs[docs.length-1].email;
         console.log(emails);
 
-        Mail.sendMail(emails, 'Поступил новый вызов! От ' + dataset.partner.tradepoint.name + ' в ' + dataset.partner.tradepoint.tradepoint + '.',
-                              'Поступил новый вызов! От <b>' + dataset.partner.tradepoint.name + '</b> в ' + dataset.partner.tradepoint.tradepoint + '.');
+        Mail.sendMail(emails, 'Поступил новый вызов! От ' + dataset.partner.tradepoint.name + ' в ' + dataset.partner.tradepoint.tradepoint + '. Проверьте список вызовов.',
+                              'Поступил новый вызов! От <b>' + dataset.partner.tradepoint.name + '</b> в ' + dataset.partner.tradepoint.tradepoint + '. Проверьте список вызовов.');
       } else {
         console.log('Epic fail :)');
       }
@@ -252,8 +252,7 @@ apiRoutes.post("/orders/accept", jsonParser, (req, res) => {
       console.log( "Order accepted: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
       res.sendStatus(201);
 
-      Mail.sendMail(email, 'Вызов принят');
-      console.log(result.value);
+      Mail.sendMail(email, 'Вызов принят! Консультант: ' + dataset.name  + ', ' + dataset.phone + '. Время прибытия: ' + dataset.time2go + ' мин. Проверьте список вызовов.');
     });
   });
 });
@@ -269,7 +268,9 @@ apiRoutes.post("/orders/resolve", jsonParser, (req, res) => {
     console.log( "Order resolved: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
     res.sendStatus(201);
 
-    if (result.value.consultant.email) { Mail.sendMail(result.value.consultant.email, 'Вызов завершён'); }
+    if (result.value.consultant.email) {
+      Mail.sendMail(result.value.consultant.email, 'Вызов от ' + result.value.partner.name + ' (' + result.value.partner.tradepoint.tradepoint + ') завершён. Проверьте список вызовов.');
+    }
   });
 });
 
@@ -282,6 +283,10 @@ apiRoutes.post("/orders/cancel", jsonParser, (req, res) => {
     if(err) { res.sendStatus(400); }
     console.log( "Order cancelled: " + JSON.stringify(orderid) );
     res.sendStatus(201);
+
+    if (result.value.consultant.email) {
+      Mail.sendMail(result.value.consultant.email, 'Вызов от ' + result.value.partner.name + ' (' + result.value.partner.tradepoint.tradepoint + ') отменён. Проверьте список вызовов.');
+    }
   });
 });
 
