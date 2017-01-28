@@ -4,9 +4,9 @@ module.exports = function ($rootScope, $scope, dataSource) {
     $scope.users = res.data;
   });
 
-  $scope.SendLetter = function(){
+  $scope.SendLetter = function(email, message){
 
-    dataSource.set('/api/user/letter', {email: $scope.u.email, letter: $scope.u.message}).then(function(res){
+    dataSource.set('/api/user/letter', {email: email, letter: message}).then(function(res){
       if (res.data.success) {
         $scope.u.sent = true;
         //$state.reload();

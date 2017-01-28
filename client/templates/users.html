@@ -35,7 +35,7 @@
           <td colspan="3" width="100%">Адрес: {{ u.tradepoint.address }} </td>
         <tr>
           <td colspan="3" width="100%">
-            <form class="formx" name="SendForm" ng-submit="SendLetter()"/>
+            <form class="formx" name="SendForm" ng-submit="SendLetter(u.email, u.message)"/>
               <input class="formx-input" placeholder="Сообщение пользователю" id="message" ng-model="u.message"/>
               <input class="btnx" type="submit" value="Отправить" />
             </form>
