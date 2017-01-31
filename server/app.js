@@ -18,7 +18,7 @@ require('./configExpress')(app, express, bodyParser); // Load Express Configurat
 // API routes                 ==================================================
 let apiRoutes = express.Router(); // get an instance of the router for api routes
 
-require('./routes/auth')(apiRoutes, User); // auth routes
+require('./routes/auth')(apiRoutes); // auth routes
 
 // route to show welcome message
 apiRoutes.get('/', (req, res) => {

@@ -9,7 +9,7 @@ let User        = require('./user'); // get our mongoose model
 mongoose.connect(Config.database); // connect to MongoDB through Mongoose
 mongoose.Promise = global.Promise; //WTF???
 
-module.exports = function(apiRoutes, User) {
+module.exports = function(apiRoutes) {
   apiRoutes.post('/login', (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
       if (err) throw err;
