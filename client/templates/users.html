@@ -1,5 +1,5 @@
 <h2>Ой</h2><br>
-<table class="grid" ng-show="user.role==0">
+<table class="grid" ng-show="user.role==2">
   <thead>
     <tr>
       <th width="25%">name</th>
@@ -45,7 +45,8 @@
               <select class="formx-input" id="newrole" ng-model="u.newrole" ng-init="u.newrole = '0'">
                 <option value="0">Консультант</option>
                 <option value="1">Продавец-партнёр</option>
-                <option value="2">Администратор</option>
+                <option value="2">Супервизор</option>
+                <option value="3">Администратор</option>
               </select>
               <input class="btnx" type="submit" value="Принять" />
             </form>
