@@ -70,6 +70,24 @@ module.exports = function(apiRoutes, jsonParser, Mongo, Mail) {
     });
   });
 
+  apiRoutes.post("/user/delete", (req, res) => {
+    let dataset = req.body.dataset || {};
+    let email = dataset.email;
+    let role = dataset.role;
+    let users = Mongo.users();
+
+    if (role == 3) {
+      users.deleteOne({"email": email}, {}, function(err, result){
+        if(err) { res.sendStatus(400); console.log(err + " " + result); }
+        else {
+          res.status(201).send({ success: true, message: 'User deleted' });
+
+          console.log( "User deleted: " + JSON.stringify(email) + " " + JSON.stringify(role) );
+        }
+      });
+    }
+  });
+
   apiRoutes.post('/user/letter', (req, res) => {
     let dataset = req.body.dataset || {};
     let email = dataset.email;
