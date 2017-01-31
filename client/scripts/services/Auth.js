@@ -7,13 +7,14 @@ module.exports = function ($http, session) {
     isLoggedIn: function(){
       return session.getUser() !== undefined;
     },
-    Register: function(credentials){
+    Register: function(credentials, callback){
       return $http
         .post('/api/register', credentials)
         .then(function(response){
           var data = response.data;
           session.setUser(data.user);
           session.setAccessToken(data.token);
+          callback();
         });
     },
     /* Log in
@@ -30,7 +31,6 @@ module.exports = function ($http, session) {
           console.log(data.user);
           console.log(data.token);
           callback();
-          console.log("callback");
         });
     },
     /* Log out

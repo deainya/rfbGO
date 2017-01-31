@@ -6,8 +6,9 @@ module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravata
     });
   };
   $scope.Register = function(credentials){
-    auth.Register(credentials);
-    $state.go('profile');
+    auth.Register(credentials, function(){
+      $state.go('profile');
+    });
   };
 
   if(auth.isLoggedIn()){
