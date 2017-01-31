@@ -137,7 +137,7 @@ module.exports = function(apiRoutes, jsonParser, Mongo, Mail) {
         else {
           res.status(201).send({ success: true, message: 'Order deleted' });
 
-          console.log( "Order deleted: " + JSON.stringify(email) + " " + JSON.stringify(role) );
+          console.log( "Order deleted: " + JSON.stringify(orderid) + " " + JSON.stringify(role) );
         }
       });
     }
