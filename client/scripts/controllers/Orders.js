@@ -21,7 +21,7 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
   } else if ($rootScope.user.role == 1) {
     angular.extend(filter, {tp:$rootScope.user.tradepoint.tp});
   } else if ($rootScope.user.role == 2) {
-    filter = {};
+    filter = {from: $rootScope.filter.from, to: $rootScope.filter.to, status: "Все"};
   }
   dataSource.get('/api/orders', filter).then(function(res) {
     $scope.orders = res.data;
