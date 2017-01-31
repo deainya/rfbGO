@@ -1,6 +1,6 @@
 // Users controller
 module.exports = function ($rootScope, $scope, $state, dataSource) {
-  dataSource.get('/api/userslonglist', {}).then(function(res) {
+  dataSource.get('/api/console', {}).then(function(res) {
     $scope.users = res.data;
   });
 

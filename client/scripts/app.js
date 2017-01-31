@@ -46,7 +46,7 @@ angular
     controller: 'ordersCtrl'
   })
   .state('users', {
-    url: '/userslonglist',
+    url: '/console',
     templateUrl: 'templates/users.html',
     controller: 'usersCtrl'
   })
