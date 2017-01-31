@@ -18,3 +18,7 @@ App is built using MEAN stack
 * `mongoimport -u user -p pass --db rfbgo-dev --collection orders --type json --file server/seeds/o-seed.json --jsonArray --drop`
 * `mongoimport -u user -p pass --db rfbgo-dev --collection tradepoints --type json --file server/seeds/t-seed.json --jsonArray --drop`
 * `mongoimport -u user -p pass --db rfbgo-dev --collection users --type json --file server/seeds/u-seed.json --jsonArray --drop`
+
+## Start/Stop forever server side app (appps/rfbGO/htdocs)
+* `/opt/bitnami/nodejs/bin/node /opt/bitnami/nodejs/bin/forever stop app.js`
+* `/opt/bitnami/nodejs/bin/node /opt/bitnami/nodejs/bin/forever start app.js`
