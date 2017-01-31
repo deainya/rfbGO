@@ -106,7 +106,7 @@ apiRoutes.get('/', (req, res) => {
 });
 
 // route to return all users
-apiRoutes.get('/userslonglist', (req, res) => {
+apiRoutes.get('/console', (req, res) => {
   User.find({}, (err, docs) => {
     if(err) { res.sendStatus(400); }
     res.json(docs);
