@@ -1,5 +1,5 @@
 <h2>Ой</h2><br>
-<table class="grid" ng-show="user.role==2">
+<table class="grid" ng-show="user.role==0">
   <thead>
     <tr>
       <th width="25%">name</th>
@@ -51,7 +51,7 @@
               <input class="btnx" type="submit" value="Принять" />
             </form>
 
-            <form class="formx" name="SendForm" ng-submit="DeleteUser(u.email, user.role)"/>
+            <form class="formx" name="DeleteForm" ng-submit="DeleteUser(u.email, user.role)"/>
               <input class="btnx" type="submit" value="Удалить" />
             </form>
           </td>

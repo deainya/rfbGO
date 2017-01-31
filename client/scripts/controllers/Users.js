@@ -21,7 +21,7 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
     });
   };
 
-  $scope.setRole = function(email, role){
+  $scope.DeleteUser = function(email, role){
     dataSource.set('/api/user/delete', {email: email, role: role}).then(function(res){
       if (res.data.success) {
         $state.reload();
