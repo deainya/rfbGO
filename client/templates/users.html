@@ -39,6 +39,17 @@
               <input class="formx-input" placeholder="Сообщение пользователю" id="message" ng-model="u.message"/>
               <input class="btnx" type="submit" value="Отправить" />
             </form>
+
+            <form class="formx" name="RoleForm" ng-submit="setRole(u.email, u.newrole)"/>
+              <label class="form-label" for="newrole">Новая роль:</label>
+              <select class="formx-input" id="newrole" ng-model="u.newrole" ng-init="u.newrole = '0'">
+                <option value="0">Консультант</option>
+                <option value="1">Продавец-партнёр</option>
+                <option value="2">Администратор</option>
+              </select>
+              <input class="btnx" type="submit" value="Принять" />
+            </form>
+
           </td>
         </tr>
       </tbody>

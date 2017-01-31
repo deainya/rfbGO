@@ -5,28 +5,20 @@ let express     = require('express');
 let app         = express();
 let bodyParser  = require('body-parser'); // will let us get parameters from our POST requests
 let mongoose    = require('mongoose');
-let morgan      = require('morgan'); // will log requests to the console so we can see what is happening
 let jwt         = require('jsonwebtoken'); // used to create, sign, and verify tokens
-let nodemailer  = require('nodemailer'); // send emails
 
 let Config      = require('./config'); // get our config file
+let Mail        = require('./mail');
 let Mongo       = require('./mongo'); // get our mongo utils
 let User        = require('./user'); // get our mongoose model
 
-// Email test                 ==================================================
-// create reusable transporter object using the default SMTP transport
-let transporter = nodemailer.createTransport('smtps://deainru%40gmail.com:mail4deainru@smtp.gmail.com');
 // Initialization            ==================================================
 Mongo.connect(Config.database); // connecting to MongoDB
 mongoose.connect(Config.database); // connect to MongoDB through Mongoose
 mongoose.Promise = global.Promise; //WTF???
 
-let jsonParser = bodyParser.json(); // ?
-app.use(bodyParser.json()); // get our request parameters
-app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(express.cookieParser()); // read cookies (needed for auth)
-app.use(morgan('dev')); // use morgan to log requests to the console
-app.use( express.static(__dirname + "/../client") ); // default route
+let jsonParser  = bodyParser.json();
+require('./configExpress')(app, express, bodyParser); // Load Express Configuration
 
 // API routes                 ==================================================
 let apiRoutes = express.Router(); // get an instance of the router for api routes
@@ -130,7 +122,7 @@ apiRoutes.get("/tradepoints", (req, res) => {
       if(err) { res.sendStatus(400); }
       res.json( docs );
     });
-  } else{
+  } else if (role == 1) {
     tradepoints.find({"city":city}, {"_id":false}).toArray((err, docs) => {
       if(err) { res.sendStatus(400); }
       res.json( docs );
@@ -143,8 +135,9 @@ apiRoutes.post("/user/atwork", (req, res) => {
   actions.insert(dataset, function(err, result){
     if(err) { res.sendStatus(400); console.log(err + " " + result); }
     else {
-      console.log( "Action added: " + JSON.stringify(dataset) );
       res.status(201).send({ success: true, message: 'Tradepoint added' });
+
+      console.log( "Action added: " + JSON.stringify(dataset) );
     }
   });
 });
@@ -153,194 +146,49 @@ apiRoutes.post("/user/tradepoint", (req, res) => {
   let email = dataset.email;
   let point = dataset.tradepoint;
   let users = Mongo.users();
+
   users.findOneAndUpdate({"email": email}, {$set: {"tradepoint": point}}, {}, function(err, result){
     if(err) { res.sendStatus(400); console.log(err + " " + result); }
     else {
-      console.log( "Tradepoint set: " + JSON.stringify(email) + " " + JSON.stringify(point) );
       res.status(201).send({ success: true, message: 'Tradepoint set' });
 
-      // Email notification test 1
-      var mailOptions = {
-          from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-          to: email, // list of receivers
-          subject: 'rfbGO notification ✔', // subject line
-          text: 'Информация о торговой точке успешно сохранена', // plaintext body
-          html: 'Информация о торговой точке успешно сохранена: <b>' + point.tradepoint + '</b>' // html body
-      };
-      transporter.sendMail(mailOptions, function(err, info){
-        if(err){ return console.log(err); }
-        console.log("Message sent: " + info.response);
-      });
+      if (!point.tp) {
+        var message = 'Информация о месте работы сохранена: код ' + point.wp + '; ' + point.tradepoint + ' (' + point.address + ')';
+      } else {
+        var message = 'Информация о месте работы сохранена:' + point.name + '; ' + point.tradepoint + ' (' + point.address + ')';
+      }
+      Mail.sendMail(email, message);
+
+      console.log( "Tradepoint set: " + JSON.stringify(email) + " " + JSON.stringify(point) );
     }
   });
 });
+apiRoutes.post("/user/role", (req, res) => {
+  let dataset = req.body.dataset || {};
+  let email = dataset.email;
+  let role = dataset.role;
+  let users = Mongo.users();
+
+  users.findOneAndUpdate({"email": email}, {$set: {"role": role}}, {}, function(err, result){
+    if(err) { res.sendStatus(400); console.log(err + " " + result); }
+    else {
+      res.status(201).send({ success: true, message: 'Role set' });
+
+      console.log( "Role set: " + JSON.stringify(email) + " " + JSON.stringify(role) );
+    }
+  });
+});
+
 
 apiRoutes.post('/user/letter', (req, res) => {
   let dataset = req.body.dataset || {};
   let email = dataset.email;
   let letter = dataset.letter;
 
-  // Email notification Yo
-  var mailOptions = {
-      from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-      to: email, // list of receivers
-      subject: 'rfbGO notification ✔', // subject line
-      text: letter, // plaintext body
-      html: letter // html body
-  };
-  transporter.sendMail(mailOptions, function(err, info){
-    if(err){ return console.log(err); }
-    console.log("Message sent: " + info.response);
-  });
+  Mail.sendMail(email, letter);
 });
 
-// Orders routing             ==================================================
-apiRoutes.get("/orders", jsonParser, (req, res) => {
-  let _from = req.query.from || '';
-  let _to = req.query.to || '';
-  let _sts = req.query.status || '';
-  let _tp = req.query.tp || '';
-  let _wp = req.query.wp || '';
-  let _city = req.query.city || '';
-  let orders = Mongo.orders();
-
-  console.log({ created: { $gte: _from, $lt: _to }, "tp": _tp, "wp": _wp });
-  if ( _sts == 'Любой' || _sts == '' ){
-    if (!req.query) {
-      orders.find().toArray((err, docs) => {
-        if (err) { res.sendStatus(400); }
-        res.json( docs ); // orders
-      });
-    } else {
-      orders.find({ created: { $gte: _from, $lt: _to }, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
-        if (err) { res.sendStatus(400); }
-        res.json( docs ); // orders
-      });
-    }
-  } else {
-    if (!req.query) {
-      orders.find().toArray((err, docs) => {
-        if (err) { res.sendStatus(400); }
-        res.json( docs ); // orders
-      });
-    } else {
-      orders.find({ created: { $gte: _from, $lt: _to }, "status": _sts, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
-        if (err) { res.sendStatus(400); }
-        res.json( docs ); // orders
-      });
-    }
-  }
-});
-
-apiRoutes.post("/orders/create", jsonParser, (req, res) => {
-  let dataset = req.body.dataset || {};
-  let orders = Mongo.orders();
-  let users = Mongo.users();
-
-  orders.insert(dataset, function(err, result){
-    if(err) { res.sendStatus(400); }
-    console.log( "Order created: " + JSON.stringify( dataset ) );
-    res.sendStatus(201);
-
-    users.find({ "tradepoint.wp":dataset.partner.tradepoint.wp, "role":0 }, {"email":true}).toArray((err, docs) => {
-      if (docs) {
-        var emails = '';
-        for (var i = 0; i < docs.length-1; i++){
-          emails = emails + docs[i].email + ', ';
-        }
-        emails = emails + docs[docs.length-1].email;
-        console.log(emails);
-
-        // Email notification test 3
-        var mailOptions = {
-            from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-            to: emails, // list of receivers
-            subject: 'rfbGO notification ✔', // subject line
-            text: 'Поступил новый вызов!', // plaintext body
-            html: 'Поступил новый вызов! От <b>' + dataset.partner.tradepoint.name + '</b> в ' + dataset.partner.tradepoint.tradepoint + '.' // html body
-        };
-        transporter.sendMail(mailOptions, function(err, info){
-          if(err){ return console.log(err); }
-          console.log("Message sent: " + info.response);
-        });
-      } else {
-        console.log('Epic fail :)');
-      }
-    });
-
-  });
-});
-
-apiRoutes.post("/orders/accept", jsonParser, (req, res) => {
-  let dataset = req.body.dataset || {};
-  let orderid = dataset._id;
-  delete dataset._id;
-  let orders = Mongo.orders();
-
-  orders.findOne({_id: new Mongo.ObjID(orderid)}, (err, docs) => {
-    if(err) { console.log(err); }
-    let email = docs.partner.email;
-
-    orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: dataset}, function(err, result){
-      if(err) { res.sendStatus(400); }
-      console.log( "Order accepted: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
-      res.sendStatus(201);
-
-      // Email notification test 2
-      var mailOptions = {
-          from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-          to: email, // list of receivers
-          subject: 'rfbGO notification ✔', // subject line
-          text: 'Вызов принят', // plaintext body
-          html: 'Вызов принят' // html body
-      };
-      transporter.sendMail(mailOptions, function(err, info){
-        if(err){ return console.log(err); }
-        console.log("Message sent: " + info.response);
-      });
-    });
-  });
-});
-
-apiRoutes.post("/orders/resolve", jsonParser, (req, res) => {
-  let dataset = req.body.dataset || {};
-  let orderid = dataset._id;
-  delete dataset._id;
-  let orders = Mongo.orders();
-
-  orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: dataset}, function(err, result){
-    if(err) { res.sendStatus(400); }
-    console.log( "Order resolved: " + JSON.stringify(orderid) + " " + JSON.stringify(dataset) );
-    res.sendStatus(201);
-
-    if (result.value.consultant.email) {
-      // Email notification test 4
-      var mailOptions = {
-          from: '"rfbGO" <rfbGO@deain.ru>', // sender address
-          to: result.value.consultant.email, // list of receivers
-          subject: 'rfbGO notification ✔', // subject line
-          text: 'Вызов завершён', // plaintext body
-          html: 'Вызов завершён' // html body
-      };
-      transporter.sendMail(mailOptions, function(err, info){
-        if(err){ return console.log(err); }
-        console.log("Message sent: " + info.response);
-      });
-    }
-  });
-});
-
-apiRoutes.post("/orders/cancel", jsonParser, (req, res) => {
-  let dataset = req.body.dataset || {};
-  let orderid = dataset._id;
-  let orders = Mongo.orders();
-
-  orders.findOneAndUpdate({_id: new Mongo.ObjID(orderid)}, {$set: {status: "Отменён"}, $currentDate: {"cancelled": {$type: "date"}}}, function(err, result){
-    if(err) { res.sendStatus(400); }
-    console.log( "Order cancelled: " + JSON.stringify(orderid) );
-    res.sendStatus(201);
-  });
-});
+require('./routes/orders')(apiRoutes, jsonParser, Mongo, Mail); // orders routes
 
 // Apply the API routes       ==================================================
 app.use('/api', apiRoutes);

@@ -12,14 +12,16 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
   $scope.city = $rootScope.filter.city;
 
   var filter = {from: $rootScope.filter.from, to: $rootScope.filter.to, status: $rootScope.filter.status};
-  if ($rootScope.user.role === 1){
-    angular.extend(filter, {tp:$rootScope.user.tradepoint.tp});
-  } else {
-    if ($rootScope.filter.city){
+  if ($rootScope.user.role == 0) {
+    if ($rootScope.filter.city) {
       angular.extend(filter, {city:$rootScope.user.tradepoint.city});
     } else {
       angular.extend(filter, {wp:$rootScope.user.tradepoint.wp});
     }
+  } else if ($rootScope.user.role == 1) {
+    angular.extend(filter, {tp:$rootScope.user.tradepoint.tp});
+  } else if ($rootScope.user.role == 2) {
+    filter = {};
   }
   dataSource.get('/api/orders', filter).then(function(res) {
     $scope.orders = res.data;

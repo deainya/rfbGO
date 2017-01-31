@@ -5,13 +5,20 @@ module.exports = function ($rootScope, $scope, dataSource) {
   });
 
   $scope.SendLetter = function(email, message){
-
     dataSource.set('/api/user/letter', {email: email, letter: message}).then(function(res){
       if (res.data.success) {
         $scope.u.sent = true;
         //$state.reload();
       }
-
     });
   };
+
+  $scope.setRole = function(email, role){
+    dataSource.set('/api/user/role', {email: email, role: role}).then(function(res){
+      if (res.data.success) {
+        $state.reload();
+      }
+    });
+  };
+
 };
