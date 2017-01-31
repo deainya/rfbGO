@@ -96,7 +96,7 @@ module.exports = function(apiRoutes, jsonParser, Mongo, Mail) {
       if(err) { res.sendStatus(400); }
       res.sendStatus(201);
 
-      if (result.value.consultant.email) {
+      if (result.value.consultant) {
         var email = result.value.consultant.email;
         var message = 'Вызов от ' + result.value.partner.name + ' (' + result.value.partner.tradepoint.name + ') в ' + result.value.partner.tradepoint.tradepoint + ' завершён. Проверьте список вызовов.';
         Mail.sendMail(email, message);
@@ -115,7 +115,7 @@ module.exports = function(apiRoutes, jsonParser, Mongo, Mail) {
       if(err) { res.sendStatus(400); }
       res.sendStatus(201);
 
-      if (result.value.consultant.email) {
+      if (result.value.consultant) {
         var email = result.value.consultant.email;
         var message = 'Вызов от ' + result.value.partner.name + ' (' + result.value.partner.tradepoint.name + ') в ' + result.value.partner.tradepoint.tradepoint + ' отменён. Проверьте список вызовов.';
         Mail.sendMail(email, message);
