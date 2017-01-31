@@ -124,4 +124,22 @@ module.exports = function(apiRoutes, jsonParser, Mongo, Mail) {
       console.log( "Order cancelled: " + JSON.stringify(orderid) );
     });
   });
+
+  apiRoutes.post("/orders/delete", (req, res) => {
+    let dataset = req.body.dataset || {};
+    let orderid = dataset._id;
+    let role = dataset.role;
+    let orders = Mongo.orders();
+
+    if (role == 3) {
+      orders.deleteOne({_id: new Mongo.ObjID(orderid)}, {}, function(err, result){
+        if(err) { res.sendStatus(400); console.log(err + " " + result); }
+        else {
+          res.status(201).send({ success: true, message: 'Order deleted' });
+
+          console.log( "Order deleted: " + JSON.stringify(email) + " " + JSON.stringify(role) );
+        }
+      });
+    }
+  });
 }

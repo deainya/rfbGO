@@ -74,4 +74,15 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
   $scope.isAccept = function(status){ return status === "Принят" };
   $scope.isResolve = function(status){ return status === "Завершён" };
   $scope.isCancel = function(status){ return status === "Отменён" };
+
+
+
+  $scope.DeleteOrder = function(orderid, role){
+    dataSource.set('/api/orders/delete', {_id:orderid, role: role}).then(function(res){
+      if (res.data.success) {
+        $state.reload();
+      }
+    });
+  };
+
 };

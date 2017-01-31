@@ -100,6 +100,13 @@
             </form>
           </td>
         </tr>
+        <tr>
+          <td colspan="3">
+            <form class="formx" name="DeleteForm" ng-show="user.role==3" ng-submit="DeleteOrder(order._id, user.role)"/>
+              <input class="btnx" type="submit" value="Удалить" />
+            </form>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
