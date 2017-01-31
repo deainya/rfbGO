@@ -4,18 +4,13 @@
 let express     = require('express');
 let app         = express();
 let bodyParser  = require('body-parser'); // will let us get parameters from our POST requests
-let mongoose    = require('mongoose');
-let jwt         = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 let Config      = require('./config'); // get our config file
 let Mail        = require('./mail');
 let Mongo       = require('./mongo'); // get our mongo utils
-let User        = require('./user'); // get our mongoose model
 
 // Initialization            ==================================================
 Mongo.connect(Config.database); // connecting to MongoDB
-mongoose.connect(Config.database); // connect to MongoDB through Mongoose
-mongoose.Promise = global.Promise; //WTF???
 
 let jsonParser  = bodyParser.json();
 require('./configExpress')(app, express, bodyParser); // Load Express Configuration
