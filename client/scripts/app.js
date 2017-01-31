@@ -59,7 +59,7 @@ angular
 .factory('localStorage', ['$window', localStorageFactory])
 .controller('profileCtrl', ['$rootScope', '$scope', '$state', 'auth', 'dataSource', 'Gravatar', profileCtrl])
 .controller('ordersCtrl' , ['$rootScope', '$scope', '$state', 'dataSource' , ordersCtrl])
-.controller('usersCtrl' , ['$rootScope', '$scope', 'dataSource' , usersCtrl])
+.controller('usersCtrl' , ['$rootScope', '$scope', '$state', 'dataSource' , usersCtrl])
 
 .run(function ($rootScope, $state, auth, session) {
   $rootScope.auth = auth;

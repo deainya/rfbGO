@@ -11,11 +11,12 @@ module.exports = function(apiRoutes, jsonParser, Mongo, Mail) {
     let orders = Mongo.orders();
 
     //console.log({ created: { $gte: _from, $lt: _to }, "tp": _tp, "wp": _wp });
-    if ( _sts == 'Любой' || _sts == '' ){
+    if ( _sts == 'Любой' || _sts == '' ) {
       if (!req.query) {
         orders.find().toArray((err, docs) => {
           if (err) { res.sendStatus(400); }
           res.json( docs ); // orders
+          console.log("1");
         });
       } else {
         orders.find({ created: { $gte: _from, $lt: _to }, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
@@ -28,6 +29,7 @@ module.exports = function(apiRoutes, jsonParser, Mongo, Mail) {
         orders.find().toArray((err, docs) => {
           if (err) { res.sendStatus(400); }
           res.json( docs ); // orders
+          console.log("2");
         });
       } else {
         orders.find({ created: { $gte: _from, $lt: _to }, "status": _sts, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
