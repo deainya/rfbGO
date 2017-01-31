@@ -3,7 +3,7 @@
 let mongoose    = require('mongoose');
 let jwt         = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
-let Config      = require('././config'); // get our config file
+let Config      = require('./../config'); // get our config file
 let User        = require('./user'); // get our mongoose model
 
 mongoose.connect(Config.database); // connect to MongoDB through Mongoose
