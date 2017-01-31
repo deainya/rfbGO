@@ -4,7 +4,9 @@
     <tr>
       <th width="25%">
         <span ng-show="user.role==0">Партнёр</span>
-        <span ng-show="user.role==1">Консультант</span>&nbsp;
+        <span ng-show="user.role==1">Консультант</span>
+        <span ng-show="user.role>1">Партнёр</span>/<span ng-show="user.role>1">Консультант</span>
+        &nbsp;
       </th>
       <th width="25%">Место</th>
       <th width="25%">Дата</th>
@@ -21,6 +23,7 @@
           <td width="25%">
             <span style="color:red" ng-show="isDeadline(order.status, order.created)"><span ng-show="user.role==0">{{ order.partner.name }}</span><span ng-show="user.role==1">{{ order.consultant.name }}</span></span>
             <span ng-show="!isDeadline(order.status, order.created)"><span ng-show="user.role==0">{{ order.partner.name }}</span><span ng-show="user.role==1">{{ order.consultant.name }}</span></span>
+            <span ng-show="user.role>1">{{ order.partner.name }}</span>&#47;<span ng-show="user.role>1">{{ order.consultant.name }}</span>
             &nbsp;
           </td>
           <td width="25%">
@@ -110,7 +113,7 @@
     &nbsp;
     <input class="formx-input" type="date" id="to" ng-model="filter.to"/>
     &nbsp;&nbsp;&nbsp;
-    <select class="formx-input" id="status" ng-model="filter.status">
+    <select class="formx-input" id="status" ng-show="user.role<2" ng-model="filter.status">
       <option value="Любой">Любой</option>
       <option value="Новый">Новый</option>
       <option value="Принят">Принят</option>

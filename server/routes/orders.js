@@ -12,38 +12,25 @@ module.exports = function(apiRoutes, jsonParser, Mongo, Mail) {
 
     //console.log({ created: { $gte: _from, $lt: _to }, "tp": _tp, "wp": _wp });
     if ( _sts == 'Все') {
-      orders.find().toArray((err, docs) => {
+      /*orders.find().toArray((err, docs) => {
+        if (err) { res.sendStatus(400); }
+        res.json( docs ); // all orders
+      });*/
+      orders.find({ created: { $gte: _from, $lt: _to }}, {}).toArray((err, docs) => {
         if (err) { res.sendStatus(400); }
         res.json( docs ); // orders
-        console.log("0");
       });
     } else {
       if ( _sts == 'Любой' || _sts == '' ) {
-        if (!req.query) {
-          orders.find().toArray((err, docs) => {
-            if (err) { res.sendStatus(400); }
-            res.json( docs ); // orders
-            console.log("1");
-          });
-        } else {
-          orders.find({ created: { $gte: _from, $lt: _to }, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
-            if (err) { res.sendStatus(400); }
-            res.json( docs ); // orders
-          });
-        }
+        orders.find({ created: { $gte: _from, $lt: _to }, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
+          if (err) { res.sendStatus(400); }
+          res.json( docs ); // orders
+        });
       } else {
-        if (!req.query) {
-          orders.find().toArray((err, docs) => {
-            if (err) { res.sendStatus(400); }
-            res.json( docs ); // orders
-            console.log("2");
-          });
-        } else {
-          orders.find({ created: { $gte: _from, $lt: _to }, "status": _sts, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
-            if (err) { res.sendStatus(400); }
-            res.json( docs ); // orders
-          });
-        }
+        orders.find({ created: { $gte: _from, $lt: _to }, "status": _sts, $or:[{"partner.tradepoint.tp": _tp}, {"partner.tradepoint.wp": _wp}, {"partner.tradepoint.city": _city}] }, {}).toArray((err, docs) => {
+          if (err) { res.sendStatus(400); }
+          res.json( docs ); // orders
+        });
       }
     }
   });
