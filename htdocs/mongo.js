@@ -19,15 +19,9 @@ module.exports = {
   actions(){
     return _db.collection('actions');
   },
-  //consultants(){
-  //  return _db.collection('consultants');
-  //},
   orders(){
     return _db.collection('orders');
   },
-  //partners(){
-  //  return _db.collection('partners');
-  //},
   tradepoints(){
     return _db.collection('tradepoints');
   },
