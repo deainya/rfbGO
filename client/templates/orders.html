@@ -60,7 +60,7 @@
         </tr>
         <tr>
           <td width="33%">Клиент: {{ order.client }}</td>
-          <td width="33%">Телефон: {{ order.contact.phone }}</td>
+          <td width="33%">Телефон: <a ng-href="tel:{{ order.contact.phone }}">{{ order.contact.phone }}</a></td>
           <td width="34%">E-mail: {{ order.contact.email }}</td>
         </tr>
         <tr ng-show="isResolve(order.status)">
