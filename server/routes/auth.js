@@ -10,7 +10,7 @@ let User        = require('./user'); // get our mongoose model
 mongoose.connect(Config.database); // connect to MongoDB through Mongoose
 mongoose.Promise = global.Promise; //WTF???
 
-module.exports = function(apiRoutes) {
+module.exports = function(app, apiRoutes) {
   apiRoutes.post('/login', (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
       if (err) throw err;
@@ -111,7 +111,7 @@ module.exports = function(apiRoutes) {
   }*/
 
    // route to Google Auth hopefully
-  apiRoutes.post('/auth/google', (req, res) => {
+  app.post('/auth/google', (req, res) => {
     var accessTokenUrl = 'https://accounts.google.com/o/oauth2/token';
     var peopleApiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';
     var params = {
