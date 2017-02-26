@@ -115,11 +115,15 @@ module.exports = function(app, apiRoutes) {
     var accessTokenUrl = 'https://accounts.google.com/o/oauth2/token';
     var peopleApiUrl = 'https://www.googleapis.com/plus/v1/people/me/openIdConnect';
     var params = {
-      code: req.body.code,
-      client_id: req.body.clientId || 'y_xltbcKTcjeSdE3DrX7bb2r',
-      client_secret: '94725787074-o8kjs9381bq1suldeskpssm7jcb4gklb.apps.googleusercontent.com', //config.GOOGLE_SECRET,
-      redirect_uri: 'http://rfbgo.ru/profile', //req.body.redirectUri,
-      grant_type: 'authorization_code'
+
+      'client_id'      : '94725787074-o8kjs9381bq1suldeskpssm7jcb4gklb.apps.googleusercontent.com',
+      'client_secret'  : 'y_xltbcKTcjeSdE3DrX7bb2r',
+      'redirect_uri'   : 'http://localhost:3005/register'
+      //code: req.body.code,
+      //client_id: req.body.clientId || 'y_xltbcKTcjeSdE3DrX7bb2r',
+      //client_secret: '94725787074-o8kjs9381bq1suldeskpssm7jcb4gklb.apps.googleusercontent.com', //config.GOOGLE_SECRET,
+      //redirect_uri: 'http://rfbgo.ru/profile', //req.body.redirectUri,
+      //grant_type: 'authorization_code'
     };
     // Step 1. Exchange authorization code for access token.
     request.post(accessTokenUrl, { json: true, form: params }, function(err, response, token) {
