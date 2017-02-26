@@ -85,4 +85,6 @@ module.exports = function ($rootScope, $scope, $state, dataSource) {
     });
   };
 
+  $scope.phonecall = function(number){ document.location.href = 'tel:' + number };
+
 };

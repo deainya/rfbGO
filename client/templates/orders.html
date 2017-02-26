@@ -51,12 +51,12 @@
         <tr ng-show="user.role==0">
           <td width="33%">Партнёр: {{ order.partner.tradepoint.name }}</td>
           <td width="33%">Адрес: {{ order.partner.tradepoint.address }}</td>
-          <td width="34%">Контакт: <a ng-href="tel:{{order.partner.phone}}">{{ order.partner.phone }}</a></td>
+          <td width="34%">Контакт: <a href="#" ng-click="phonecall('{{order.partner.phone}}')">{{ order.partner.phone }}</a></td>
         </tr>
         <tr ng-show="user.role==1&&isAccept(order.status)">
           <td width="33%">Принят: {{ order.accepted | date:'dd.MM HH:mm'}}</td>
           <td width="33%">Время прибытия: {{ order.time2go }} мин.</td>
-          <td width="34%">Контакт: <a ng-href="tel:{{order.consultant.phone}}">{{ order.consultant.phone }}</a></td>
+          <td width="34%">Контакт: <a href="#" ng-click="phonecall('{{order.consultant.phone}}')">{{ order.consultant.phone }}</a></td>
         </tr>
         <tr>
           <td width="33%">Клиент: {{ order.client }}</td>
