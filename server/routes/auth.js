@@ -125,10 +125,13 @@ module.exports = function(app, apiRoutes) {
       //redirect_uri: 'http://rfbgo.ru/profile', //req.body.redirectUri,
       //grant_type: 'authorization_code'
     };
+    console.log("test 1");
+
     // Step 1. Exchange authorization code for access token.
     request.post(accessTokenUrl, { json: true, form: params }, function(err, response, token) {
       var accessToken = token.access_token;
       var headers = { Authorization: 'Bearer ' + accessToken };
+      console.log("test 2");
 
       // Step 2. Retrieve profile information about the current user.
       request.get({ url: peopleApiUrl, headers: headers, json: true }, function(err, response, profile) {
