@@ -1,7 +1,9 @@
 // User profile controller
-module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravatar) {
+module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravatar, toastr) {
   $scope.Login = function(credentials){
-    auth.logIn(credentials, function(){
+    auth.logIn(credentials, function(data){
+      console.log(data);
+      //toastr.error('Что-то пошло не так', 'Ой!');
       $state.go('profile');
     });
   };

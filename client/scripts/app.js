@@ -1,6 +1,7 @@
 import angular from 'angular'
 import 'angular-ui-router'
 import 'angular-resource'
+import 'toastr'
 //import 'cordova' //ionic
 
 var Auth = require('./services/Auth');
@@ -13,7 +14,7 @@ var ordersCtrl = require('./controllers/Orders');
 var usersCtrl = require('./controllers/Users');
 
 angular
-.module('rfbgo', ["ui.router", "ngResource"])
+.module('rfbgo', ["ui.router", "ngResource", "toastr"])
 .config(($stateProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise('/')
   $stateProvider
