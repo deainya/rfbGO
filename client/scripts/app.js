@@ -1,7 +1,7 @@
 import angular from 'angular'
 import 'angular-ui-router'
 import 'angular-resource'
-import 'toastr'
+import 'angular-toastr'
 //import 'cordova' //ionic
 
 var Auth = require('./services/Auth');
