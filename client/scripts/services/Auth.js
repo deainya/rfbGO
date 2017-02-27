@@ -21,7 +21,7 @@ module.exports = function ($http, session) {
      | @params credentials
      | @returns {*|Promise}
      */
-    logIn: function(credentials, callback){
+    logIn: function(credentials, callback, error){
       return $http
         .post('/api/login', credentials)
         .then(function(response){
@@ -30,7 +30,10 @@ module.exports = function ($http, session) {
           session.setAccessToken(data.token);
           console.log(data.user);
           console.log(data.token);
-          callback(data);
+          callback();
+        },function(response){
+          var data = response.data;
+          error(data);
         });
     },
     /* Log out
