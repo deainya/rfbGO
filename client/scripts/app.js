@@ -58,7 +58,7 @@ angular
 .service('dataSource', ['$http', 'session', dataSourceService])
 .factory('Gravatar', GravatarFactory)
 .factory('localStorage', ['$window', localStorageFactory])
-.controller('profileCtrl', ['$rootScope', '$scope', '$state', 'auth', 'dataSource', 'Gravatar', profileCtrl])
+.controller('profileCtrl', ['$rootScope', '$scope', '$state', 'auth', 'dataSource', 'Gravatar', 'toastr', profileCtrl])
 .controller('ordersCtrl' , ['$rootScope', '$scope', '$state', 'dataSource' , ordersCtrl])
 .controller('usersCtrl' , ['$rootScope', '$scope', '$state', 'dataSource' , usersCtrl])
 
