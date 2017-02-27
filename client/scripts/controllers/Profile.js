@@ -7,7 +7,7 @@ module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravata
       }, function(data){
         console.log("test");
         console.log(data);
-        toastr.error('Что-то пошло не так', 'Ой!');
+        toastr.error('Указан не верный логин/пароль', 'Ой!');
       });
   };
   $scope.Register = function(credentials){
