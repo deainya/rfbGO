@@ -11,7 +11,9 @@ let express     = require('express');
 let socket      = require('./routes/socket.js');
 let app         = express();
 //let app         = express.createServer();
-let io          = require('socket.io').listen(app); // Hook socket.io into Express
+var server      = require('http').Server(app);
+
+let ion          = require('socket.io').listen(server); // Hook socket.io into Express
 //var server = require('http').Server(app);
 //var io = require('socket.io')(server);
 
