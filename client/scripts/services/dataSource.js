@@ -13,8 +13,7 @@ module.exports = function ($http, session) {
   }
 };
 
-// REFACTOR CODE
-
+// REFACTOR THE CODE
 // Rewritable with $resource injection instead fo $http
 /*module.exports = function ($resource) {
   return $resource(url+'/:id', {id: '@id'})
