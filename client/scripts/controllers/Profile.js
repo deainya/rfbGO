@@ -1,12 +1,39 @@
 // User profile controller
-module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravatar, toastr) {
+module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravatar, socket, toastr) {
+
+  socket.on('init', function (data) {
+    $scope.xname = data.xname;
+    $scope.xusers = data.xusers;
+  });
+  socket.on('user-join', function (data) {
+    //$scope.messages.push({ user: 'chatroom', text: 'User ' + data.name + ' has joined.' });
+    $scope.xusers.push(data.xname);
+  });
+  // add a message to the conversation when a user disconnects or leaves the room
+  socket.on('user-left', function (data) {
+    //$scope.messages.push({ user: 'chatroom', text: 'User ' + data.name + ' has left.' });
+    var i, user;
+    for (i = 0; i < $scope.xusers.length; i++) {
+      user = $scope.xusers[i];
+      if (user === data.xname) { $scope.xusers.splice(i, 1); break; }
+    }
+  });
+
+  /*socket.on('send:message', function (message) { $scope.messages.push(message); });
+  $scope.messages = [];
+  $scope.sendMessage = function () {
+    socket.emit('send:message', { message: $scope.message });
+    // add the message to our model locally
+    $scope.messages.push({ xuser: $scope.name, text: $scope.message });
+    // clear message box
+    $scope.message = '';
+  };*/
+
   $scope.Login = function(credentials){
     auth.logIn(credentials,
       function(){
         $state.go('profile');
       }, function(data){
-        console.log("test");
-        console.log(data);
         toastr.error('Указан неверный логин или пароль', 'Ой!');
       });
   };
@@ -18,10 +45,8 @@ module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravata
 
   if(auth.isLoggedIn()){
     $scope.tradepoints = false;
-
     // Get avatar for User from Gravatar API
     $scope.gravatarUrl = Gravatar.generate($rootScope.user.email, 80); //???
-
     // is User at work?
     $scope.atWork = function(){
       $rootScope.user.atWork = !$rootScope.user.atWork;
@@ -33,7 +58,6 @@ module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravata
       dataSource.set('/api/user/atwork', obj).then(function(){
         console.log(obj);
       });
-      //navigator.notification.beep(2000);
     };
 
     // get/set Tradepoint for User
