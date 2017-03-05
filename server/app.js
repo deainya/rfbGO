@@ -29,7 +29,7 @@ require('./routes/orders')(apiRoutes, jsonParser, Mongo, Mail); // orders routes
 app.use('/api', apiRoutes);
 
 // Socket.io                  ==================================================
-io.on('connection', function(){
+io.on('connection', function(socket){
   socket.on('room join', function(data) {
     socket.join(data.room);
     io.in(data.room).emit('has joined', data);
