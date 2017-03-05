@@ -30,10 +30,10 @@ app.use('/api', apiRoutes);
 
 // Socket.io                  ==================================================
 io.on('connection', function(socket){
-  socket.on('room join', function(data) {
+  /*socket.on('room join', function(data) {
     socket.join(data.room);
     io.in(data.room).emit('has joined', data);
-  });
+  });*/
 
   socket.on('message', function(msg){
     io.emit('message', msg);
