@@ -47,7 +47,7 @@ angular
     controller: 'ordersCtrl'
   })
   .state('users', {
-    url: '/console',
+    url: '/api/console',
     templateUrl: 'templates/users.html',
     controller: 'usersCtrl'
   })
