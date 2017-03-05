@@ -2,7 +2,8 @@
 module.exports = function(apiRoutes, jsonParser, Mongo, Mail) {
   // Users admin console
   apiRoutes.get("/console", (req, res) => {
-    User.find({}, (err, docs) => { if(err) { res.sendStatus(400); } res.json(docs); });
+    let users = Mongo.users();
+    users.find({}, (err, docs) => { if(err) { res.sendStatus(400); } res.json(docs); });
   });
 
   // Profile API routes         ==================================================
