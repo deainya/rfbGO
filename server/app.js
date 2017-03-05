@@ -13,7 +13,7 @@ let app         = express();
 //let app         = express.createServer();
 var server      = require('http').Server(app);
 
-let ion          = require('socket.io').listen(server); // Hook socket.io into Express
+let io          = require('socket.io').listen(server); // Hook socket.io into Express
 //var server = require('http').Server(app);
 //var io = require('socket.io')(server);
 
