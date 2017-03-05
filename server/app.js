@@ -1,27 +1,27 @@
-//"use strict";
+"use strict";
 
 // Dependencies               ==================================================
-var express     = require('express');
-//let app         = express();
 
-var bodyParser  = require('body-parser'); // to get params from POST requests
-var Config      = require('./config'); // get our config file
-var Mail        = require('./mail'); // to send email
-var Mongo       = require('./mongo'); // get our mongo utils
+let bodyParser  = require('body-parser'); // to get params from POST requests
+let Config      = require('./config'); // get our config file
+let Mail        = require('./mail'); // to send email
+let Mongo       = require('./mongo'); // get our mongo utils
 
-var socket      = require('./routes/socket.js');
-var app         = express.createServer();
-var io          = require('socket.io').listen(app); // Hook socket.io into Express
-
-
+let express     = require('express');
+let socket      = require('./routes/socket.js');
+let app         = express();
+//let app         = express.createServer();
+let io          = require('socket.io').listen(app); // Hook socket.io into Express
+//var server = require('http').Server(app);
+//var io = require('socket.io')(server);
 
 // Initialization            ==================================================
 Mongo.connect(Config.database); // connecting to MongoDB
-var jsonParser  = bodyParser.json();
+let jsonParser  = bodyParser.json();
 app.configure(require('./configExpress')(app, express, bodyParser)); // Load Express Configuration
 
 // API routes                 ==================================================
-var apiRoutes = express.Router(); // get an instance of the router for api routes
+let apiRoutes = express.Router(); // get an instance of the router for api routes
 require('./routes/auth')(app, apiRoutes); // auth routes
 // route to show welcome message
 apiRoutes.get('/', (req, res) => {  res.json({ message: 'rfbGO API' }); });
@@ -36,3 +36,4 @@ app.use('/api', apiRoutes);
 
 // Start the server           ==================================================
 app.listen( Config.port, () => console.log( "Started on port: " + Config.port ) );
+//server.listen(Config.port, () => console.log( "Started on port: " + Config.port ));
