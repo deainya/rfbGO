@@ -19,7 +19,7 @@ let io          = require('socket.io')(server); // Hook socket.io into Express
 // Initialization            ==================================================
 Mongo.connect(Config.database); // connecting to MongoDB
 let jsonParser  = bodyParser.json();
-app.configure(require('./configExpress')(app, express, bodyParser)); // Load Express Configuration
+require('./configExpress')(app, express, bodyParser); // Load Express Configuration
 
 // API routes                 ==================================================
 let apiRoutes = express.Router(); // get an instance of the router for api routes
