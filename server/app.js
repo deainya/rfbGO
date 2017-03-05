@@ -11,9 +11,8 @@ let express     = require('express');
 let socket      = require('./routes/socket.js');
 let app         = express();
 //let app         = express.createServer();
-var server      = require('http').Server(app);
-
-let io          = require('socket.io').listen(server); // Hook socket.io into Express
+let server      = require('http').Server(app);
+let io          = require('socket.io')(server); // Hook socket.io into Express
 //var server = require('http').Server(app);
 //var io = require('socket.io')(server);
 
@@ -37,5 +36,5 @@ io.sockets.on('connection', socket);
 app.use('/api', apiRoutes);
 
 // Start the server           ==================================================
-app.listen( Config.port, () => console.log( "Started on port: " + Config.port ) );
-//server.listen(Config.port, () => console.log( "Started on port: " + Config.port ));
+//app.listen( Config.port, () => console.log( "Started on port: " + Config.port ) );
+server.listen(Config.port, () => console.log( "Started on port: " + Config.port ));
