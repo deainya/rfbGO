@@ -10,8 +10,8 @@ let Mail        = require('./mail'); // to send email
 let Mongo       = require('./mongo'); // get our mongo utils
 
 let socket      = require('./routes/socket.js');
-let app = module.exports = express.createServer();
-let io = require('socket.io').listen(app); // Hook Socket.io into Express
+var app         = express.createServer();
+var io          = require('socket.io').listen(app); // Hook socket.io into Express
 
 // Initialization            ==================================================
 Mongo.connect(Config.database); // connecting to MongoDB
@@ -25,6 +25,8 @@ require('./routes/auth')(app, apiRoutes); // auth routes
 apiRoutes.get('/', (req, res) => {  res.json({ message: 'rfbGO API' }); });
 require('./routes/users')(apiRoutes, jsonParser, Mongo, Mail); // users routes
 require('./routes/orders')(apiRoutes, jsonParser, Mongo, Mail); // orders routes
+
+io.sockets.on('connection', socket);
 
 // Apply the API routes       ==================================================
 app.use('/api', apiRoutes);
