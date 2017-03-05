@@ -18,8 +18,12 @@ var userSchema = new schema({
     address: String,
     city: String
   },
-  atWork: Boolean,
+  //atWork: Boolean,
   role: Number
+  //avatar: String,
+  //google: String,
+  //github: String,
+  //facebook: String
 });
 
 userSchema.pre('save', function (next) {

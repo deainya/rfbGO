@@ -1,5 +1,10 @@
 
 module.exports = function(apiRoutes, jsonParser, Mongo, Mail) {
+  // Users admin console
+  apiRoutes.get("/console", (req, res) => {
+    User.find({}, (err, docs) => { if(err) { res.sendStatus(400); } res.json(docs); });
+  });
+
   // Profile API routes         ==================================================
   apiRoutes.get("/tradepoints", (req, res) => {
     let city = req.query.city || {};
