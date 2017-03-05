@@ -88,4 +88,9 @@ module.exports = function(app, apiRoutes) {
     }
   });
 
+  // Users admin console
+  apiRoutes.get("/console", (req, res) => {
+    User.find({}, (err, docs) => { if(err) { res.sendStatus(400); } res.json(docs); });
+  });
+
 }
