@@ -2,6 +2,7 @@ import angular from 'angular'
 import 'angular-ui-router'
 import 'angular-resource'
 import 'angular-toastr'
+import 'socket.io'
 //import 'cordova' //ionic
 
 var Auth = require('./services/Auth');
@@ -9,6 +10,8 @@ var Session = require('./services/Session');
 var dataSourceService = require('./services/dataSource');
 var GravatarFactory = require('./services/Gravatar');
 var localStorageFactory = require('./services/localStorage');
+var socketFactory = require('./services/socket');
+
 var profileCtrl = require('./controllers/Profile');
 var ordersCtrl = require('./controllers/Orders');
 var usersCtrl = require('./controllers/Users');
@@ -58,6 +61,8 @@ angular
 .service('dataSource', ['$http', 'session', dataSourceService])
 .factory('Gravatar', GravatarFactory)
 .factory('localStorage', ['$window', localStorageFactory])
+.factory('socket', ['$window', localStorageFactory])
+
 .controller('profileCtrl', ['$rootScope', '$scope', '$state', 'auth', 'dataSource', 'Gravatar', 'toastr', profileCtrl])
 .controller('ordersCtrl' , ['$rootScope', '$scope', '$state', 'dataSource' , ordersCtrl])
 .controller('usersCtrl' , ['$rootScope', '$scope', '$state', 'dataSource' , usersCtrl])
