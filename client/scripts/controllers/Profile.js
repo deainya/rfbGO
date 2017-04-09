@@ -1,7 +1,7 @@
 // User profile controller
 module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravatar, socket, toastr) {
 
-  socket.on('init', function (data) {
+  /*socket.on('init', function (data) {
     $scope.xname = data.xname;
     $scope.xusers = data.xusers;
   });
@@ -17,7 +17,7 @@ module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravata
       user = $scope.xusers[i];
       if (user === data.xname) { $scope.xusers.splice(i, 1); break; }
     }
-  });
+  });*/
 
   /*socket.on('send:message', function (message) { $scope.messages.push(message); });
   $scope.messages = [];

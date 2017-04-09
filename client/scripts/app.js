@@ -10,7 +10,7 @@ var Session = require('./services/Session');
 var dataSourceService = require('./services/dataSource');
 var GravatarFactory = require('./services/Gravatar');
 var localStorageFactory = require('./services/localStorage');
-var socketFactory = require('./services/socket');
+//var socketFactory = require('./services/socket');
 var profileCtrl = require('./controllers/Profile');
 var ordersCtrl = require('./controllers/Orders');
 var usersCtrl = require('./controllers/Users');
@@ -60,7 +60,7 @@ angular
 .service('dataSource', ['$http', 'session', dataSourceService])
 .factory('Gravatar', GravatarFactory)
 .factory('localStorage', ['$window', localStorageFactory])
-.factory('socket', ['$rootScope', socketFactory])
+//.factory('socket', ['$rootScope', socketFactory])
 .controller('profileCtrl', ['$rootScope', '$scope', '$state', 'auth', 'dataSource', 'Gravatar', 'socket', 'toastr', profileCtrl])
 .controller('ordersCtrl', ['$rootScope', '$scope', '$state', 'dataSource', 'socket', ordersCtrl])
 .controller('usersCtrl', ['$rootScope', '$scope', '$state', 'dataSource', usersCtrl])
