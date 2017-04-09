@@ -1,5 +1,5 @@
 // User profile controller
-module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravatar, socket, toastr) {
+module.exports = function ($rootScope, $scope, $state, auth, dataSource, Gravatar, toastr) {
 
   /*socket.on('init', function (data) {
     $scope.xname = data.xname;

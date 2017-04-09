@@ -1,5 +1,5 @@
 // Orders controller
-module.exports = function ($rootScope, $scope, $state, dataSource, socket) {
+module.exports = function ($rootScope, $scope, $state, dataSource) {
   // Get data when controller executes
   // $rootScope have to be replaced!!!
 

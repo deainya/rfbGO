@@ -61,8 +61,8 @@ angular
 .factory('Gravatar', GravatarFactory)
 .factory('localStorage', ['$window', localStorageFactory])
 //.factory('socket', ['$rootScope', socketFactory])
-.controller('profileCtrl', ['$rootScope', '$scope', '$state', 'auth', 'dataSource', 'Gravatar', 'socket', 'toastr', profileCtrl])
-.controller('ordersCtrl', ['$rootScope', '$scope', '$state', 'dataSource', 'socket', ordersCtrl])
+.controller('profileCtrl', ['$rootScope', '$scope', '$state', 'auth', 'dataSource', 'Gravatar', 'toastr', profileCtrl])
+.controller('ordersCtrl', ['$rootScope', '$scope', '$state', 'dataSource', ordersCtrl])
 .controller('usersCtrl', ['$rootScope', '$scope', '$state', 'dataSource', usersCtrl])
 
 .run(function ($rootScope, $state, auth, session) {
